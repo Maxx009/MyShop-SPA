@@ -1,9 +1,26 @@
 {
-	"name": "angular",
-	"version": "1.0.0",
-	"dependencies": {
-		"bootstrap": "latest",
-		"angular": "latest",
-		"angular-route": "latest"	
-	}
+  "name": "myshop-spa",
+  "description": "MyShop-SPA is app for my wholesale grocery store.Contains all the client side dependancies needed for MyShop-SPA to run.",
+  "authors": [
+    {
+      "name": "Sudarshan Jhawar",
+      "email": "sudarshan891@gmail.com"
+    },
+    {
+      "name": "Kulbhushan Singh",
+      "email": "kulbhushan18@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/skapp/MyShop-SPA.git"
+  },
+  "ignore": [
+    "lib/*"
+  ],
+  "dependencies": {
+    "angular": "~1.5",
+    "angular-material": "^1.1.1",
+    "angular-route": "^1.5.8"
+  }
 }

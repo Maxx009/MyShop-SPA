@@ -1,5 +1,5 @@
 {
-  "name": "my-shop-spa",
+  "name": "myshop-spa",
   "main": "server.js",
   "dependencies": {
     "express" : "~4.5.1",
