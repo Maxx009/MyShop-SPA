@@ -29,8 +29,13 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
-public/lib
+
+#scripts libararies
+app/public/lib
 data
+
+vs code files
+.vscode
 
 # Optional npm cache directory
 .npm
