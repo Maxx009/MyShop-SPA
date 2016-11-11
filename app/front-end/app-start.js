@@ -1,4 +1,4 @@
 (function() {
     'use strict';
-    angular.module('myShopApp', ["ui.router","ngMaterial"]);
+    angular.module('myShopApp', ["ui.router","ngAnimate","ui.bootstrap.collapse"]);
 }());
