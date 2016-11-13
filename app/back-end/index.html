@@ -124,19 +124,30 @@
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class=" navbar-collapse collapse in" uib-collapse="mainApp.showSidebar">
 				<ul class="nav navbar-nav side-nav">
-					<li class="active">
+					<li ng-class="{'active':mainApp.selectedSideMenu === 'Dashbaord'}">
 						<a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
 					</li>
-					<li>
-						<a ui-sref="customer"  ng-click="mainApp.toggleCustomer=!mainApp.toggleCustomer"><i class="fa fa-fw fa-users"></i> Customers <i class="fa fa-fw fa-caret-{{mainApp.toggleCustomer?'right':'down'}}"></i></a>
-						<ul id="demo" class="collapse"  uib-collapse="mainApp.toggleCustomer">
+					<li ng-class="{'active':mainApp.selectedSideMenu === 'Dashbaord'}">					
+						<a ui-sref="customer"><i class="fa fa-fw fa-users"></i> Customers</a>
+						<!--<a ui-sref="customer"  ng-click="mainApp.toggleCustomer=!mainApp.toggleCustomer"><i class="fa fa-fw fa-users"></i> Customers <i class="fa fa-fw fa-caret-{{mainApp.toggleCustomer?'right':'down'}}"></i></a>-->
+						<!--<ul id="demo" class="collapse"  uib-collapse="mainApp.toggleCustomer">
 							<li>
-								<a ui-sref="customer.add"> <i class="fa fa-fw fa-plus"></i> Add</a>
+								<a ui-sref="add"> <i class="fa fa-fw fa-plus"></i> Add</a>
 							</li>
 							<li>
 								<a href="#"><i class="fa fa-eye"></i> View</a>
 							</li>
-						</ul>
+						</ul>-->
+					</li>
+					<li ng-class="{'active':mainApp.selectedSideMenu === 'Products'}">                   
+						<a ui-sref="products"><i class="fa fa-fw fa-dashboard"></i> Products</a>
+					</li>
+					<li ng-class="{'active':mainApp.selectedSideMenu === 'Sales'}">
+                    
+						<a ui-sref="sales"><i class="fa fa-fw fa-dashboard"></i> Sales</a>
+					</li>
+					<li ng-class="{'active':mainApp.selectedSideMenu === 'Purchases'}">                    
+						<a ui-sref="purchases"><i class="fa fa-fw fa-dashboard"></i> Purchases</a>
 					</li>
 				</ul>
 			</div>
@@ -147,122 +158,7 @@
 			<div class="container-fluid"  ui-view>
 				
 				<!-- Page Heading -->
-				<!-- <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-                
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="alert alert-info alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
-                        </div>
-                    </div>
-                </div>
-                
-
-                <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>New Comments!</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>New Tasks!</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-shopping-cart fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
-                                        <div>New Orders!</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-support fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">13</div>
-                                        <div>Support Tickets!</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-
+				<!--                          
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
@@ -428,6 +324,7 @@
 	<!--Scripts-Lib-Section-->
 	<script type="text/javascript" src="/app-start.js"></script>
 	<script type="text/javascript" src="/customer/customer-router.js"></script>
+	<script type="text/javascript" src="/common/directives/title-bread-crum-directive.js"></script>
 	<script type="text/javascript" src="/main-app-controller.js"></script>
 	<!--Css-->
 	<link rel="stylesheet" type="text/css" href="/lib/bootstrap-css-only/css/bootstrap.css">

@@ -2,6 +2,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+var passport = require('passport');
 
 var app = express();
 
@@ -21,7 +22,6 @@ app.use(bodyParser.json({
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(methodOverride('X-HTTP-Method-Override'));
 
@@ -29,7 +29,6 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/front-end'));
 app.use(express.static(__dirname + '/back-end'));
-
 
 // routes ==================================================
 require(__dirname + '/back-end/routes')(app); // configure our routes

@@ -9,12 +9,12 @@
         .state('customer',
         {
             url:"/Customer",
-            templateUrl:"customer/customer-dashboard.html"
+            templateUrl:"customer/dashboard.html"
         })
         .state('customer.add',
         {
-            url:"/Customer/Add",
-            templateUrl:"add-customer.html"
+            url:"/Add",
+            templateUrl:"customer/add.html"
         })
     }
 })();
