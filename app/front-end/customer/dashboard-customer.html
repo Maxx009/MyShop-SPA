@@ -5,7 +5,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-plus-circle fa-5x"></i>
+                        <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">26</div>
@@ -13,13 +13,24 @@
                     </div>
                 </div>
             </div>
-            <a ui-sref="customer.add">
-                <div class="panel-footer">
-                    <span class="pull-left">Add New Customer</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-6 primary-right-border">
+                        <a ui-sref="customers.add">
+                            <span class="pull-left">Add New</span>
+                            <span class="pull-right"><i class="fa fa-user-plus"></i></span>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a ui-sref="customers.list">
+                            <span class="pull-left">View List</span>
+                            <span class="pull-right"><i class="fa fa-list"></i></span>
+                        </a>
+                    </div>
                 </div>
-            </a>
+                <div class="clearfix"></div>
+            </div>
+
         </div>
     </div>
     <div class="col-lg-3 col-md-6">

@@ -12,17 +12,16 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle">
+				<button type="button" class="navbar-toggle" ng-click="isOpen=!isopen">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-				<a class="navbar-brand" href="/">My Shop</a>
+				<a class="navbar-brand" ui-sref="customer">My Shop</a>
 			</div>
 			<!-- Top Menu Items -->
-			<ul class="nav navbar-right top-nav">
-					
+			<ul class="nav navbar-right top-nav">					
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
 					<ul class="dropdown-menu">
@@ -43,7 +42,7 @@
 				</li>
 			</ul>
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-			<side-bar></side-bar>
+			<side-bar is-open="isOpen"></side-bar>
 			<!-- /.navbar-collapse -->
 		</nav>
 
@@ -56,16 +55,17 @@
 	<!--Scripts-Lib-Section-->
 	<script src="/lib/angular/angular.min.js"></script>
 	<script src="/lib/angular-animate/angular-animate.min.js"></script>
+	<script src="/lib/ui-bootstrap/src/collapse/collapse.js"></script>
 	<script src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="/lib/oclazyload/dist/ocLazyLoad.min.js"></script>
 
 	<!--Scripts-Lib-Section-->
 	<script type="text/javascript" src="/app-start.js"></script>
-	<script type="text/javascript" src="/common/directives/title-bread-crum-directive.js"></script>
-	<script type="text/javascript" src="/common/directives/sidebar-directive.js"></script>
-	<script type="text/javascript" src="/customer/customer-router.js"></script>
+	<script type="text/javascript" src="/common/directives/header-bread-crum-directive.js"></script>
+	<script type="text/javascript" src="/common/directives/side-bar/sidebar-directive.js"></script>
+	<script type="text/javascript" src="/router.js"></script>
 	<!--Css-->
-	<link rel="stylesheet" type="text/css" href="/lib/bootstrap-css-only/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/lib/bootstrap-css-only/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/app.css">
 

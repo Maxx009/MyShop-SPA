@@ -9,7 +9,7 @@
     function AddCustomerController() {
         var vm = this;
         
-
+        
         activate();
 
         ////////////////

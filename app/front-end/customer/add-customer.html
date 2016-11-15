@@ -1,7 +1,7 @@
 <form role="form">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-plus-circle fa-fw"></i> Add Customer</h3>
+            <h3 class="panel-title"><i class="fa fa-user-plus fa-fw"></i> Add Customer</h3>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -10,32 +10,38 @@
 
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Customer Name</label>
-                            <input type="text" class="form-control" />
+                            <label>Full Name</label>
+                            <input type="text" class="form-control" ng-model="customer.name" />
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Shop Name</label>
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" ng-model="customer.shopName"/>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Mobile No.</label>
-                            <input type="number" max="10" class="form-control">
+                            <input type="number" max="10" class="form-control" ng-model="customer.mobileNumber">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Landline No.</label>
-                            <input type="tel" max="10" class="form-control">
+                            <input type="tel" max="10" class="form-control" ng-model="customer.landLineNumber">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Address</label>
-                            <textarea rows="3" class="form-control"></textarea>
+                            <textarea rows="3" class="form-control" ng-model="customer.address"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" max="20" class="form-control" ng-model="customer.location">                            
                         </div>
                     </div>
                 </div>

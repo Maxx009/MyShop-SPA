@@ -13,12 +13,14 @@
         // Creates:
         //
         var directive = {
-            templateUrl: "common/templates/sidebar.html",
+            templateUrl: "common/directives/side-bar/sidebar.html",
             bindToController: true,
             controller: ["$rootScope", "$location", SideBarController],
             controllerAs: 'sideBar',
             restrict: 'E',
-            scope: {}
+            scope: {
+                isOpen: "="
+            }
         };
         return directive;
 
