@@ -1,4 +1,4 @@
-<header-breadcrum header-big="Customer" header-small="Dashboard" icon-class="fa-dashboard"></header-breadcrum>
+<header-breadcrum header-big="Main" header-small="Dashboard" icon-class="fa-dashboard"></header-breadcrum>
 <div class="row">
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-primary">
@@ -9,28 +9,17 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">26</div>
-                        <div>Total Customers</div>
+                        <div>Customers</div>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-6 primary-right-border">
-                        <a ui-sref="main.customers.add">
-                            <span class="pull-left">Add New</span>
-                            <span class="pull-right"><i class="fa fa-user-plus"></i></span>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <a ui-sref="main.customers.list">
-                            <span class="pull-left">View List</span>
-                            <span class="pull-right"><i class="fa fa-list"></i></span>
-                        </a>
-                    </div>
+            <a ui-sref="main.customers">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
-            </div>
-
+            </a>
         </div>
     </div>
     <div class="col-lg-3 col-md-6">
@@ -98,10 +87,5 @@
                 </div>
             </a>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12" ui-view>
-
     </div>
 </div>

@@ -28,8 +28,7 @@ module.exports = function (app) {
     app.get('/', function (req, res) {
         res.sendfile(__dirname + '/index.html'); // load our public/index.html file
     });
-    app.get('/Login', function (req, res) {
-        res.sendfile(__dirname + '/login.html'); // load our public/index.html file
+    app.post('/api/login', function (req, res) {
+        res.send(); // load our public/index.html file
     });
-
 };

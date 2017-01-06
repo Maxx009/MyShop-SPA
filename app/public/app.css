@@ -8,7 +8,9 @@ body {
         margin-top: 50px;
     }
 }
-
+.white-color{
+    color: #fff;
+}
 #wrapper {
     padding-left: 0;
 }

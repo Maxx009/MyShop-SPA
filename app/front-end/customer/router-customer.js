@@ -6,7 +6,7 @@
 
     function CusrtomerRoutesConfiguration($stateProvider) {
         $stateProvider
-            .state('customers.add', {
+            .state('main.customers.add', {
                 url: "/Add",
                 templateUrl: "customer/add-customer.html",
                 controller: "AddCustomerController",
