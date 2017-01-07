@@ -19,7 +19,7 @@
                     }]
                 }
             })
-            .state('customers.list', {
+            .state('main.customers.list', {
                 url: "/List",
                 templateUrl: "customer/list-customer.html",
                 controller: "ListCustomerController",
@@ -27,6 +27,7 @@
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
+                            "common/services/data-access-service.js",
                             "customer/list-customer-controller.js"
                         ]);
                     }]

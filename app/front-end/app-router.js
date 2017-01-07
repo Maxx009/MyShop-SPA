@@ -7,30 +7,26 @@
     function AppRoutesConfiguration($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
         $urlMatcherFactoryProvider.caseInsensitive(true);
         $stateProvider
-                 .state('main', {
+            .state('main', {
                 url: "/main",
                 views: {
                     '': {
                         templateUrl: "main/main.html",
-                        controller: "MainController"
+                        controller: "MainController",
+                        controllerAs: "vm"
                     },
-                    'side-bar@main': {
-                        templateUrl: "side-bar/sidebar.html",
-                        controller: "SideBarController",
-                        controllerAs: "sideBar"
-                    },
-                    'header@main':{
-                        templateUrl: "header/header.html",
-                        controller:"headerController",
-                        controllerAs:"header"
+                    'navigation@main': {
+                        templateUrl: "main/navigation.html",
+                        controller: "NavigationController",
+                        controllerAs: "vm"
                     }
                 },
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
+                            "/lib/ui-bootstrap/src/collapse/collapse.js",
                             "/common/directives/header-bread-crum-directive.js",
-                            "side-bar/sidebar-controller.js",
-                            "header/header-controller.js",
+                            "main/navigation-controller.js",
                             "main/main-controller.js",
                             "main/main-router.js"
                         ]);

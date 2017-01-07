@@ -3,13 +3,12 @@
 
     angular
         .module('myShopApp')
-        .controller('SideBarController', SideBarController);
+        .controller('NavigationController', NavigationController);
 
-    SideBarController.inject = ['$rootScope', '$location'];
+    NavigationController.inject = ['$rootScope', '$location'];
 
-    function SideBarController($rootScope, $location) {
+    function NavigationController($rootScope, $location) {
         var vm = this;
-        vm.showSidebar = true;
         activate();
 
         function activate() {
@@ -19,10 +18,10 @@
         function selectCurrentSideMenu() {
             vm.selectedSideMenu = $location.$$path.split('/')[2];
         }
-        
+
         $rootScope.$on('$stateChangeStart',
             function (event, toState, toParams, fromState, fromParams, options) {
-                selectedSideMenu();
+                selectCurrentSideMenu();
             });
     }
 }());

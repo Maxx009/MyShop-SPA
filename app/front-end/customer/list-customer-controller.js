@@ -5,43 +5,19 @@
         .module('myShopApp')
         .controller('ListCustomerController', ListCustomerController);
 
-    ListCustomerController.$inject = [];
+    ListCustomerController.$inject = ['dataAccessService'];
 
-    function ListCustomerController() {
-        var vm = this;
-        vm.customers = [];
-
+    function ListCustomerController(dataAccessService) {
+        var vm = this;  
         activate();
 
         ////////////////
 
         function activate() {
-            vm.customers = [{
-                name: "Sudarshan Jhawar",
-                mobileNumber: 9021528891,
-                shopName: "Massive Dynamics",
-                address: "Plot No. 6, Chanayanagar Kinetic Chowk,Ahmednagar"
-            },{
-                name: "Sudarshan Jhawar",
-                mobileNumber: 9021528891,
-                shopName: "Massive Dynamics",
-                address: "Plot No. 6, Chanayanagar Kinetic Chowk,Ahmednagar"
-            },{
-                name: "Sudarshan Jhawar",
-                mobileNumber: 9021528891,
-                shopName: "0Massive Dynamics",
-                address: "Plot No. 6, Chanayanagar Kinetic Chowk,Ahmednagar"
-            },{
-                name: "Sudarshan Jhawar",
-                mobileNumber: 9021528891,
-                shopName: "0Massive Dynamics",
-                address: "Plot No. 6, Chanayanagar Kinetic Chowk,Ahmednagar"
-            },{
-                name: "Sudarshan Jhawar",
-                mobileNumber: 9021528891,
-                shopName: "0Massive Dynamics",
-                address: "Plot No. 6, Chanayanagar Kinetic Chowk,Ahmednagar"
-            }]
+            dataAccessService.fetch("/api/get/customers")
+            .then(function(customers){
+                vm.customers = customers;
+            });
         }
     }
 }());
