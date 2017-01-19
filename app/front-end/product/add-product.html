@@ -1,0 +1,57 @@
+<form role="form">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-user-plus fa-fw"></i> Add Product</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="col-lg-12">
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" class="form-control" ng-model="product.name" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Shop Name</label>
+                            <input type="text" class="form-control" ng-model="product.shopName"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Mobile No.</label>
+                            <input type="number" max="10" class="form-control" ng-model="product.mobileNumber">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Landline No.</label>
+                            <input type="tel" max="10" class="form-control" ng-model="product.landLineNumber">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea rows="3" class="form-control" ng-model="product.address"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" max="20" class="form-control" ng-model="product.location">                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <span class="">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-default">Reset</button>
+            </span>
+        </div>
+    </div>
+</form>

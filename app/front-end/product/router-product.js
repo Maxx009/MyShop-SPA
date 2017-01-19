@@ -2,33 +2,33 @@
     'use strict';
 
     angular.module('myShopApp')
-        .config(['$stateProvider', CustomerRoutesConfiguration]);
+        .config(['$stateProvider', ProductRoutesConfiguration]);
 
-    function CustomerRoutesConfiguration($stateProvider) {
+    function ProductRoutesConfiguration($stateProvider) {
         $stateProvider
-            .state('main.customers.add', {
+            .state('main.products.add', {
                 url: "/Add",
-                templateUrl: "customer/add-customer.html",
+                templateUrl: "product/add-product.html",
                 controller: "AddCustomerController",
-                controllerAs: "customer",
+                controllerAs: "product",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            "customer/add-customer-controller.js"
+                            "product/add-product-controller.js"
                         ]);
                     }]
                 }
             })
-            .state('main.customers.list', {
+            .state('main.products.list', {
                 url: "/List",
-                templateUrl: "customer/list-customer.html",
+                templateUrl: "product/list-product.html",
                 controller: "ListCustomerController",
-                controllerAs: "customerList",
+                controllerAs: "productList",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
                             "common/services/data-access-service.js",
-                            "customer/list-customer-controller.js"
+                            "product/list-product-controller.js"
                         ]);
                     }]
                 }

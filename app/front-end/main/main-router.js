@@ -31,7 +31,14 @@
             })
             .state('main.products', {
                 url: "/Products",
-                templateUrl: "customer/dashboard-customer.html"
+                templateUrl: "product/dashboard-product.html",
+                resolve: {
+                    loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            "product/router-product.js"
+                        ]);
+                    }]
+                }
             })
             .state('main.purchases', {
                 url: "/Purchases",
