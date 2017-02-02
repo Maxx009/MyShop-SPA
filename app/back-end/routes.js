@@ -15,4 +15,17 @@ module.exports = function (app) {
             console.log(error)
         });
     });
+    app.post('/api/post/product', function (req, res) {
+        //get Product Info,
+        //Validate it
+        req;
+        // dataAccess.addDocumentToCollection("ProductMaster", {}).then(function (data, meta, leta) {
+        //     console.log(data);
+        //     data.toArray(function (error, docs) {
+        //         res.send(JSON.stringify(docs));
+        //     });
+        // }, function (error) {
+        //     console.log(error)
+        // });
+    });
 };

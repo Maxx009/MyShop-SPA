@@ -30,7 +30,10 @@
             return deferer.promise;
         }
 
-        function post() {}
+        function post(url,data) {
+            $http.post(url,{payLoad:data}).then(success,error);
+            return deferer.promise;
+        }
 
         function put() {}
 

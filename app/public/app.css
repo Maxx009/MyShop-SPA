@@ -206,3 +206,13 @@ ul.alert-dropdown {
 .primary-right-border{
     border-right: #337ab7 solid 1px;
 }
+
+.green-right-border{
+    border-right: #5cb85c solid 1px;
+}
+.red-right-border{
+    border-right: #f0ad4e solid 1px;
+}
+.orange-right-border{
+    border-right: #d9534f solid 1px;
+}

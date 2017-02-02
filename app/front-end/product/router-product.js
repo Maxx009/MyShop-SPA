@@ -5,17 +5,18 @@
         .config(['$stateProvider', ProductRoutesConfiguration]);
 
     function ProductRoutesConfiguration($stateProvider) {
+        let commonScripts = ["common/services/data-access-service.js"];
         $stateProvider
             .state('main.products.add', {
                 url: "/Add",
                 templateUrl: "product/add-product.html",
-                controller: "AddCustomerController",
-                controllerAs: "product",
+                controller: "AddProductController",
+                controllerAs: "vm",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
+                        return $ocLazyLoad.load(commonScripts.concat([
                             "product/add-product-controller.js"
-                        ]);
+                        ]));
                     }]
                 }
             })
@@ -35,4 +36,3 @@
             })
     }
 }());
-
