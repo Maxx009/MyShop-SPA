@@ -1,5 +1,16 @@
 var dataAccess = require('./models/data-access');
 
+function validateProduct(product) {
+    let isValid = true
+    if (!product.name) {
+        isValid = false;
+    } else if (!product.vendorName) {
+        isValid = false;
+    } else if (!product.brand) {
+        isValid = false;
+    }
+    return isValid;
+}
 module.exports = function (app) {
 
     app.get('/', function (req, res) {
@@ -18,14 +29,15 @@ module.exports = function (app) {
     app.post('/api/post/product', function (req, res) {
         //get Product Info,
         //Validate it
-        req;
-        // dataAccess.addDocumentToCollection("ProductMaster", {}).then(function (data, meta, leta) {
-        //     console.log(data);
-        //     data.toArray(function (error, docs) {
-        //         res.send(JSON.stringify(docs));
-        //     });
-        // }, function (error) {
-        //     console.log(error)
-        // });
+        let product = req.body.payLoad;
+        if (validateProduct(product)) {
+            dataAccess.addDocumentToCollection("ProductMaster", product).then(function (databaseResponse) {
+                // if (databaseResponse.insertOk) {
+                //     res.send();
+                // }
+            }, function (error) {
+                console.log(error)
+            });
+        }
     });
 };
