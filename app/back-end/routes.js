@@ -27,16 +27,16 @@ module.exports = function (app) {
         });
     });
     app.post('/api/post/product', function (req, res) {
-        //get Product Info,
-        //Validate it
         let product = req.body.payLoad;
         if (validateProduct(product)) {
             dataAccess.addDocumentToCollection("ProductMaster", product).then(function (databaseResponse) {
-                // if (databaseResponse.insertOk) {
-                //     res.send();
-                // }
+                res.status(200).json({
+                    message: "Inserted one item"
+                })
             }, function (error) {
-                console.log(error)
+                res.status(500).json({
+                    error: error
+                });
             });
         }
     });
