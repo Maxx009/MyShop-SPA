@@ -22,6 +22,7 @@
 7. Configure Mongo:
 	1. Goto Mongodb installed folder - to bin path and run CMD with Administrator
 	2. Run Mongodb as windows service
+		mongod --config "<config file path>" --install
 8. Congifure git username and email id
 	git config --global user.name <username>
 	git config --global user.email <email_id>

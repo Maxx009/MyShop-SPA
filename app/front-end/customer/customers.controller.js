@@ -5,7 +5,7 @@
         .module('myShopApp')
         .controller('DashboardCustomerController', DashboardCustomerController);
 
-    ControllerController.inject = [];
+    DashboardCustomerController.inject = [];
     function DashboardCustomerController() {
         var vm = this;
         

@@ -216,3 +216,13 @@ ul.alert-dropdown {
 .orange-right-border{
     border-right: #d9534f solid 1px;
 }
+.green-color{
+color: #5cb85c;
+}
+.green-color a,.green-color a:focus,.green-color a:visited{
+color: #5cb85c !important;
+}
+.green-color a:hover{
+    color: #3d8b3d !important;
+}
+

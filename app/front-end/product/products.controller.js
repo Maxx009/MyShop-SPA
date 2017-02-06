@@ -3,10 +3,10 @@
 
     angular
         .module('myShopApp')
-        .controller('DashboardCustomerController', DashboardCustomerController);
+        .controller('DashboardProductController', DashboardProductController);
 
-    ControllerController.inject = [];
-    function DashboardCustomerController() {
+    DashboardProductController.inject = [];
+    function DashboardProductController() {
         var vm = this;
         
 
