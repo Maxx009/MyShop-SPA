@@ -1,0 +1,2 @@
+use <db-name> : to switch databases
+db.<collection-name>.ensureIndex( { "<field-1>": 1, "<field-2>": 1 }, { unique: true } ) : Creats compound unique key index

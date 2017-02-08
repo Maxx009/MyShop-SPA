@@ -14,13 +14,7 @@
             name: "",
             vendorName: ""
         };
-        vm.saveProduct = saveProduct;
-
-        activate();
-
-        ////////////////
-
-        function activate() {}
+        vm.saveProduct = saveProduct;  
 
         function saveProduct() {
             dataAccessService.feed("/api/post/product", vm.product)

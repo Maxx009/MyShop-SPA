@@ -118,6 +118,7 @@
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load(commonScripts.concat([
+                            "lib/angular-messages/angular-messages.min.js",
                             "product/products.add.controller.js"
                         ]));
                     }]

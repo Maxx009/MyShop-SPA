@@ -34,9 +34,7 @@ module.exports = function (app) {
                     message: "Inserted one item"
                 })
             }, function (error) {
-                res.status(500).json({
-                    error: error
-                });
+                res.status(500).json(error);
             });
         }
     });
