@@ -1,0 +1,35 @@
+<div class="panel panel-green">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list fa-fw"></i>Products </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--<h2>Bordered with Striped Rows</h2>-->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Brand</th>
+                                <th>Vendor</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="product in vm.products">
+                                <td ng-bind="product.name"></td>
+                                <td ng-bind="product.brand"></td>
+                                <td ng-bind="product.vendorName"></td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-circle" ng-click="vm.editProduct()"><i class="fa fa-pencil-square-o"aria-hidden="true"></i></button>
+                                </td>
+                            </tr>                             
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

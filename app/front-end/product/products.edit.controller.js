@@ -3,21 +3,21 @@
 
     angular
         .module('myShopApp')
-        .controller('AddProductController', AddProductController);
+        .controller('ProductEditController', ProductEditController);
 
-    AddProductController.$inject = ["dataAccessService"];
+    ProductEditController.$inject = ["dataAccessService"];
 
-    function AddProductController(dataAccessService) {
+    function ProductEditController(dataAccessService) {
         var vm = this;
         vm.product = {
             brand: "",
             name: "",
             vendorName: ""
         };
-        vm.saveProduct = saveProduct;  
+        vm.updateProduct = updateProduct;  
 
-        function saveProduct() {
-            dataAccessService.feed("/api/post/add/product", vm.product)
+        function updateProduct() {
+            dataAccessService.update("/api/post/update/product", vm.product)
                 .then(function (response) {
                     console.info(response);
                 }, function (error) {

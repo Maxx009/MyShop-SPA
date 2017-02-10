@@ -20,13 +20,22 @@ module.exports = function (app) {
         dataAccess.getDataFromCollection("CustomersMaster", {}).then(function (data, meta, leta) {
             console.log(data);
             data.toArray(function (error, docs) {
-                res.send(JSON.stringify(docs));
+                res.status(200).json(docs);
             });
         }, function (error) {
             console.log(error)
         });
     });
-    app.post('/api/post/product', function (req, res) {
+    app.get('/api/get/list/product', function (req, res) {
+        dataAccess.getDataFromCollection("ProductMaster", {}).then(function (data) {
+            data.toArray(function (error, docs) {
+                res.status(200).json(docs);
+            });
+        }, function (error) {
+            console.log(error)
+        });
+    });
+    app.post('/api/post/add/product', function (req, res) {
         let product = req.body.payLoad;
         if (validateProduct(product)) {
             dataAccess.addDocumentToCollection("ProductMaster", product).then(function (databaseResponse) {
@@ -36,6 +45,8 @@ module.exports = function (app) {
             }, function (error) {
                 res.status(500).json(error);
             });
+        }else{
+            res.status(400).json({error:"Invalid Product Details"});
         }
     });
 };

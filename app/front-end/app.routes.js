@@ -124,11 +124,25 @@
                     }]
                 }
             })
+            .state('main.products.add', {
+                url: "/Edit",
+                templateUrl: "product/products.edit.html",
+                controller: "ProductEditController",
+                controllerAs: "vm",
+                resolve: {
+                    loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
+                        return $ocLazyLoad.load(commonScripts.concat([
+                            "lib/angular-messages/angular-messages.min.js",
+                            "product/products.edit.controller.js"
+                        ]));
+                    }]
+                }
+            })
             .state('main.products.list', {
                 url: "/List",
                 templateUrl: "product/products.list.html",
-                controller: "ListCustomerController",
-                controllerAs: "productList",
+                controller: "ProductListController",
+                controllerAs: "vm",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load(commonScripts.concat([
