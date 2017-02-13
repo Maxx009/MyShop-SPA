@@ -1,7 +1,8 @@
 var dataAccess = require('./models/data-access');
+var ObjectId = require('mongodb').ObjectId;
 
 function validateProduct(product) {
-    let isValid = true
+    var isValid = true
     if (!product.name) {
         isValid = false;
     } else if (!product.vendorName) {
@@ -26,6 +27,16 @@ module.exports = function (app) {
             console.log(error)
         });
     });
+    app.get('/api/get/single/product/:id', function (req, res) {
+        dataAccess.getSingleDocument("ProductMaster", {
+                "_id": ObjectId(req.params.id)
+            })
+            .then(function (doc) {
+                res.status(200).json(doc);
+            }, function (error) {
+                console.log(error)
+            });
+    });
     app.get('/api/get/list/product', function (req, res) {
         dataAccess.getDataFromCollection("ProductMaster", {}).then(function (data) {
             data.toArray(function (error, docs) {
@@ -36,7 +47,7 @@ module.exports = function (app) {
         });
     });
     app.post('/api/post/add/product', function (req, res) {
-        let product = req.body.payLoad;
+        var product = req.body.payLoad;
         if (validateProduct(product)) {
             dataAccess.addDocumentToCollection("ProductMaster", product).then(function (databaseResponse) {
                 res.status(200).json({
@@ -45,8 +56,10 @@ module.exports = function (app) {
             }, function (error) {
                 res.status(500).json(error);
             });
-        }else{
-            res.status(400).json({error:"Invalid Product Details"});
+        } else {
+            res.status(400).json({
+                error: "Invalid Product Details"
+            });
         }
     });
 };

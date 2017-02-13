@@ -5,21 +5,21 @@
         .module('myShopApp')
         .controller('AddProductController', AddProductController);
 
-    AddProductController.$inject = ["dataAccessService"];
+    AddProductController.$inject = ["$state", "dataAccessService"];
 
-    function AddProductController(dataAccessService) {
+    function AddProductController($state, dataAccessService) {
         var vm = this;
         vm.product = {
             brand: "",
             name: "",
             vendorName: ""
         };
-        vm.saveProduct = saveProduct;  
+        vm.saveProduct = saveProduct;
 
         function saveProduct() {
             dataAccessService.feed("/api/post/add/product", vm.product)
                 .then(function (response) {
-                    console.info(response);
+                    $state.go("main.products.list");
                 }, function (error) {
                     console.error(error);
                 })

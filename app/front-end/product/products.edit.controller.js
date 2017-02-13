@@ -5,21 +5,17 @@
         .module('myShopApp')
         .controller('ProductEditController', ProductEditController);
 
-    ProductEditController.$inject = ["dataAccessService"];
+    ProductEditController.$inject = ["dataAccessService", "productItem"];
 
-    function ProductEditController(dataAccessService) {
+    function ProductEditController(dataAccessService, productItem) {
         var vm = this;
-        vm.product = {
-            brand: "",
-            name: "",
-            vendorName: ""
-        };
-        vm.updateProduct = updateProduct;  
+        vm.product = productItem;
+        vm.updateProduct = updateProduct;
 
         function updateProduct() {
             dataAccessService.update("/api/post/update/product", vm.product)
                 .then(function (response) {
-                    console.info(response);
+                     $state.go("products.lists");
                 }, function (error) {
                     console.error(error);
                 })

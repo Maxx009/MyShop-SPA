@@ -5,21 +5,24 @@
         .module('myShopApp')
         .controller('ProductListController', ProductListController);
 
-    ProductListController.$inject = ['dataAccessService'];
+    ProductListController.$inject = ['$location', 'dataAccessService'];
 
-    function ProductListController(dataAccessService) {
-        var vm = this;  
+    function ProductListController($location, dataAccessService) {
+        var vm = this;
         activate();
 
-        function editProduct(id){
+        vm.editProduct = editProduct;
+
+        function editProduct(id) {
             //TODO : redirect to Edit Controller
+            $location.path('/main/products/edit/' + id);
         }
 
         function activate() {
             dataAccessService.fetch("/api/get/list/product")
-            .then(function(products){
-                vm.products = products;
-            });
+                .then(function (products) {
+                    vm.products = products;
+                });
         }
     }
 }());

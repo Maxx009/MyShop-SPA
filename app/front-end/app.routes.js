@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('myShopApp')
-        .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', AppRoutesConfiguration]);
+        .config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', AppRoutesConfiguration]);
 
-    function AppRoutesConfiguration($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
+    function AppRoutesConfiguration($httpProvider, $stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
         let commonScripts = ["common/services/data-access.service.js"];
         $urlMatcherFactoryProvider.caseInsensitive(true);
         $stateProvider
@@ -12,9 +12,7 @@
                 url: "/main",
                 views: {
                     '': {
-                        templateUrl: "main/main.html",
-                        controller: "MainController",
-                        controllerAs: "vm"
+                        templateUrl: "main/main.html"
                     },
                     'navigation@main': {
                         templateUrl: "main/navigation.html",
@@ -28,7 +26,6 @@
                             "/lib/ui-bootstrap/src/collapse/collapse.js",
                             "/common/directives/header-bread-crum-directive.js",
                             "main/navigation.controller.js",
-                            "main/main.controller.js"
                         ]);
                     }]
                 }
@@ -38,7 +35,7 @@
                 views: {
                     '@main': {
                         templateUrl: "dashboard/dashboard.html",
-                        controller: "MainDashboardController",
+                        controller: "DashboardController",
                         controllerAs: "vm"
                     }
                 },
@@ -124,8 +121,8 @@
                     }]
                 }
             })
-            .state('main.products.add', {
-                url: "/Edit",
+            .state('main.products.edit', {
+                url: "/Edit/:productId",
                 templateUrl: "product/products.edit.html",
                 controller: "ProductEditController",
                 controllerAs: "vm",
@@ -135,6 +132,12 @@
                             "lib/angular-messages/angular-messages.min.js",
                             "product/products.edit.controller.js"
                         ]));
+                    }],
+                    productItem: ["dataAccessService", "$stateParams", function (dataAccessService, $stateParams) {
+                        return dataAccessService.fetch("/api/get/single/product/" + $stateParams.productId)
+                            .then(function (product) {
+                                return product;
+                            });
                     }]
                 }
             })
@@ -171,5 +174,6 @@
                 }
             })
         $urlRouterProvider.otherwise('/main/dashboard');
+        $httpProvider.interceptors.push('APIInterceptorService');
     }
 }());

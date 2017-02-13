@@ -17,20 +17,19 @@
 
         function request(config) {
             //TODO : Auth service to get authorization
-            config.headers.authorization = "access_token";
             return config;
         }
 
-        function response(config) {}
+        function response(config) {
+            return config;
+        }
 
         function requestError(response) {
             return response;
         }
 
         function responseError(response) {
-            if (response.status === 401) {
-                $rootScope.$broadcast('unauthorized');
-            }
+            
             return response;
         }
     }

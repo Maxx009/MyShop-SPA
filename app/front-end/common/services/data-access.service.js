@@ -13,7 +13,7 @@
         this.update = put;
         this.remove = remove;
         ////////////////
-        var deferer = $q.defer();
+        var deferer;
 
         function error(error) {
             deferer.reject(error);
@@ -26,11 +26,13 @@
         }
 
         function get(url) {
-            $http.get(url).then(success, error);
+            deferer = $q.defer();
+            $http.get(url,{cache:false}).then(success, error);
             return deferer.promise;
         }
 
         function post(url,data) {
+            deferer = $q.defer();
             $http.post(url,{payLoad:data}).then(success,error);
             return deferer.promise;
         }

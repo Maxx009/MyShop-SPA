@@ -16,10 +16,13 @@
         }
 
         function selectCurrentSideMenu() {
-            vm.selectedSideMenu = $location.$$path.split('/')[2];
+            vm.selectedSideMenu = $location.$$path.split('/')[2].toLowerCase();
         }
-
-        $rootScope.$on('$stateChangeStart',
+        // $rootScope.$on('$stateChangeStart',
+        //     function (event, toState, toParams, fromState, fromParams, options) {
+        //         vm.selectedSideMenu = $location.$$path.split('/')[2];
+        //     });
+        $rootScope.$on('$stateChangeSuccess',
             function (event, toState, toParams, fromState, fromParams, options) {
                 selectCurrentSideMenu();
             });
