@@ -114,10 +114,7 @@
                 controllerAs: "vm",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
-                        return $ocLazyLoad.load(commonScripts.concat([
-                            "lib/angular-messages/angular-messages.min.js",
-                            "product/products.add.controller.js"
-                        ]));
+                        return $ocLazyLoad.load(commonScripts.concat(["bundle/js/products.min.js"]));
                     }]
                 }
             })
@@ -128,10 +125,7 @@
                 controllerAs: "vm",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
-                        return $ocLazyLoad.load(commonScripts.concat([
-                            "lib/angular-messages/angular-messages.min.js",
-                            "product/products.edit.controller.js"
-                        ]));
+                        return $ocLazyLoad.load(commonScripts.concat(["bundle/js/products.min.js"]));
                     }],
                     productItem: ["dataAccessService", "$stateParams", function (dataAccessService, $stateParams) {
                         return dataAccessService.fetch("/api/get/single/product/" + $stateParams.productId)
@@ -148,9 +142,7 @@
                 controllerAs: "vm",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
-                        return $ocLazyLoad.load(commonScripts.concat([
-                            "product/products.list.controller.js"
-                        ]));
+                        return $ocLazyLoad.load(commonScripts.concat(["bundle/js/products.min.js"]));
                     }]
                 }
             })
