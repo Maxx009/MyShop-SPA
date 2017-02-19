@@ -7,5 +7,9 @@
     "method-override": "~2.0.2",
     "mongodb": "^2.2.19",
     "serve-static": "^1.11.1"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1"
   }
 }

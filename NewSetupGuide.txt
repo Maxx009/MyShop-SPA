@@ -26,3 +26,7 @@
 8. Congifure git username and email id
 	git config --global user.name <username>
 	git config --global user.email <email_id>
+9. Install grunt
+	npm install grunt --save-dev
+10.Install grunt-contrib-concat
+	npm install grunt-contrib-concat --save-dev
