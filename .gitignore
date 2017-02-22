@@ -28,11 +28,11 @@ build/Release
 
 # Dependency directories
 node_modules
+bower_components
 jspm_packages
 typings
 
 #scripts libararies
-app/public/lib
 data
 
 vs code files

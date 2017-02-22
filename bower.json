@@ -16,7 +16,7 @@
     "url": "git://github.com/skapp/MyShop-SPA.git"
   },
   "ignore": [
-    "lib/*"
+    "bower_components/lib/*"
   ],
   "dependencies": {
     "angular": "~1.6.2",

@@ -5,7 +5,7 @@
         .config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', AppRoutesConfiguration]);
 
     function AppRoutesConfiguration($httpProvider, $stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
-        let commonScripts = ["common/services/data-access.service.js"];
+        let commonScripts = [];
         $urlMatcherFactoryProvider.caseInsensitive(true);
         $stateProvider
             .state('main', {
@@ -19,15 +19,6 @@
                         controller: "NavigationController",
                         controllerAs: "vm"
                     }
-                },
-                resolve: {
-                    loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
-                            "/lib/ui-bootstrap/src/collapse/collapse.js",
-                            "/common/directives/header-bread-crum-directive.js",
-                            "main/navigation.controller.js",
-                        ]);
-                    }]
                 }
             })
             .state('main.dashboard', {
@@ -94,38 +85,36 @@
                 url: "/Products",
                 views: {
                     '@main': {
-                        templateUrl: "product/products.html",
+                        templateUrl: "products.html",
                         controller: "DashboardProductController",
                         controllerAs: "vm"
                     }
                 },
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
-                            "product/products.controller.js"
-                        ]);
+                        $ocLazyLoad.load(commonScripts.concat(["/bundle/js/products.min.js"]));
                     }]
                 }
             })
             .state('main.products.add', {
                 url: "/Add",
-                templateUrl: "product/products.add.html",
+                templateUrl: "products.add.html",
                 controller: "AddProductController",
                 controllerAs: "vm",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
-                        return $ocLazyLoad.load(commonScripts.concat(["bundle/js/products.min.js"]));
+                        return $ocLazyLoad.load(commonScripts.concat(["/bundle/js/products.min.js"]));
                     }]
                 }
             })
             .state('main.products.edit', {
                 url: "/Edit/:productId",
-                templateUrl: "product/products.edit.html",
+                templateUrl: "products.edit.html",
                 controller: "ProductEditController",
                 controllerAs: "vm",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
-                        return $ocLazyLoad.load(commonScripts.concat(["bundle/js/products.min.js"]));
+                        return $ocLazyLoad.load(commonScripts.concat(["/bundle/js/products.min.js"]));
                     }],
                     productItem: ["dataAccessService", "$stateParams", function (dataAccessService, $stateParams) {
                         return dataAccessService.fetch("/api/get/single/product/" + $stateParams.productId)
@@ -137,7 +126,7 @@
             })
             .state('main.products.list', {
                 url: "/List",
-                templateUrl: "product/products.list.html",
+                templateUrl: "products.list.html",
                 controller: "ProductListController",
                 controllerAs: "vm",
                 resolve: {
