@@ -1,12 +1,17 @@
 angular.module('myShopApp').run(['$templateCache', function($templateCache) {
   'use strict';
 
-  $templateCache.put('app/front-end/main/main.html',
+  $templateCache.put('dashboard.html',
+    "<header-breadcrum header-big=\"Main\" header-small=\"Dashboard\" icon-class=\"fa-dashboard\"></header-breadcrum><div class=\"row\"><div class=\"col-lg-3 col-md-6\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><div class=\"row\"><div class=\"col-xs-3\"><i class=\"fa fa-users fa-5x\"></i></div><div class=\"col-xs-9 text-right\"><div class=\"huge\">26</div><div>Customers</div></div></div></div><a ui-sref=\"main.customers\"><div class=\"panel-footer\"><span class=\"pull-left\">View Details</span> <span class=\"pull-right\"><i class=\"fa fa-arrow-circle-right\"></i></span><div class=\"clearfix\"></div></div></a></div></div><div class=\"col-lg-3 col-md-6\"><div class=\"panel panel-green\"><div class=\"panel-heading\"><div class=\"row\"><div class=\"col-xs-3\"><i class=\"fa fa-cubes fa-5x\"></i></div><div class=\"col-xs-9 text-right\"><div class=\"huge\">12</div><div>Products</div></div></div></div><a ui-sref=\"main.products\"><div class=\"panel-footer\"><span class=\"pull-left\">View Details</span> <span class=\"pull-right\"><i class=\"fa fa-arrow-circle-right\"></i></span><div class=\"clearfix\"></div></div></a></div></div><div class=\"col-lg-3 col-md-6\"><div class=\"panel panel-yellow\"><div class=\"panel-heading\"><div class=\"row\"><div class=\"col-xs-3\"><i class=\"fa fa-shopping-cart fa-5x\"></i></div><div class=\"col-xs-9 text-right\"><div class=\"huge\">124</div><div>New Orders!</div></div></div></div><a href=\"#\"><div class=\"panel-footer\"><span class=\"pull-left\">View Details</span> <span class=\"pull-right\"><i class=\"fa fa-arrow-circle-right\"></i></span><div class=\"clearfix\"></div></div></a></div></div><div class=\"col-lg-3 col-md-6\"><div class=\"panel panel-red\"><div class=\"panel-heading\"><div class=\"row\"><div class=\"col-xs-3\"><i class=\"fa fa-support fa-5x\"></i></div><div class=\"col-xs-9 text-right\"><div class=\"huge\">13</div><div>Support Tickets!</div></div></div></div><a href=\"#\"><div class=\"panel-footer\"><span class=\"pull-left\">View Details</span> <span class=\"pull-right\"><i class=\"fa fa-arrow-circle-right\"></i></span><div class=\"clearfix\"></div></div></a></div></div></div>"
+  );
+
+
+  $templateCache.put('main.html',
     "<div id=\"wrapper\"><!-- Navigation --><nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\" ui-view=\"navigation\"></nav><div id=\"page-wrapper\"><div class=\"container-fluid\" ui-view=\"\"></div></div><!-- /#page-wrapper --></div>"
   );
 
 
-  $templateCache.put('app/front-end/main/navigation.html',
+  $templateCache.put('navigation.html',
     "<!-- Brand and toggle get grouped for better mobile display --><div><div class=\"navbar-header\"><button type=\"button\" class=\"navbar-toggle\" ng-init=\"vm.navCollapse=true;\" ng-click=\"vm.navCollapse=!vm.navCollapse\"><span class=\"sr-only\">Toggle navigation</span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span></button> <a class=\"navbar-brand\" href=\"/\">My Shop</a></div><!-- Top Menu Items --><!--<ul class=\"nav navbar-right top-nav\">\r" +
     "\n" +
     "        <li class=\"dropdown\">\r" +
@@ -151,7 +156,7 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </li>\r" +
     "\n" +
-    "    </ul>--><!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens --><div class=\"navbar-collapse collapse in\" uib-collapse=\"vm.navCollapse\"><ul class=\"nav navbar-nav side-nav\"><li ng-class=\"{'active':vm.selectedSideMenu === 'dashboard'}\"><a ui-sref=\"main.dashboard\"><i class=\"fa fa-fw fa-dashboard\"></i> Dashboard</a></li><li ng-class=\"{'active':vm.selectedSideMenu === 'customers'}\"><a ui-sref=\"main.customers\"><i class=\"fa fa-fw fa-users\"></i> Customers</a></li><li ng-class=\"{'active':vm.selectedSideMenu === 'products'}\"><a ui-sref=\"main.products\"><i class=\"fa fa-fw fa-dashboard\"></i> Products</a></li><li ng-class=\"{'active':vm.selectedSideMenu === 'sales'}\"><a ui-sref=\"main.sales\"><i class=\"fa fa-fw fa-dashboard\"></i> Sales</a></li><li ng-class=\"{'active':vm.selectedSideMenu === 'purchases'}\"><a ui-sref=\"main.purchases\"><i class=\"fa fa-fw fa-dashboard\"></i> Purchases</a></li></ul></div></div>"
+    "    </ul>--><!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens --><div class=\"navbar-collapse collapse in\" uib-collapse=\"vm.navCollapse\"><ul class=\"nav navbar-nav side-nav\"><li ng-class=\"{'active':vm.selectedSideMenu === 'dashboard'}\"><a ui-sref=\"main.dashboard\"><i class=\"fa fa-fw fa-dashboard\"></i> Dashboard</a></li><li ng-class=\"{'active':vm.selectedSideMenu === 'customers'}\"><a ui-sref=\"main.customers\"><i class=\"fa fa-fw fa-users\"></i> Customers</a></li><li ng-class=\"{'active':vm.selectedSideMenu === 'products'}\"><a ui-sref=\"main.products\"><i class=\"fa fa-fw fa-cubes\"></i> Products</a></li><li ng-class=\"{'active':vm.selectedSideMenu === 'sales'}\"><a ui-sref=\"main.sales\"><i class=\"fa fa-fw fa-dashboard\"></i> Sales</a></li><li ng-class=\"{'active':vm.selectedSideMenu === 'purchases'}\"><a ui-sref=\"main.purchases\"><i class=\"fa fa-fw fa-dashboard\"></i> Purchases</a></li></ul></div></div>"
   );
 
 }]);

@@ -3,11 +3,11 @@
 
     angular
         .module('myShopApp')
-        .directive('headerBreadcrum', Directive);
+        .directive('headerBreadcrum', headerBreadcrumDirective);
 
-    Directive.$inject = [];
+    headerBreadcrumDirective.$inject = [];
 
-    function Directive() {
+    function headerBreadcrumDirective() {
         // Usage:
         //
         // Creates:a Title for the current page and bread crum
@@ -27,18 +27,18 @@
                 </div>`,
             bindToController: true,
             controller: HearderBreadCrumController,
-            controllerAs: 'vm',            
+            controllerAs: 'vm',
             restrict: 'E',
             scope: {
-                headerBig:"@",
-                headerSmall:"@",
-                iconClass:"@"
+                headerBig: "@",
+                headerSmall: "@",
+                iconClass: "@"
             }
         };
-        return directive;        
+        return directive;
     }
     /* @ngInject */
     function HearderBreadCrumController() {
-        var vm=this;
+        var vm = this;
     }
-})();
+}());

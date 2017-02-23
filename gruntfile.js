@@ -1,5 +1,8 @@
 module.exports = function (grunt) {
-
+    function urlTrimmer(url) {
+        url = url.split('/');
+        return url[url.length - 1];
+    };
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         // jshint: {
@@ -25,23 +28,34 @@ module.exports = function (grunt) {
         },
         ngtemplates: {
             product: {
-                src: 'app/front-end/product/*.html',
+                src: 'app/front-end/product/**/*.html',
                 dest: 'app/build/bundle/js/templates/product.js',
                 options: {
                     module: 'myShopApp',
-                    url: function (url) {
-                        return url.replace('app/front-end/product/', '');
-                    },
-                    // htmlmin: {
-                    //     collapseWhitespace: true,
-                    //     collapseBooleanAttributes: true
-                    // }
+                    url: urlTrimmer,
+                    htmlmin: {
+                        collapseWhitespace: true,
+                        collapseBooleanAttributes: true
+                    }
+                }
+            },
+            customer: {
+                src: 'app/front-end/customer/**/*.html',
+                dest: 'app/build/bundle/js/templates/customer.js',
+                options: {
+                    module: 'myShopApp',
+                    url: urlTrimmer,
+                    htmlmin: {
+                        collapseWhitespace: true,
+                        collapseBooleanAttributes: true
+                    }
                 }
             },
             main: {
                 src: ['app/front-end/main/*.html'],
                 dest: 'app/build/bundle/js/templates/main.js',
                 options: {
+                    url: urlTrimmer,
                     module: 'myShopApp',
                     htmlmin: {
                         collapseWhitespace: true,
@@ -53,6 +67,7 @@ module.exports = function (grunt) {
                 src: ['app/front-end/common/templates/*.html'],
                 dest: 'app/build/bundle/js/templates/common.js',
                 options: {
+                    url: urlTrimmer,
                     module: 'myShopApp',
                     htmlmin: {
                         collapseWhitespace: true,
@@ -65,7 +80,7 @@ module.exports = function (grunt) {
             options: {
                 separator: '\n\n',
             },
-            concatLibraries: {
+            libraries: {
                 src: ['bower_Components/lib/angular/angular.min.js',
                     'bower_Components/lib/angular-animate/angular-animate.min.js',
                     'bower_Components/lib/angular-messages/angular-messages.min.js',
@@ -75,24 +90,33 @@ module.exports = function (grunt) {
                 ],
                 dest: 'app/build/bundle/js/libraries.min.js'
             },
-            concatApp: {
+            app: {
                 src: ['app/front-end/app.module.js',
+
                     'app/front-end/app.routes.js',
+                    'app/front-end/product/products.routes.js',
+                    'app/front-end/customer/customers.routes.js',
+
                     'app/front-end/common/services/*.js',
-                    'app/front-end/common/directive/*.js',
+                    'app/front-end/common/directives/*.js',
                     'app/front-end/main/*.js',
+
                     'app/build/bundle/js/templates/main.js',
-                    'app/build/bundle/js/templates/common.js'
+                    'app/build/bundle/js/templates/common.js',
+                    'app/build/bundle/js/templates/product.js',
+                    'app/build/bundle/js/templates/customer.js'
                 ],
                 dest: 'app/build/bundle/js/app.min.js'
             },
-            concatProduct: {
-                src: ['app/front-end/product/*.js',
-                    'app/build/bundle/js/templates/product.js'
-                ],
+            product: {
+                src: ['app/front-end/product/**/*.js','!app/front-end/product/*.js'],
                 dest: 'app/build/bundle/js/products.min.js'
             },
-            concatStyles: {
+            customer: {
+                src: ['app/front-end/customer/**/*.js','!app/front-end/customer/*.js'],
+                dest: 'app/build/bundle/js/customer.min.js'
+            },
+            styles: {
                 src: ['bower_Components/lib/bootstrap-css-only/css/bootstrap.min.css',
                     'bower_Components/lib/font-awesome/css/font-awesome.min.css',
                     'app/public/content/styles/app.css'
