@@ -32,9 +32,9 @@
         }
 
         function post(url,data) {
-            deferer = $q.defer();
-            $http.post(url,{payLoad:data}).then(success,error);
-            return deferer.promise;
+            //deferer = $q.defer();
+           return $http.post(url,{payLoad:data});//.then(success,error);
+            //return deferer.promise;
         }
 
         function put() {}

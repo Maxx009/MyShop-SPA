@@ -21,10 +21,14 @@ module.exports = function (app) {
         dataAccess.getDataFromCollection("CustomersMaster", {}).then(function (data, meta, leta) {
             console.log(data);
             data.toArray(function (error, docs) {
+                if(error){
+                    res.status(500).json(error);
+                   return;
+                }
                 res.status(200).json(docs);
             });
         }, function (error) {
-            console.log(error)
+            console.error(error);
         });
     });
     app.get('/api/get/single/product/:id', function (req, res) {
@@ -34,22 +38,29 @@ module.exports = function (app) {
             .then(function (doc) {
                 res.status(200).json(doc);
             }, function (error) {
-                console.log(error)
+                console.error(error);
+                res.status(500).json(error);
             });
     });
     app.get('/api/get/list/product', function (req, res) {
         dataAccess.getDataFromCollection("ProductMaster", {}).then(function (data) {
             data.toArray(function (error, docs) {
+                if(error){
+                    res.status(500).json(error);
+                    return;
+                }
                 res.status(200).json(docs);
             });
         }, function (error) {
-            console.log(error)
+            console.error(error);
+            res.status(500).json(error);
         });
     });
     app.post('/api/post/add/product', function (req, res) {
         var product = req.body.payLoad;
         if (validateProduct(product)) {
-            dataAccess.addDocumentToCollection("ProductMaster", product).then(function (databaseResponse) {
+            dataAccess.addDocumentToCollection("ProductMaster", product)
+            .then(function (databaseResponse) {
                 res.status(200).json({
                     message: "Inserted one item"
                 })
@@ -57,9 +68,7 @@ module.exports = function (app) {
                 res.status(500).json(error);
             });
         } else {
-            res.status(400).json({
-                error: "Invalid Product Details"
-            });
+            res.status(400).send('product details not correct');
         }
     });
 };

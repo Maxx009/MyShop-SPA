@@ -35,8 +35,6 @@ typings
 #scripts libararies
 data
 
-vs code files
-.vscode
 
 # Optional npm cache directory
 .npm
