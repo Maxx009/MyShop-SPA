@@ -260,6 +260,27 @@ ul.alert-dropdown {
     border-bottom-right-radius: 0!important;
     border-bottom-left-radius: 0!important;
 }
-.panel,.form-control,.btn{
+
+.panel,
+.form-control,
+.btn {
     border-radius: 0!important;
+}
+/*animation*/
+.ng-enter {
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.ng-enter-active {
+    opacity: 1;
+}
+
+.ng-leave {
+    transition: 0s;
+    opacity: 1;
+}
+
+.ng-leave-active {
+    opacity: 0;
 }

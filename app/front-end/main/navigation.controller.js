@@ -16,7 +16,7 @@
         }
 
         function selectCurrentSideMenu() {
-            let moduleName= $location.$$path.split('/')[2];
+            var moduleName= $location.$$path.split('/')[2];
             vm.selectedSideMenu = moduleName ? moduleName.toLowerCase():"";
         }
         // $rootScope.$on('$stateChangeStart',

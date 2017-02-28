@@ -90,32 +90,6 @@ module.exports = function (grunt) {
                 ],
                 dest: 'app/build/bundle/js/libraries.min.js'
             },
-            app: {
-                src: ['app/front-end/app.module.js',
-
-                    'app/front-end/app.routes.js',
-                    'app/front-end/product/products.routes.js',
-                    'app/front-end/customer/customers.routes.js',
-
-                    'app/front-end/common/services/*.js',
-                    'app/front-end/common/directives/*.js',
-                    'app/front-end/main/*.js',
-
-                    'app/build/bundle/js/templates/main.js',
-                    'app/build/bundle/js/templates/common.js',
-                    'app/build/bundle/js/templates/product.js',
-                    'app/build/bundle/js/templates/customer.js'
-                ],
-                dest: 'app/build/bundle/js/app.min.js'
-            },
-            product: {
-                src: ['app/front-end/product/**/*.js','!app/front-end/product/*.js'],
-                dest: 'app/build/bundle/js/products.min.js'
-            },
-            customer: {
-                src: ['app/front-end/customer/**/*.js','!app/front-end/customer/*.js'],
-                dest: 'app/build/bundle/js/customer.min.js'
-            },
             styles: {
                 src: ['bower_Components/lib/bootstrap-css-only/css/bootstrap.min.css',
                     'bower_Components/lib/font-awesome/css/font-awesome.min.css',
@@ -124,11 +98,58 @@ module.exports = function (grunt) {
                 dest: 'app/build/bundle/css/libraries.min.css'
             }
         },
+        cssmin: {
+            options: {
+                mergeIntoShorthands: false,
+                roundingPrecision: -1
+            },
+            target: {
+                files: {
+                    'app/build/bundle/css/libraries.min.css': ['app/build/bundle/css/libraries.min.css']
+                }
+            }
+        },
+        uglify: {
+            options: {
+                beautify: true,
+                mangle: false
+            },
+            allJS: {
+                files: {
+                    'app/build/bundle/js/app.min.js': [
+                        'app/front-end/app.module.js',
+                        'app/front-end/app.routes.js',
+                        'app/front-end/product/products.routes.js',
+                        'app/front-end/customer/customers.routes.js',
+
+                        'app/front-end/common/services/*.js',
+                        'app/front-end/common/directives/*.js',
+                        'app/front-end/main/*.js',
+
+                        'app/build/bundle/js/templates/main.js',
+                        'app/build/bundle/js/templates/common.js',
+                        'app/build/bundle/js/templates/product.js',
+                        'app/build/bundle/js/templates/customer.js'
+                    ],
+                    'app/build/bundle/js/products.min.js': [
+                        'app/front-end/product/**/*.js',
+                        '!app/front-end/product/*.js'
+                    ],
+                    'app/build/bundle/js/customer.min.js': [
+                        'app/front-end/customer/**/*.js',
+                        '!app/front-end/customer/*.js'
+                    ]
+                }
+            }
+        },
     });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     // grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['copy', 'ngtemplates', 'concat']);
+    grunt.registerTask('default', ['copy', 'ngtemplates', 'concat', 'uglify']);
+    // grunt.registerTask('prod', ['cssmin', 'uglify']);
 };
