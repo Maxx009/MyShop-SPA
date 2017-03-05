@@ -26,11 +26,12 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/build'));
-app.use(express.static(__dirname + '/front-end'));
 app.use(express.static(__dirname + '/back-end/index.html'));
 
 // routes ==================================================
 require(__dirname + '/back-end/routes')(app); // configure our routes
+require(__dirname + '/back-end/api/customer.api')(app); // configure our customer api
+require(__dirname + '/back-end/api/product.api')(app); // configure our product api
 
 // start app ===============================================
 // startup our app at http://localhost:8080

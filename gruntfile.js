@@ -64,7 +64,7 @@ module.exports = function (grunt) {
                 }
             },
             common: {
-                src: ['app/front-end/common/templates/*.html'],
+                src: ['app/front-end/common/templates/*.html','app/front-end/login/*.html'],
                 dest: 'app/build/bundle/js/templates/common.js',
                 options: {
                     url: urlTrimmer,
@@ -119,6 +119,7 @@ module.exports = function (grunt) {
                     'app/build/bundle/js/app.min.js': [
                         'app/front-end/app.module.js',
                         'app/front-end/app.routes.js',
+                        'app/front-end/login/*.js',
                         'app/front-end/product/products.routes.js',
                         'app/front-end/customer/customers.routes.js',
 

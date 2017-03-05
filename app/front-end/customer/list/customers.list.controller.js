@@ -14,7 +14,7 @@
         ////////////////
 
         function activate() {
-            dataAccessService.fetch("/api/get/customers")
+            dataAccessService.fetch("/api/get/list/customer")
             .then(function(customers){
                 vm.customers = customers;
             });

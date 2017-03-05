@@ -30,14 +30,9 @@
             })
             .state('login', {
                 url: "/login",
-                templateUrl: "login/login.html",
-                resolve: {
-                    loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
-                        return $ocLazyLoad.load([
-                            "login/login.controller.js"
-                        ]);
-                    }]
-                }
+                templateUrl: "login.html",
+                controller: "LoginController",
+                controllerAs: "vm"
             })
         $urlRouterProvider.otherwise('/main/dashboard');
         $httpProvider.interceptors.push('APIInterceptorService');

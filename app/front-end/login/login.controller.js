@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('myShopApp', [])
+    angular.module('myShopApp')
         .controller('LoginController', LoginController);
 
     LoginController.$inject = ["$http"];

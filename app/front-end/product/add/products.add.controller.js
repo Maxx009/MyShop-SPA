@@ -15,6 +15,15 @@
             vendorName: ""
         };
         vm.saveProduct = saveProduct;
+        vm.resetProduct = resetProduct;
+
+        function resetProduct() {
+            vm.product = {
+                brand: "",
+                name: "",
+                vendorName: ""
+            };
+        }
 
         function saveProduct() {
             dataAccessService.feed("/api/post/add/product", vm.product)

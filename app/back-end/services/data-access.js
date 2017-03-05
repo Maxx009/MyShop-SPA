@@ -1,6 +1,6 @@
 var mongodb = require('mongodb');
 var mongoClient = mongodb.MongoClient;
-const dbURL = "mongodb://LocalHost:7000/MyShopPrimary"
+const dbURL = require("../config/db").url;
 var mongo = {};
 
 var getConnection = mongoClient.connect(dbURL);
