@@ -1,47 +1,41 @@
-<form role="form">
+<form name="addCustomer" role="form" novalidate ng-submit="addCustomer.$valid && vm.saveCustomer()">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-user-plus fa-fw"></i> Add Customer</h3>
+            <h3 class="panel-title"><i class="fa fa-user-plus fa-fw"></i> &nbsp; Add Customer</h3>
         </div>
         <div class="panel-body">
             <div class="row">
-
-                <div class="col-lg-12">
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" class="form-control" ng-model="customer.name" />
+                <div class="col-lg-6">
+                    <div class="form-group" ng-class="{'has-error':addCustomer.customerName.$dirty && addCustomer.customerName.$invalid}">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" name="customerName" ng-model="vm.customer.name" ng-required="true" ng-pattern="/^[a-zA-Z]+$/"
+                        />
+                        <div ng-messages="addCustomer.customerName.$dirty && addCustomer.customerName.$error">
+                            <!--<div ng-messages-include="error-messages"></div>-->
+                            <ng-messages-include src="error-messages.html">...</ng-messages-include>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Shop Name</label>
-                            <input type="text" class="form-control" ng-model="customer.shopName"/>
+                    <div class="form-group" ng-class="{'has-error':addCustomer.shopName.$dirty && addCustomer.shopName.$invalid}">
+                        <label>Shop Name</label>
+                        <input type="text" class="form-control" name="shopName" ng-model="vm.customer.shopName" ng-pattern="/^[a-zA-Z]+$/" />
+                        <div ng-messages="addCustomer.shopName.$dirty && addCustomer.shopName.$error">
+                            <div ng-messages-include="error-messages.html"></div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Mobile No.</label>
-                            <input type="number" max="10" class="form-control" ng-model="customer.mobileNumber">
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group" ng-class="{'has-error':addCustomer.contactNo.$dirty && addCustomer.contactNo.$invalid}">
+                        <label>Contact No.</label>
+                        <input type="number" max="10" class="form-control" name="contactNo" ng-model="vm.customer.mobileNumber">
+                        <div ng-messages="addCustomer.contactNo.$dirty && addCustomer.contactNo.$error">
+                            <div ng-messages-include="error-messages.html"></div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Landline No.</label>
-                            <input type="tel" max="10" class="form-control" ng-model="customer.landLineNumber">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Address</label>
-                            <textarea rows="3" class="form-control" ng-model="customer.address"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Location</label>
-                            <input type="text" max="20" class="form-control" ng-model="customer.location">                            
+                    <div class="form-group" ng-class="{'has-error':addCustomer.address.$dirty && addCustomer.address.$invalid}">
+                        <label>Address</label>
+                        <textarea rows="3" class="form-control" name="address" ng-model="vm.customer.address"></textarea>
+                        <div ng-messages="addCustomer.address.$dirty && addCustomer.address.$error">
+                            <div ng-messages-include="error-messages.html"></div>
                         </div>
                     </div>
                 </div>
@@ -49,8 +43,8 @@
         </div>
         <div class="panel-footer">
             <span class="">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="reset" class="btn btn-default">Reset</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-default" ng-click="vm.resetCustomer();">Reset</button>
             </span>
         </div>
     </div>

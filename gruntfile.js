@@ -86,7 +86,7 @@ module.exports = function (grunt) {
                     'bower_Components/lib/angular-messages/angular-messages.min.js',
                     'bower_Components/lib/angular-ui-router/release/angular-ui-router.min.js',
                     'bower_Components/lib/oclazyload/dist/ocLazyLoad.min.js',
-                    'bower_Components/lib/ui-bootstrap/src/collapse/collapse.js'
+                    'app/public/content/js/ui-bootstrap-tpls-2.5.0/ui-bootstrap-tpls-2.5.0.min.js'
                 ],
                 dest: 'app/build/bundle/js/libraries.min.js'
             },

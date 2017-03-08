@@ -13,30 +13,23 @@ function validateProduct(product) {
     return isValid;
 }
 module.exports = function (app) {
-    app.get('/api/get/single/product/:id', function (req, res) {
+    app.get('/api/get/single/product/:id', function (req, res, next) {
         dataAccess.getSingleDocument("ProductMaster", {
                 "_id": ObjectId(req.params.id)
             })
             .then(function (doc) {
                 res.status(200).json(doc);
-            }, function (error) {
-                console.error(error);
-                res.status(500).json(error);
-            });
+            }, next).catch(next);;
     });
     app.get('/api/get/list/product', function (req, res, next) {
         dataAccess.getDataFromCollection("ProductMaster", {}).then(function (data) {
             data.toArray(function (error, docs) {
                 if (error) {
-                    res.status(500).json(error);
-                    return;
+                    return next(error);
                 }
                 res.status(200).json(docs);
             });
-        }, function (error) {
-            console.error(error);
-            res.status(500).json(error);
-        });
+        }, next).catch(next);
     });
     app.post('/api/post/add/product', function (req, res, next) {
         var product = req.body.payLoad;
@@ -46,20 +39,14 @@ module.exports = function (app) {
                     res.status(200).json({
                         message: "Inserted one item"
                     })
-                }, function (error) {
-                    res.status(500, {
-                        error: error
-                    });
-                })
-                .catch(function (error) {
-                    res.status(500, {
-                        error: error
-                    });
-                });;
+                }, next)
+                .catch(next);
         } else {
-            res.status(500, {
-                error: "error"
-            });
+            next(error);
         }
+    });
+    app.use(function (err, req, res, next) {
+        console.error(err.stack);
+        res.status(500).send('Something broke!');
     });
 };

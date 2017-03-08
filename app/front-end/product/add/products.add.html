@@ -1,4 +1,4 @@
-<form name="addProduct" ng-submit="vm.saveProduct()" role="form" novalidate>
+<form name="addProduct" ng-submit="addProduct.$valid && vm.saveProduct()" role="form" novalidate>
     <div class="panel panel-green">
         <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-plus fa-fw"></i>&nbsp; Add Product</h3>

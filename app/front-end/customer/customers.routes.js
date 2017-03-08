@@ -26,7 +26,7 @@
                 url: "/Add",
                 templateUrl: "customers.add.html",
                 controller: "AddCustomerController",
-                controllerAs: "customer",
+                controllerAs: "vm",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load("/bundle/js/customer.min.js");

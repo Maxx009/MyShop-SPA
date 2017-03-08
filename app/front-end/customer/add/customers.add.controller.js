@@ -1,19 +1,36 @@
-(function() {
-'use strict';
+(function () {
+    'use strict';
 
     angular
         .module('myShopApp')
         .controller('AddCustomerController', AddCustomerController);
 
     AddCustomerController.$inject = [];
+
     function AddCustomerController() {
         var vm = this;
-        
-        
-        activate();
+        vm.customer = {
+            name: "",
+            shopName: "",
+            mobileNumber: "",
+            address: ""
+        };
 
-        ////////////////
+        vm.resetCustomer = resetCustomer;
+        vm.saveCustomer = saveCustomer;
 
-        function activate() { }
+        function saveCustomer() {
+
+        }
+
+        function resetCustomer() {
+            vm.customer = {
+                name: "",
+                shopName: "",
+                mobileNumber: "",
+                address: ""
+            };
+        }
+
     }
 }());
