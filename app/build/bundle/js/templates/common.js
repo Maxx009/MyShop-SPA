@@ -2,7 +2,7 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('error-messages.html',
-    "<script type=\"text/ng-template\" id=\"error-messages\"><span class=\"text-danger\" ng-message=\"minlength\">Minmum allowed letters not entered</span>\r" +
+    "<script type=\"text/ng-template\" id=\"error-messages.html\"><span class=\"text-danger\" ng-message=\"minlength\">Minmum allowed letters not entered</span>\r" +
     "\n" +
     "    <span class=\"text-danger\" ng-message=\"maxlength\">Maximum allowed letters exceeded.</span>\r" +
     "\n" +

@@ -7,7 +7,13 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('main.html',
-    "<div id=\"wrapper\"><!-- Navigation --><nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\" ui-view=\"navigation\"></nav><div id=\"page-wrapper\"><div class=\"container-fluid\" ui-view=\"\"></div></div><!-- /#page-wrapper --></div>"
+    "<div id=\"wrapper\"><!-- Navigation --><nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\" ui-view=\"navigation\"></nav><div id=\"page-wrapper\"><script type=\"text/ng-template\" id=\"error-messages.html\"><span class=\"text-danger\" ng-message=\"minlength\">Minmum allowed letters not entered</span>\r" +
+    "\n" +
+    "			<span class=\"text-danger\" ng-message=\"maxlength\">Maximum allowed letters exceeded.</span>\r" +
+    "\n" +
+    "			<span class=\"text-danger\" ng-message=\"number\">Only number are allowed</span>\r" +
+    "\n" +
+    "			<span class=\"text-danger\" ng-message=\"required\">This field is required.</span></script><div class=\"container-fluid\" ui-view=\"\"></div></div><!-- /#page-wrapper --></div>"
   );
 
 

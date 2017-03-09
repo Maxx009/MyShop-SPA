@@ -276,9 +276,12 @@ ul.alert-dropdown {
 
 .panel,
 .form-control,
-.btn {
+.btn,.breadcrumb  {
     border-radius: 0!important;
 }
+.breadcrumb{
+    margin-bottom: 10px;
+} 
 /*animation*/
 .ng-enter {
     transition: 0.5s;

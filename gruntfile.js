@@ -123,8 +123,7 @@ module.exports = function (grunt) {
                         'app/front-end/product/products.routes.js',
                         'app/front-end/customer/customers.routes.js',
 
-                        'app/front-end/common/services/*.js',
-                        'app/front-end/common/directives/*.js',
+                        'app/front-end/common/**/*.js',
                         'app/front-end/main/*.js',
 
                         'app/build/bundle/js/templates/main.js',
