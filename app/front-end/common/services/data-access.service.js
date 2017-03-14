@@ -25,25 +25,27 @@
             console.info("In Data-Service Success-Callback :", response);
         }
 
+        function response(response) {
+            if (response.status === 200) {
+                success(response);
+            } else {
+                error(response.data);
+            }
+        }
+
         function get(url) {
             deferrer = $q.defer();
             $http.get(url, {
                 cache: false
-            }).then(success, error);
+            }).then(response);
             return deferrer.promise;
         }
 
         function post(url, data) {
-            var deferrer = $q.defer();
+            deferrer = $q.defer();
             $http.post(url, {
                 payLoad: data
-            }).then(function success(response) {
-                deferrer.resolve(response.data);
-                console.info("In Data-Service Success-Callback :", response);
-            }, function error(error) {
-                deferrer.reject(error);
-                console.error("In Data-Service Error-Callback :", error);
-            });
+            }).then(response);
             return deferrer.promise;
         }
 

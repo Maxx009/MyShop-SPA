@@ -142,7 +142,7 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('customers.list.html',
-    "<div class=\"panel panel-primary\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><i class=\"fa fa-list fa-fw\"></i>Customers</h3></div><div class=\"panel-body\"><div class=\"row\"><div class=\"col-lg-12\"><!--<h2>Bordered with Striped Rows</h2>--><div class=\"table-responsive\"><table class=\"table table-bordered table-hover table-striped\"><thead><tr><th>Name</th><th>Shop Name</th><th>Mobile</th><th>Address</th></tr></thead><tbody><tr ng-repeat=\"customer in customerList.customers track by customer._id\"><td ng-bind=\"customer.name\"></td><td ng-bind=\"customer.shopName\"></td><td ng-bind=\"customer.mobileNumber\"></td><td ng-bind=\"customer.address\"></td></tr></tbody></table></div></div></div></div></div>"
+    "<div class=\"panel panel-primary\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><i class=\"fa fa-list fa-fw\"></i>&nbsp; Customers</h3></div><div class=\"panel-body\"><div class=\"row\"><div class=\"col-lg-12\"><!--<h2>Bordered with Striped Rows</h2>--><div class=\"table-responsive\"><table class=\"table table-bordered table-hover table-striped\"><thead><tr><th>Name</th><th>Shop Name</th><th>Mobile</th><th>Address</th></tr></thead><tbody><tr ng-repeat=\"customer in customerList.customers track by customer._id\"><td ng-bind=\"customer.name\"></td><td ng-bind=\"customer.shopName\"></td><td ng-bind=\"customer.mobileNumber\"></td><td ng-bind=\"customer.address\"></td></tr></tbody></table></div></div></div></div></div>"
   );
 
 }]);

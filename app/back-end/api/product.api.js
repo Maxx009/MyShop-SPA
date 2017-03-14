@@ -2,7 +2,7 @@ var dataAccess = require('../services/data-access');
 var ObjectId = require('mongodb').ObjectId;
 
 function validateProduct(product) {
-    var isValid = true
+    const isValid = true
     if (!product.name) {
         isValid = false;
     } else if (!product.vendorName) {
@@ -47,6 +47,6 @@ module.exports = function (app) {
     });
     app.use(function (err, req, res, next) {
         console.error(err.stack);
-        res.status(500).send('Something broke!');
+        res.status(400).send(err);
     });
 };

@@ -282,6 +282,13 @@ ul.alert-dropdown {
 .breadcrumb{
     margin-bottom: 10px;
 } 
+.no-data-wrapper{
+text-align: center;
+
+}
+.no-data{
+
+}
 /*animation*/
 .ng-enter {
     transition: 0.5s;
