@@ -49,7 +49,13 @@
             return deferrer.promise;
         }
 
-        function put() {}
+        function put() {
+            deferrer = $q.defer();
+            $http.put(url, {
+                payLoad: data
+            }).then(response);
+            return deferrer.promise;
+        }
 
         function remove() {}
     }

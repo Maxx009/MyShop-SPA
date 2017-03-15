@@ -4,6 +4,8 @@
             <h3 class="panel-title"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp; Edit Product</h3>
         </div>
         <div class="panel-body">
+            <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
+                dismiss-on-timeout="2000">{{alert.msg}}</div>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group" ng-class="{'has-error':editProduct.productName.$dirty && editProduct.productName.$invalid}">

@@ -5,9 +5,9 @@
         .module('myShopApp')
         .controller('ProductListController', ProductListController);
 
-    ProductListController.$inject = ['$location', 'dataAccessService'];
+    ProductListController.$inject = ["$location", "products"];
 
-    function ProductListController($location, dataAccessService) {
+    function ProductListController($location,products) {
         var vm = this;
         activate();
 
@@ -19,10 +19,7 @@
         }
 
         function activate() {
-            dataAccessService.fetch("/api/get/list/product")
-                .then(function (products) {
-                    vm.products = products;
-                });
+            vm.products = products;
         }
     }
 }());

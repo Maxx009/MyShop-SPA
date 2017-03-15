@@ -11,7 +11,7 @@
                 url: "/Products",
                 views: {
                     '@main': {
-                        templateUrl: "products.html"    
+                        templateUrl: "products.html"
                     }
                 },
                 resolve: {
@@ -56,6 +56,12 @@
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load("/bundle/js/products.min.js");
+                    }],
+                    products: ["dataAccessService", function (dataAccessService) {
+                        return dataAccessService.fetch("/api/get/list/product")
+                            .then(function (products) {
+                                return products;
+                            });
                     }]
                 }
             })

@@ -5,9 +5,9 @@
         .module('myShopApp')
         .controller('AddCustomerController', AddCustomerController);
 
-    AddCustomerController.$inject = ['dataAccessService', 'alertMessage', 'messages'];
+    AddCustomerController.$inject = ["$state", "dataAccessService", "alertMessage", "messages"];
 
-    function AddCustomerController(dataAccessService, alertMessage, messages) {
+    function AddCustomerController($state, dataAccessService, alertMessage, messages) {
         var vm = this;
         vm.customer = {
             name: "",
@@ -21,14 +21,13 @@
         vm.alertService = alertMessage;
 
         function saveCustomer() {
-            dataAccessService.feed("/api/post/add/customer", vm.customer)
+            dataAccessService.feed("/api/post/update/customer", vm.customer)
                 .then(function (response) {
-                    vm.alertService.addAlert('success',messages.successMsgs.ITEM_ADDED);
-                    // $state.go("main.customers.list");
+                    vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
+                    $state.go("customers.list");
                 }, function (error) {
-                    vm.alertService.addAlert('success',messages.errorMsgs.ITEM_ADDED);
-                    console.error(error);
-                })
+                    vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED);
+                });
         }
 
         function resetCustomer() {

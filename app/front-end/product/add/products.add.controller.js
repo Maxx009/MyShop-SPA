@@ -5,9 +5,9 @@
         .module('myShopApp')
         .controller('AddProductController', AddProductController);
 
-    AddProductController.$inject = ["$state", "dataAccessService"];
+    AddProductController.$inject = ["$state", "dataAccessService", "alertMessage", "messages"];
 
-    function AddProductController($state, dataAccessService) {
+    function AddProductController($state, dataAccessService, alertMessage, messages) {
         var vm = this;
         vm.product = {
             brand: "",
@@ -16,6 +16,7 @@
         };
         vm.saveProduct = saveProduct;
         vm.resetProduct = resetProduct;
+        vm.alertService = alertMessage;
 
         function resetProduct() {
             vm.product = {
@@ -28,10 +29,11 @@
         function saveProduct() {
             dataAccessService.feed("/api/post/add/product", vm.product)
                 .then(function (response) {
-                    $state.go("main.products.list");
+                    vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
+                    $state.go("products.lists");
                 }, function (error) {
-                    console.error(error);
-                })
+                    vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED);
+                });
         }
     }
 }());

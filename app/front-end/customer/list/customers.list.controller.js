@@ -5,19 +5,22 @@
         .module('myShopApp')
         .controller('ListCustomerController', ListCustomerController);
 
-    ListCustomerController.$inject = ['dataAccessService'];
+    ListCustomerController.$inject = ["customers", "$location"];
 
-    function ListCustomerController(dataAccessService) {
-        var vm = this;  
+    function ListCustomerController(customers, $location) {
+        var vm = this;
+        vm.editCustomer = editCustomer;
+
         activate();
 
         ////////////////
 
+        function editCustomer(customerId) {
+            $location.path('/main/customers/edit/' + id);
+        }
+
         function activate() {
-            dataAccessService.fetch("/api/get/list/customer")
-            .then(function(customers){
-                vm.customers = customers;
-            });
+            vm.customers = customers;
         }
     }
 }());
