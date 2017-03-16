@@ -18,7 +18,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="customer in customerList.customers track by customer._id">
+                            <tr ng-repeat="customer in vm.customers track by customer._id">
                                 <td ng-bind="customer.name"></td>
                                 <td ng-bind="customer.shopName"></td>
                                 <td ng-bind="customer.mobileNumber"></td>

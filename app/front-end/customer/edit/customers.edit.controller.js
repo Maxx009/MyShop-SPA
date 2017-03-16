@@ -16,17 +16,17 @@
         vm.alertService = alertMessage;
 
         function updateCustomer() {
-            dataAccessService.feed("/api/post/add/customer", vm.customer)
+            dataAccessService.update("/api/put/update/customer", vm.customer)
                 .then(function (response) {
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_UPDATED);
-                    $state.go("customers.list");
+                    $state.go("main.customers.list");
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_UPDATED);
                 });
         }
 
         function cancelUpdate() {
-            $state.go("customers.list");
+            $state.go("main.customers.list");
         }
         
     }

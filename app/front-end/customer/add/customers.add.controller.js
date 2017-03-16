@@ -21,7 +21,7 @@
         vm.alertService = alertMessage;
 
         function saveCustomer() {
-            dataAccessService.feed("/api/post/update/customer", vm.customer)
+            dataAccessService.feed("/api/post/add/customer", vm.customer)
                 .then(function (response) {
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
                     $state.go("customers.list");

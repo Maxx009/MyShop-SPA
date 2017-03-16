@@ -54,7 +54,7 @@
                 url: "/List",
                 templateUrl: "customers.list.html",
                 controller: "ListCustomerController",
-                controllerAs: "customerList",
+                controllerAs: "vm",
                 resolve: {
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load("/bundle/js/customer.min.js");

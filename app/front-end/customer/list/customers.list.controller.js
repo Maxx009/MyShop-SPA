@@ -16,7 +16,7 @@
         ////////////////
 
         function editCustomer(customerId) {
-            $location.path('/main/customers/edit/' + id);
+            $location.path('/main/customers/edit/' +customerId);
         }
 
         function activate() {

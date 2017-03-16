@@ -1,4 +1,4 @@
-<form name="updateCustomer" role="form" novalidate ng-submit="updateCustomer.$valid && vm.saveCustomer()">
+<form name="updateCustomer" role="form" novalidate ng-submit="updateCustomer.$valid && vm.updateCustomer()">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-pencil-square fa-fw"></i> &nbsp; Update Customer</h3>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group" ng-class="{'has-error':updateCustomer.shopName.$dirty && updateCustomer.shopName.$invalid}">
                         <label>Shop Name</label>
-                        <input type="text" class="form-control" name="shopName" ng-model="vm.customer.shopName" ng-pattern="/^[a-zA-Z]+$/" />
+                        <input type="text" class="form-control" name="shopName" ng-model="vm.customer.shopName" ng-pattern="/^[a-z A-Z]+$/" />
                         <div ng-messages="updateCustomer.shopName.$dirty && updateCustomer.shopName.$error">
                             <div ng-messages-include="error-messages.html"></div>
                         </div>

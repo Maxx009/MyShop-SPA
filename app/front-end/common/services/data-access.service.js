@@ -49,7 +49,7 @@
             return deferrer.promise;
         }
 
-        function put() {
+        function put(url, data) {
             deferrer = $q.defer();
             $http.put(url, {
                 payLoad: data

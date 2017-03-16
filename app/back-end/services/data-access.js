@@ -32,7 +32,7 @@ mongo.addDocumentToCollection = function addDocumentToCollection(collectionName,
 mongo.updateDocument = function updateDocument(collectionName, jsonObject) {
     return mongo.getCollection(collectionName)
         .then(function getCollectionSuccess(collection) {
-            return collection.updateOne(jsonObject);
+            return collection.updateOne(jsonObject.query, {$set:jsonObject.update});
         });
 }
 module.exports = mongo;
