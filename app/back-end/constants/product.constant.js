@@ -1,3 +1,3 @@
 module.exports={
-    PRODUCT_MASTER:"ProductMaster",
+    COLLECTION_NAME:"ProductMaster",
 }

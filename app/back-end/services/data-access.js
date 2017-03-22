@@ -35,4 +35,10 @@ mongo.updateDocument = function updateDocument(collectionName, jsonObject) {
             return collection.updateOne(jsonObject.query, {$set:jsonObject.update});
         });
 }
+mongo.getDocumentCount = function getDocumentCount(collectionName, jsonObject) {
+    return mongo.getCollection(collectionName)
+        .then(function getCollectionSuccess(collection) {
+            return collection.count(jsonObject);
+        });
+}
 module.exports = mongo;

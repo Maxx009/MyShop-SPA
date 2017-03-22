@@ -1,27 +1,27 @@
-<header-breadcrum header-big="Customer" header-small="Dashboard" icon-class="fa-users"></header-breadcrum>
+<header-breadcrum header-big="Vendor" header-small="Dashboard" icon-class="fa-shopping-bag"></header-breadcrum>
 <div class="row">
     <div class="col-lg-3 col-md-6">
-        <div class="panel panel-primary">
+        <div class="panel panel-yellow">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-users fa-5x"></i>
+                        <i class="fa fa-shopping-bag fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge" ng-bind="vm.customerCount"></div>
-                        <div>Total Customers</div>
+                        <div class="huge" ng-bind="vm.vendorCount"></div>
+                        <div>Total Vendors</div>
                     </div>
                 </div>
             </div>
             <div class="panel-footer">
-                <div class="row">
-                    <a ui-sref="main.customers.add">
-                        <div class="col-md-6 primary-right-border">
+                <div class="row yellow-color">
+                    <a ui-sref="main.vendors.add">
+                        <div class="col-md-6 yellow-right-border">
                             <span class="pull-left">Add New</span>
                             <span class="pull-right"><i class="fa fa-user-plus"></i></span>
                         </div>
                     </a>
-                    <a ui-sref="main.customers.list">
+                    <a ui-sref="main.vendors.list">
                         <div class="col-md-6">
                             <span class="pull-left">View List</span>
                             <span class="pull-right"><i class="fa fa-list"></i></span>

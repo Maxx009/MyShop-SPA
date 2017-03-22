@@ -16,10 +16,10 @@
                         controllerAs: "vm"
                     }
                 },
-                resolve: {
+                resolve: {                   
                     loadJS: ["$ocLazyLoad", function ($ocLazyLoad) {
                         return $ocLazyLoad.load("/bundle/js/customer.min.js");
-                    }]
+                    }],
                 }
             })
             .state('main.customers.add', {

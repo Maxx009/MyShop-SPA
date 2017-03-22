@@ -215,13 +215,43 @@ ul.alert-dropdown {
     border-right: #5cb85c solid 1px;
 }
 
-.red-right-border {
+.yellow-right-border {
     border-right: #f0ad4e solid 1px;
 }
 
-.orange-right-border {
+.red-right-border {
     border-right: #d9534f solid 1px;
 }
+
+.red-color {
+    color: #d9534f;
+}
+
+.red-color a,
+.red-color a:focus,
+.red-color a:visited {
+    color: #d9534f !important;
+}
+
+.red-color a:hover {
+    color: #b52b27 !important;
+}
+
+
+.yellow-color {
+    color: #f0ad4e;
+}
+
+.yellow-color a,
+.yellow-color a:focus,
+.yellow-color a:visited {
+    color: #f0ad4e !important;
+}
+
+.yellow-color a:hover {
+    color: #df8a13 !important;
+}
+
 
 .green-color {
     color: #5cb85c;

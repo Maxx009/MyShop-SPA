@@ -1,9 +1,11 @@
 // modules =================================================
+var compression = require('compression');
 var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 
 var app = express();
+app.use(compression());
 
 var port = process.env.Port || 8080;
 
@@ -32,6 +34,7 @@ app.use(express.static(__dirname + '/back-end/index.html'));
 require(__dirname + '/back-end/routes')(app); // configure our routes
 require(__dirname + '/back-end/api/customer.api')(app); // configure our customer api
 require(__dirname + '/back-end/api/product.api')(app); // configure our product api
+require(__dirname + '/back-end/api/vendor.api')(app); // configure our product api
 
 // start app ===============================================
 // startup our app at http://localhost:8080

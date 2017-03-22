@@ -14,6 +14,7 @@
             name: "",
             vendorName: ""
         };
+        vm.getVendors = getVendors;
         vm.saveProduct = saveProduct;
         vm.resetProduct = resetProduct;
         vm.alertService = alertMessage;
@@ -33,6 +34,13 @@
                     $state.go("products.lists");
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED);
+                });
+        }
+
+        function getVendors(val) {
+            return dataAccessService.fetch("/api/get/find/vendor/" + val)
+                .then(function (vendors) {
+                    return vendors;
                 });
         }
     }

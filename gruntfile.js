@@ -51,6 +51,18 @@ module.exports = function (grunt) {
                     }
                 }
             },
+            vendor: {
+                src: 'app/front-end/vendor/**/*.html',
+                dest: 'app/build/bundle/js/templates/vendor.js',
+                options: {
+                    module: 'myShopApp',
+                    url: urlTrimmer,
+                    htmlmin: {
+                        collapseWhitespace: true,
+                        collapseBooleanAttributes: true
+                    }
+                }
+            },
             main: {
                 src: ['app/front-end/main/*.html'],
                 dest: 'app/build/bundle/js/templates/main.js',
@@ -122,6 +134,7 @@ module.exports = function (grunt) {
                         'app/front-end/login/*.js',
                         'app/front-end/product/products.routes.js',
                         'app/front-end/customer/customers.routes.js',
+                        'app/front-end/vendor/vendors.routes.js',
 
                         'app/front-end/common/**/*.js',
                         'app/front-end/main/*.js',
@@ -129,6 +142,7 @@ module.exports = function (grunt) {
                         'app/build/bundle/js/templates/main.js',
                         'app/build/bundle/js/templates/common.js',
                         'app/build/bundle/js/templates/product.js',
+                        'app/build/bundle/js/templates/vendor.js',
                         'app/build/bundle/js/templates/customer.js'
                     ],
                     'app/build/bundle/js/products.min.js': [
@@ -138,6 +152,10 @@ module.exports = function (grunt) {
                     'app/build/bundle/js/customer.min.js': [
                         'app/front-end/customer/**/*.js',
                         '!app/front-end/customer/*.js'
+                    ],
+                    'app/build/bundle/js/vendor.min.js': [
+                        'app/front-end/vendor/**/*.js',
+                        '!app/front-end/vendor/*.js'
                     ]
                 }
             }

@@ -15,28 +15,28 @@ function validateProduct(product) {
 }
 module.exports = function (app) {
     app.get('/api/get/single/product/:id', function (req, res, next) {
-        dataAccess.getSingleDocument(constants.PRODUCT_MASTER, {
+        dataAccess.getSingleDocument(constants.COLLECTION_NAME, {
                 "_id": ObjectId(req.params.id)
             })
             .then(function (doc) {
                 res.status(200).json(doc);
-            }, next).catch(next);;
+            }).catch(next);;
     });
 
     app.get('/api/get/list/product', function (req, res, next) {
-        dataAccess.getDataFromCollection(constants.PRODUCT_MASTER, {}).then(function (data) {
+        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {}).then(function (data) {
             data.toArray(function (error, docs) {
                 if (error) {
                     return next(error);
                 }
                 res.status(200).json(docs);
             });
-        }, next).catch(next);
+        }).catch(next);
     });
 
     app.put('/api/put/update/product', function (req, res, next) {
         var product = req.body.payLoad;
-        dataAccess.updateDocument(constants.PRODUCT_MASTER, {
+        dataAccess.updateDocument(constants.COLLECTION_NAME, {
                 query: {
                     "_id": ObjectId(product._id)
                 },
@@ -50,18 +50,18 @@ module.exports = function (app) {
                 return res.status(200).json({
                     message: "Updated one item"
                 });
-            }, next);
+            }).catch(next);
     });
     
     app.post('/api/post/add/product', function (req, res, next) {
         var product = req.body.payLoad;
         if (validateProduct(product)) {
-            dataAccess.addDocumentToCollection(constants.PRODUCT_MASTER, product)
+            dataAccess.addDocumentToCollection(constants.COLLECTION_NAME, product)
                 .then(function (databaseResponse) {
                     res.status(200).json({
                         message: "Inserted one item"
                     })
-                }, next)
+                })
                 .catch(next);
         } else {
             next(error);
