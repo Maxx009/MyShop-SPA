@@ -7,6 +7,7 @@
             <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
                 dismiss-on-timeout="2000">{{alert.msg}}</div>
             <div class="row">
+                <!--<Pre>{{vm.product.vendorName | json}}</Pre>-->
                 <div class="col-lg-6">
                     <div class="form-group" ng-class="{'has-error':addProduct.productName.$dirty && addProduct.productName.$invalid}">
                         <label>Product Name</label>
@@ -17,9 +18,9 @@
                     </div>
                     <div class="form-group">
                         <label>Vendor Name</label>
-                        <input type="text" name="productVendor" ng-model="vm.product.vendorName" placeholder="Type vendor name" uib-typeahead="vendor for vendor in vm.getVendors($viewValue)"
-                            typeahead-loading="vm.loadingLocations" typeahead-no-results="vm.noResults" class="form-control">
-                        <i ng-show="vm.loadingLocations" class="fa fa-refresh"></i>
+                        <input type="text" name="productVendor" ng-model="vm.product.vendorName" placeholder="Type vendor name" uib-typeahead="vendor as vendor.name for vendor in vm.getVendors($viewValue)"
+                            typeahead-loading="vm.loading" typeahead-no-results="vm.noResults" class="form-control">
+                        <i ng-show="vm.loading" class="fa fa-refresh"></i>
                         <div ng-show="vm.noResults">
                             <i class="fa fa-remove"></i> No Vendor Found
                         </div>

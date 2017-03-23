@@ -9,8 +9,7 @@ module.exports = function (app) {
                 console.log(data);
                 data.toArray(function (error, docs) {
                     if (error) {
-                        res.status(500).json(error);
-                        return;
+                        next(error);
                     }
                     res.status(200).json(docs);
                 });
@@ -33,14 +32,12 @@ module.exports = function (app) {
     app.get('/api/get/find/vendor/:name', function (req, res, next) {
         var searchToken = req.params.name;
         dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {
-                "name": RegExp("/.*" + searchToken + ".*/")
+                name: new RegExp(searchToken,'i')
             })
             .then(function (data) {
-                console.log(data);
                 data.toArray(function (error, docs) {
                     if (error) {
-                        res.status(500).json(error);
-                        return;
+                        next(error);
                     }
                     res.status(200).json(docs);
                 });
