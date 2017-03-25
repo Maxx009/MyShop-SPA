@@ -1,0 +1,51 @@
+<form name="billForm" role="form" novalidate ng-submit="billForm.$valid && vm.saveBill()">
+    <div class="panel panel-red">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-inr fa-fw"></i> Add Bill</h3>
+        </div>
+        <div class="panel-body">
+            <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
+                dismiss-on-timeout="2000">{{alert.msg}}</div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="form-group" ng-class="{'has-error':billForm.customerName.$dirty && billForm.customerName.$invalid}">
+                        <label>Customer Name</label>
+                        <input type="text" name="customerName" ng-model="vm.bill.customerName" placeholder="Type Customer name" uib-typeahead="customer as customer.name for customer in vm.getCustomers($viewValue)"
+                            typeahead-loading="vm.loading" typeahead-no-results="vm.noResults" class="form-control">
+                        <i ng-show="vm.loading" class="fa fa-refresh"></i>
+                        <div ng-show="vm.noResults">
+                            <i class="fa fa-remove"></i> No Vendor Found
+                        </div>
+                        <div ng-messages="billForm.customerName.$dirty && billForm.customerName.$error">
+                            <div ng-messages-include="error-messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group" ng-class="{'has-error':billForm.contactNo.$dirty && billForm.contactNo.$invalid}">
+                        <label>Bill Date</label>
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="{{'dd-MMMM-yyyy'}}" ng-model="bill.billDate" is-open="vm.isBillDateOpen"
+                                mix-date="vm.today" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="vm.isBillDateOpen = !vm.isBillDateOpen"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+                        <div ng-messages="billForm.contactNo.$dirty && billForm.contactNo.$error">
+                            <div ng-messages-include="error-messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--Bill details-->
+            </div>
+        </div>
+        <div class="panel-footer">
+            <span class="">
+                <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i>&nbsp; Save</button>
+                <button type="button" class="btn btn-default" ng-click="vm.resetBill();"><i class="fa fa-refresh"></i>&nbsp; Reset</button>
+            </span>
+        </div>
+    </div>
+</form>

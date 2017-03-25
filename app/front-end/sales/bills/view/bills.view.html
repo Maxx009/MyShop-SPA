@@ -1,0 +1,33 @@
+<div class="panel panel-yellow">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list fa-fw"></i>&nbsp; Bills </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                                <th>Address</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="bill in vm.bills track by bill._id">
+                                <td ng-bind="bill.name"></td>
+                                <td ng-bind="bill.mobileNumber"></td>
+                                <td ng-bind="bill.address"></td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-circle" ng-click="vm.editBill(bill._id)"><i class="fa fa-pencil-square-o"aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

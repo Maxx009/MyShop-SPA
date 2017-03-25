@@ -35,6 +35,7 @@ require(__dirname + '/back-end/routes')(app); // configure our routes
 require(__dirname + '/back-end/api/customer.api')(app); // configure our customer api
 require(__dirname + '/back-end/api/product.api')(app); // configure our product api
 require(__dirname + '/back-end/api/vendor.api')(app); // configure our product api
+require(__dirname + '/back-end/api/sales.api')(app); // configure our product api
 
 // start app ===============================================
 // startup our app at http://localhost:8080

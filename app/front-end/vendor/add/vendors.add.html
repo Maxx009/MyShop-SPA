@@ -1,7 +1,7 @@
 <form name="vendorForm" role="form" novalidate ng-submit="vendorForm.$valid && vm.saveVendor()">
     <div class="panel panel-yellow">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-shopping-bag fa-fw"></i> Add Vendor</h3>
+            <h3 class="panel-title"><i class="fa fa-plus-square fa-fw"></i> Add Vendor</h3>
         </div>
         <div class="panel-body">
             <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
