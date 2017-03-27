@@ -13,7 +13,10 @@
         //
         var directive = {
             restrict: 'A',
-            templateUrl:'',
+            templateUrl:'picker.html',
+            controller:"PickerController",
+            controllerAs:"vm",
+            bindToController:true,
             scope: {
                 elementName:"@",
                 modelObject:"=",
@@ -24,4 +27,7 @@
         return directive;
     }
     /* @ngInject */
+    function PickerController(params) {
+        
+    }
 })();

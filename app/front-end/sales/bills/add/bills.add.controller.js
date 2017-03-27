@@ -8,17 +8,31 @@
     AddBillController.$inject = ["$state", "dataAccessService", "alertMessage", "messages"];
 
     function AddBillController($state, dataAccessService, alertMessage, messages) {
+        function BillItem() {
+            this.product = "";
+            this.units = 1;
+            this.quantity = 1;
+            this.rate = 0.0;
+        }
+
         var vm = this;
-        vm.bill = {
-            name: "",
-            mobileNumber: "",
-            address: ""
-        };
-        vm.today = new Date();
+        vm.quantities = [1, 5, 10, 25, 30, 50];
+
+        vm.billDetails = {};
+        vm.billDetails.billDate = new Date();
+        vm.billDetails.billItems = [
+            new BillItem()
+        ];
+
         vm.resetBill = resetBill;
         vm.saveBill = saveBill;
         vm.getCustomers = getCustomers;
+        vm.getProducts = getProducts;
         vm.alertService = alertMessage;
+        vm.addNewRow = addNewRow;
+        vm.removeRow = removeRow;
+        vm.calculate = calculate;
+
 
         function saveBill() {
             dataAccessService.feed("/api/post/add/bill", vm.bill)
@@ -31,11 +45,9 @@
         }
 
         function resetBill() {
-            vm.bill = {
-                name: "",
-                mobileNumber: "",
-                address: ""
-            };
+            vm.billDetails.billItems = [
+                new BillItem()
+            ];
         }
 
         function getCustomers(val) {
@@ -43,6 +55,31 @@
                 .then(function (customers) {
                     return customers;
                 });
+        }
+
+        function getProducts(val) {
+            return dataAccessService.fetch("/api/get/find/product/" + val)
+                .then(function (products) {
+                    return products;
+                });
+        }
+
+        function addNewRow() {
+            vm.billDetails.billItems.push(new BillItem());
+        }
+
+        function removeRow(index) {
+            vm.billDetails.billItems.splice(index, 1);
+        }
+
+        function calculate() {
+            var grandTotal = 0;
+            for (var index = 0; index < vm.billDetails.billItems.length; index++) {
+                var item = vm.billDetails.billItems[index];
+                item.total = (item.rate * item.quantity) * item.units;
+                grandTotal += item.total;
+            }
+            vm.billDetails.grandTotal=grandTotal;
         }
     }
 }());

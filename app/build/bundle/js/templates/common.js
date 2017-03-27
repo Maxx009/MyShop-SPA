@@ -7,7 +7,7 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('picker.html',
-    "<div><input type=\"text\" name=\"vm.elementName\" ng-model=\"vm.product.vendorName\" placeholder=\"Type vendor name\" uib-typeahead=\"vendor as vendor.name for vendor in vm.getVendors($viewValue)\" typeahead-loading=\"vm.loading\" typeahead-no-results=\"vm.noResults\" class=\"form-control\"> <i ng-show=\"vm.loading\" class=\"fa fa-refresh\"></i><div ng-show=\"vm.noResults\"><i class=\"fa fa-remove\"></i> No Vendor Found</div></div>"
+    "<div><input type=\"text\" name=\"vm.elementName\" ng-model=\"vm.modelObject\" placeholder=\"vm.placeholder\" uib-typeahead=\"vm.typeAheadExpression\" typeahead-loading=\"vm.loading\" typeahead-no-results=\"vm.noResults\" class=\"form-control\"> <i ng-show=\"vm.loading\" class=\"fa fa-refresh\"></i><div ng-show=\"vm.noResults\"><i class=\"fa fa-remove\"></i> No data Found</div></div>"
   );
 
 

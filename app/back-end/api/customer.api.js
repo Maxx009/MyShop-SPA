@@ -34,7 +34,13 @@ module.exports = function (app) {
     app.get('/api/get/find/customer/:name', function (req, res, next) {
         var searchToken = req.params.name;
         dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {
-                name: new RegExp(searchToken, 'i')
+                $or: [{
+                        name: new RegExp(searchToken, 'i')
+                    },
+                    {
+                        shopName: new RegExp(searchToken, 'i')
+                    }
+                ]
             }, {
                 _id: 1,
                 name: 1,

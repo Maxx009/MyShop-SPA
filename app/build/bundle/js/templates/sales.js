@@ -2,7 +2,191 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('bills.add.html',
-    "<form name=\"billForm\" role=\"form\" novalidate ng-submit=\"billForm.$valid && vm.saveBill()\"><div class=\"panel panel-red\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><i class=\"fa fa-inr fa-fw\"></i> Add Bill</h3></div><div class=\"panel-body\"><div uib-alert ng-repeat=\"alert in vm.alertService.alerts\" ng-class=\"'alert-' + (alert.type || 'warning')\" close=\"vm.alertService.closeAlert($index)\" dismiss-on-timeout=\"2000\">{{alert.msg}}</div><div class=\"row\"><div class=\"col-lg-8\"><div class=\"form-group\" ng-class=\"{'has-error':billForm.customerName.$dirty && billForm.customerName.$invalid}\"><label>Customer Name</label><input type=\"text\" name=\"customerName\" ng-model=\"vm.bill.customerName\" placeholder=\"Type Customer name\" uib-typeahead=\"customer as customer.name for customer in vm.getCustomers($viewValue)\" typeahead-loading=\"vm.loading\" typeahead-no-results=\"vm.noResults\" class=\"form-control\"> <i ng-show=\"vm.loading\" class=\"fa fa-refresh\"></i><div ng-show=\"vm.noResults\"><i class=\"fa fa-remove\"></i> No Vendor Found</div><div ng-messages=\"billForm.customerName.$dirty && billForm.customerName.$error\"><div ng-messages-include=\"error-messages.html\"></div></div></div></div><div class=\"col-lg-4\"><div class=\"form-group\" ng-class=\"{'has-error':billForm.contactNo.$dirty && billForm.contactNo.$invalid}\"><label>Bill Date</label><p class=\"input-group\"><input type=\"text\" class=\"form-control\" uib-datepicker-popup=\"{{'dd-MMMM-yyyy'}}\" ng-model=\"bill.billDate\" is-open=\"vm.isBillDateOpen\" mix-date=\"vm.today\" ng-required=\"true\" close-text=\"Close\"> <span class=\"input-group-btn\"><button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.isBillDateOpen = !vm.isBillDateOpen\"><i class=\"fa fa-calendar\"></i></button></span></p><div ng-messages=\"billForm.contactNo.$dirty && billForm.contactNo.$error\"><div ng-messages-include=\"error-messages.html\"></div></div></div></div></div><div class=\"row\"><div class=\"col-lg-6\"><div class=\"form-group\" ng-class=\"{'has-error':billForm.address.$dirty && billForm.address.$invalid}\"><label>Address</label><textarea rows=\"3\" class=\"form-control\" name=\"address\" ng-model=\"vm.bill.address\"></textarea><div ng-messages=\"billForm.address.$dirty && billForm.address.$error\"><div ng-messages-include=\"error-messages.html\"></div></div></div></div></div></div><div class=\"panel-footer\"><span class=\"\"><button type=\"submit\" class=\"btn btn-danger\"><i class=\"fa fa-floppy-o\"></i>&nbsp; Save</button> <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.resetBill();\"><i class=\"fa fa-refresh\"></i>&nbsp; Reset</button></span></div></div></form>"
+    "<form name=\"billForm\" role=\"form\" novalidate ng-submit=\"billForm.$valid && vm.saveBill()\">\r" +
+    "\n" +
+    "    <div class=\"panel panel-red\">\r" +
+    "\n" +
+    "        <div class=\"panel-heading\">\r" +
+    "\n" +
+    "            <h3 class=\"panel-title\"><i class=\"fa fa-inr fa-fw\"></i> Add Bill</h3>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"panel-body\">\r" +
+    "\n" +
+    "            <div uib-alert ng-repeat=\"alert in vm.alertService.alerts\" ng-class=\"'alert-' + (alert.type || 'warning')\" close=\"vm.alertService.closeAlert($index)\"\r" +
+    "\n" +
+    "                dismiss-on-timeout=\"2000\">{{alert.msg}}</div>\r" +
+    "\n" +
+    "            <div class=\"row\">\r" +
+    "\n" +
+    "                <div class=\"col-lg-8\">\r" +
+    "\n" +
+    "                    <div class=\"form-group\" ng-class=\"{'has-error':billForm.customerName.$dirty && billForm.customerName.$invalid}\">\r" +
+    "\n" +
+    "                        <label>Customer Name</label>\r" +
+    "\n" +
+    "                        <input type=\"text\" name=\"customerName\" ng-model=\"vm.billDetails.customerName\" placeholder=\"Type Customer name\" uib-typeahead=\"customer as customer.name for customer in vm.getCustomers($viewValue)\"\r" +
+    "\n" +
+    "                            typeahead-loading=\"vm.loading\" typeahead-no-results=\"vm.noResults\" class=\"form-control\">\r" +
+    "\n" +
+    "                        <i ng-show=\"vm.loading\" class=\"fa fa-refresh\"></i>\r" +
+    "\n" +
+    "                        <div ng-show=\"vm.noResults\">\r" +
+    "\n" +
+    "                            <i class=\"fa fa-remove\"></i> No Customers Found\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ng-messages=\"billForm.customerName.$dirty && billForm.customerName.$error\">\r" +
+    "\n" +
+    "                            <div ng-messages-include=\"error-messages.html\"></div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"col-lg-4\">\r" +
+    "\n" +
+    "                    <div class=\"form-group\" ng-class=\"{'has-error':billForm.contactNo.$dirty && billForm.contactNo.$invalid}\">\r" +
+    "\n" +
+    "                        <label>Bill Date</label>\r" +
+    "\n" +
+    "                        <p class=\"input-group\">\r" +
+    "\n" +
+    "                            <input type=\"text\" class=\"form-control\" uib-datepicker-popup=\"{{'dd-MMMM-yyyy'}}\" ng-model=\"vm.billDetails.billDate\" is-open=\"vm.isBillDateOpen\"\r" +
+    "\n" +
+    "                                mix-date=\"vm.today\" ng-required=\"true\" close-text=\"Close\" />\r" +
+    "\n" +
+    "                            <span class=\"input-group-btn\">\r" +
+    "\n" +
+    "                                <button type=\"button\" class=\"btn btn-danger\" ng-click=\"vm.isBillDateOpen = !vm.isBillDateOpen\"><i class=\"fa fa-calendar\"></i></button>\r" +
+    "\n" +
+    "                            </span>\r" +
+    "\n" +
+    "                        </p>\r" +
+    "\n" +
+    "                        <div ng-messages=\"billForm.contactNo.$dirty && billForm.contactNo.$error\">\r" +
+    "\n" +
+    "                            <div ng-messages-include=\"error-messages.html\"></div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"row\">\r" +
+    "\n" +
+    "                <pre>{{vm.billDetails | json}}</pre>\r" +
+    "\n" +
+    "                <div class=\"col-lg-12\">\r" +
+    "\n" +
+    "                    <div class=\"table-responsive\">\r" +
+    "\n" +
+    "                        <table class=\"table table-hover table-striped\">\r" +
+    "\n" +
+    "                            <thead>\r" +
+    "\n" +
+    "                                <tr>\r" +
+    "\n" +
+    "                                    <th>Product</th>\r" +
+    "\n" +
+    "                                    <th style=\"width: 75px\">Units</th>\r" +
+    "\n" +
+    "                                    <th style=\"width: 150px\">Quantity (in kgs.)</th>\r" +
+    "\n" +
+    "                                    <th style=\"width: 150px\">Rate (per kg.)</th>\r" +
+    "\n" +
+    "                                    <th style=\"width: 150px\">Total</th>\r" +
+    "\n" +
+    "                                    <th style=\"width: 80px\" </th>\r" +
+    "\n" +
+    "                                </tr>\r" +
+    "\n" +
+    "                            </thead>\r" +
+    "\n" +
+    "                            <tbody>\r" +
+    "\n" +
+    "                                <tr ng-repeat=\"item in vm.billDetails.billItems\">\r" +
+    "\n" +
+    "                                    <td><input type=\"text\" name=\"{{'product_'+$index}}\" ng-model=\"item.product\" placeholder=\"Type product name\"\r" +
+    "\n" +
+    "                                            uib-typeahead=\"product as product.name for product in vm.getProducts($viewValue)\"\r" +
+    "\n" +
+    "                                            class=\"form-control\">\r" +
+    "\n" +
+    "                                    </td>\r" +
+    "\n" +
+    "                                    <td><input type=\"number\" name=\"{{'product_'+$index}}\" class=\"form-control\" ng-model=\"item.units\"\r" +
+    "\n" +
+    "                                            ng-change=\"item.units !== undefined && vm.calculate();\" /></td>\r" +
+    "\n" +
+    "                                    <td><select class=\"form-control\" name=\"{{'product_'+$index}}\" ng-model=\"item.quantity\" ng-options=\"quantity for quantity in vm.quantities\" ng-change=\"item.quantity !== undefined && vm.calculate();\"></select></td>\r" +
+    "\n" +
+    "                                    <td><input type=\"number\" class=\"form-control\" ng-model=\"item.rate\"  ng-change=\"item.rate !== undefined && vm.calculate();\"/></td>\r" +
+    "\n" +
+    "                                    <td><i class=\"fa fa-inr\"></i>&nbsp;<label ng-bind=\"item.total\"></label></td>\r" +
+    "\n" +
+    "                                    <td>\r" +
+    "\n" +
+    "                                        <button type=\"button\" class=\"btn btn-circle btn-danger\" uib-tooltip=\"Add Row\" ng-click=\"vm.addNewRow()\" ng-if=\"$last\">\r" +
+    "\n" +
+    "                                            <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r" +
+    "\n" +
+    "                                        </button>\r" +
+    "\n" +
+    "                                        <button type=\"button\" class=\"btn btn-circle btn-danger\" uib-tooltip=\"Remove Row\" ng-click=\"vm.removeRow($index)\" ng-if=\"vm.billDetails.billItems.length >1\">\r" +
+    "\n" +
+    "                                            <i class=\"fa fa-minus\" aria-hidden=\"true\"></i>\r" +
+    "\n" +
+    "                                        </button>\r" +
+    "\n" +
+    "                                    </td>\r" +
+    "\n" +
+    "                                </tr>\r" +
+    "\n" +
+    "                                <tr>\r" +
+    "\n" +
+    "                                    <td colspan=\"4\" class=\"text-right\"><label>Grand Total</label></td>\r" +
+    "\n" +
+    "                                    <td><i class=\"fa fa-inr\"></i>&nbsp;<label ng-bind=\"vm.billDetails.grandTotal\"></label></td>\r" +
+    "\n" +
+    "                                    <td></td>\r" +
+    "\n" +
+    "                                </tr>\r" +
+    "\n" +
+    "                            </tbody>\r" +
+    "\n" +
+    "                        </table>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"panel-footer\">\r" +
+    "\n" +
+    "            <span class=\"\">\r" +
+    "\n" +
+    "                <button type=\"submit\" class=\"btn btn-danger\"><i class=\"fa fa-floppy-o\"></i>&nbsp; Save</button>\r" +
+    "\n" +
+    "                <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.resetBill();\"><i class=\"fa fa-refresh\"></i>&nbsp; Reset</button>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</form>"
   );
 
 
