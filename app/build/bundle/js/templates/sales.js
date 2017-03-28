@@ -14,6 +14,8 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <div class=\"panel-body\">\r" +
     "\n" +
+    "           <pre> {{vm.billDetails | json}}</pre>\r" +
+    "\n" +
     "            <div uib-alert ng-repeat=\"alert in vm.alertService.alerts\" ng-class=\"'alert-' + (alert.type || 'warning')\" close=\"vm.alertService.closeAlert($index)\"\r" +
     "\n" +
     "                dismiss-on-timeout=\"2000\">{{alert.msg}}</div>\r" +

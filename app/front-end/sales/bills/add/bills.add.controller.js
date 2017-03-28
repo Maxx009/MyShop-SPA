@@ -13,7 +13,6 @@
             this.units = 1;
             this.quantity = 1;
             this.rate = 0.0;
-            this.total = 0.0;
         }
 
         var vm = this;
@@ -36,10 +35,10 @@
 
 
         function saveBill() {
-            dataAccessService.feed("/api/post/add/bill", vm.bill)
+            dataAccessService.feed("/api/post/add/bill", vm.billDetails)
                 .then(function (response) {
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
-                    $state.go("bills.list");
+                    $state.go("main.sales.list");
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED);
                 });
@@ -79,7 +78,7 @@
                 var item = vm.billDetails.billItems[index];
                 item.total = 0.0
                 if (!isNaN(item.rate) && !isNaN(item.quantity) && !isNaN(item.units)) {
-                    item.total = (item.rate * item.quantity) * item.units;
+                    item.total = Math.round(((item.rate * item.quantity) * item.units)* 100) / 100;
                     vm.billDetails.grandTotal += item.total;
                 }
             }

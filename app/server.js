@@ -34,15 +34,15 @@ app.use(express.static(__dirname + '/back-end/index.html'));
 require(__dirname + '/back-end/routes')(app); // configure our routes
 require(__dirname + '/back-end/api/customer.api')(app); // configure our customer api
 require(__dirname + '/back-end/api/product.api')(app); // configure our product api
-require(__dirname + '/back-end/api/vendor.api')(app); // configure our product api
-require(__dirname + '/back-end/api/sales.api')(app); // configure our product api
+require(__dirname + '/back-end/api/vendor.api')(app); // configure our vendor api
+require(__dirname + '/back-end/api/sales.api')(app); // configure our sales api
 
 // start app ===============================================
 // startup our app at http://localhost:8080
 app.listen(port);
 
 // shoutout to the user                     
-console.log('listening to port ' + port);
+console.log('MyShopApp running on port :' + port);
 
 // expose app           
 exports = module.exports = app;

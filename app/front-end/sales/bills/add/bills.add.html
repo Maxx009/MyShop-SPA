@@ -4,6 +4,7 @@
             <h3 class="panel-title"><i class="fa fa-inr "></i> Add Bill</h3>
         </div>
         <div class="panel-body">
+           <pre> {{vm.billDetails | json}}</pre>
             <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
                 dismiss-on-timeout="2000">{{alert.msg}}</div>
             <div class="row">

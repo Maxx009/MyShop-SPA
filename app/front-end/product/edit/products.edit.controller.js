@@ -15,14 +15,14 @@
         vm.alertService = alertMessage;
 
         function cancelUpdate() {
-            $state.go("main.products.lists");
+            $state.go("main.products.list");
         }
 
         function updateProduct() {
             dataAccessService.update("/api/put/update/product", vm.product)
                 .then(function (response) {
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_UPDATED);
-                    $state.go("main.products.lists");
+                    $state.go("main.products.list");
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_UPDATED);                    
                 });
