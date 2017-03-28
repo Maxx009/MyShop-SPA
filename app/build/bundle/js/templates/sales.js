@@ -8,7 +8,7 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <div class=\"panel-heading\">\r" +
     "\n" +
-    "            <h3 class=\"panel-title\"><i class=\"fa fa-inr fa-fw\"></i> Add Bill</h3>\r" +
+    "            <h3 class=\"panel-title\"><i class=\"fa fa-inr \"></i> Add Bill</h3>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -22,13 +22,15 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "                <div class=\"col-lg-8\">\r" +
     "\n" +
-    "                    <div class=\"form-group\" ng-class=\"{'has-error':billForm.customerName.$dirty && billForm.customerName.$invalid}\">\r" +
+    "                    <div class=\"form-group\" ng-class=\"{'has-error':(billForm.customerName.$dirty || billForm.$submitted) && billForm.customerName.$invalid}\">\r" +
     "\n" +
     "                        <label>Customer Name</label>\r" +
     "\n" +
-    "                        <input type=\"text\" name=\"customerName\" ng-model=\"vm.billDetails.customerName\" placeholder=\"Type Customer name\" uib-typeahead=\"customer as customer.name for customer in vm.getCustomers($viewValue)\"\r" +
+    "                        <input type=\"text\" name=\"customerName\" ng-required=\"true\" ng-model=\"vm.billDetails.customerName\" placeholder=\"Type Customer name\"\r" +
     "\n" +
-    "                            typeahead-loading=\"vm.loading\" typeahead-no-results=\"vm.noResults\" class=\"form-control\">\r" +
+    "                            uib-typeahead=\"customer as customer.name for customer in vm.getCustomers($viewValue)\" typeahead-loading=\"vm.loading\"\r" +
+    "\n" +
+    "                            typeahead-no-results=\"vm.noResults\" class=\"form-control\">\r" +
     "\n" +
     "                        <i ng-show=\"vm.loading\" class=\"fa fa-refresh\"></i>\r" +
     "\n" +
@@ -38,7 +40,7 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div ng-messages=\"billForm.customerName.$dirty && billForm.customerName.$error\">\r" +
+    "                        <div ng-messages=\"(billForm.customerName.$dirty || billForm.$submitted)&& billForm.customerName.$error\">\r" +
     "\n" +
     "                            <div ng-messages-include=\"error-messages.html\"></div>\r" +
     "\n" +
@@ -50,15 +52,17 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "                <div class=\"col-lg-4\">\r" +
     "\n" +
-    "                    <div class=\"form-group\" ng-class=\"{'has-error':billForm.contactNo.$dirty && billForm.contactNo.$invalid}\">\r" +
+    "                    <div class=\"form-group\" ng-class=\"{'has-error':(billForm.billDate.$dirty || billForm.$submitted) && billForm.billDate.$invalid}\">\r" +
     "\n" +
     "                        <label>Bill Date</label>\r" +
     "\n" +
     "                        <p class=\"input-group\">\r" +
     "\n" +
-    "                            <input type=\"text\" class=\"form-control\" uib-datepicker-popup=\"{{'dd-MMMM-yyyy'}}\" ng-model=\"vm.billDetails.billDate\" is-open=\"vm.isBillDateOpen\"\r" +
+    "                            <input type=\"text\" name=\"billDate\" class=\"form-control\" uib-datepicker-popup=\"{{'dd-MMMM-yyyy'}}\" ng-model=\"vm.billDetails.billDate\"\r" +
     "\n" +
-    "                                mix-date=\"vm.today\" ng-required=\"true\" close-text=\"Close\" />\r" +
+    "                                is-open=\"vm.isBillDateOpen\" mix-date=\"vm.today\" ng-required=\"true\" ng-readonly=\"true\" close-text=\"Close\"\r" +
+    "\n" +
+    "                            />\r" +
     "\n" +
     "                            <span class=\"input-group-btn\">\r" +
     "\n" +
@@ -66,13 +70,13 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "                            </span>\r" +
     "\n" +
+    "                            <div ng-messages=\"(billForm.billDate.$dirty || billForm.$submitted)&& billForm.billDate.$error\">\r" +
+    "\n" +
+    "                                <div ng-messages-include=\"error-messages.html\"></div>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
     "                        </p>\r" +
-    "\n" +
-    "                        <div ng-messages=\"billForm.contactNo.$dirty && billForm.contactNo.$error\">\r" +
-    "\n" +
-    "                            <div ng-messages-include=\"error-messages.html\"></div>\r" +
-    "\n" +
-    "                        </div>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
@@ -82,7 +86,7 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "            <div class=\"row\">\r" +
     "\n" +
-    "                <pre>{{vm.billDetails | json}}</pre>\r" +
+    "                <!--<pre>{{vm.billDetails | json}}</pre>-->\r" +
     "\n" +
     "                <div class=\"col-lg-12\">\r" +
     "\n" +
@@ -114,23 +118,85 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
     "\n" +
     "                                <tr ng-repeat=\"item in vm.billDetails.billItems\">\r" +
     "\n" +
-    "                                    <td><input type=\"text\" name=\"{{'product_'+$index}}\" ng-model=\"item.product\" placeholder=\"Type product name\"\r" +
+    "                                    <td>\r" +
     "\n" +
-    "                                            uib-typeahead=\"product as product.name for product in vm.getProducts($viewValue)\"\r" +
+    "                                        <div ng-class=\"{'has-error':(billForm['product'+$index].$dirty || billForm.$submitted)&& billForm['product'+$index].$invalid}\">\r" +
     "\n" +
-    "                                            class=\"form-control\">\r" +
+    "                                            <input type=\"text\" name=\"{{'product'+$index}}\" ng-model=\"item.product\" placeholder=\"Type product name\" uib-typeahead=\"product as product.name for product in vm.getProducts($viewValue)\"\r" +
+    "\n" +
+    "                                                class=\"form-control\" ng-required=\"true\">\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div ng-messages=\"(billForm['product'+$index].$dirty || billForm.$submitted)&& billForm['product'+$index].$error\">\r" +
+    "\n" +
+    "                                            <div ng-messages-include=\"error-messages.html\"></div>\r" +
+    "\n" +
+    "                                        </div>\r" +
     "\n" +
     "                                    </td>\r" +
     "\n" +
-    "                                    <td><input type=\"number\" name=\"{{'product_'+$index}}\" class=\"form-control\" ng-model=\"item.units\"\r" +
+    "                                    <td>\r" +
     "\n" +
-    "                                            ng-change=\"item.units !== undefined && vm.calculate();\" /></td>\r" +
+    "                                        <div ng-class=\"{'has-error':(billForm['unit'+$index].$dirty || billForm.$submitted)&& billForm['unit'+$index].$invalid}\">\r" +
     "\n" +
-    "                                    <td><select class=\"form-control\" name=\"{{'product_'+$index}}\" ng-model=\"item.quantity\" ng-options=\"quantity for quantity in vm.quantities\" ng-change=\"item.quantity !== undefined && vm.calculate();\"></select></td>\r" +
+    "                                            <input type=\"number\" name=\"{{'unit'+$index}}\" class=\"form-control\" ng-model=\"item.units\" ng-change=\"item.units !== undefined && vm.calculate();\"\r" +
     "\n" +
-    "                                    <td><input type=\"number\" class=\"form-control\" ng-model=\"item.rate\"  ng-change=\"item.rate !== undefined && vm.calculate();\"/></td>\r" +
+    "                                                ng-required=\"true\" min=\"1\" max=\"1000\"/>\r" +
     "\n" +
-    "                                    <td><i class=\"fa fa-inr\"></i>&nbsp;<label ng-bind=\"item.total\"></label></td>\r" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div ng-messages=\"(billForm['unit'+$index].$dirty || billForm.$submitted)&& billForm['unit'+$index].$error\">\r" +
+    "\n" +
+    "                                            <div ng-messages-include=\"error-messages.html\"></div>\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                    </td>\r" +
+    "\n" +
+    "                                    <td>\r" +
+    "\n" +
+    "                                        <div ng-class=\"{'has-error':(billForm['quantity'+$index].$dirty || billForm.$submitted)&& billForm['quantity'+$index].$invalid}\">\r" +
+    "\n" +
+    "                                            <select class=\"form-control\" name=\"{{'quantity'+$index}}\" ng-model=\"item.quantity\" ng-options=\"quantity for quantity in vm.quantities\"\r" +
+    "\n" +
+    "                                                ng-change=\"item.quantity !== undefined && vm.calculate();\" ng-required=\"true\"></select>\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div ng-messages=\"(billForm['quantity'+$index].$dirty || billForm.$submitted)&& billForm['quantity'+$index].$error\">\r" +
+    "\n" +
+    "                                            <div ng-messages-include=\"error-messages.html\"></div>\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                    </td>\r" +
+    "\n" +
+    "                                    <td>\r" +
+    "\n" +
+    "                                        <div ng-class=\"{'has-error':(billForm['rate'+$index].$dirty || billForm.$submitted)&& billForm['rate'+$index].$invalid}\">\r" +
+    "\n" +
+    "                                            <input type=\"number\" class=\"form-control\" name=\"{{'rate'+$index}}\" ng-model=\"item.rate\" ng-change=\"item.rate !== undefined && vm.calculate();\"\r" +
+    "\n" +
+    "                                                ng-required=\"true\" min=\"1\" max=\"999999\"/>\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div ng-messages=\"(billForm['rate'+$index].$dirty || billForm.$submitted)&& billForm['rate'+$index].$error\">\r" +
+    "\n" +
+    "                                            <div ng-messages-include=\"error-messages.html\"></div>\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                    </td>\r" +
+    "\n" +
+    "                                    <td>\r" +
+    "\n" +
+    "                                        <i class=\"fa fa-inr\"></i>&nbsp;\r" +
+    "\n" +
+    "                                        <label ng-bind=\"item.total\"></label>\r" +
+    "\n" +
+    "                                    </td>\r" +
     "\n" +
     "                                    <td>\r" +
     "\n" +
@@ -191,17 +257,17 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('bills.edit.html',
-    "<form name=\"billForm\" role=\"form\" novalidate ng-submit=\"billForm.$valid && vm.updateBill()\"><div class=\"panel panel-red\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><i class=\"fa fa-pencil-square fa-fw\"></i> Update Bill</h3></div><div class=\"panel-body\"><div uib-alert ng-repeat=\"alert in vm.alertService.alerts\" ng-class=\"'alert-' + (alert.type || 'warning')\" close=\"vm.alertService.closeAlert($index)\" dismiss-on-timeout=\"2000\">{{alert.msg}}</div><div class=\"row\"><div class=\"col-lg-6\"><div class=\"form-group\" ng-class=\"{'has-error':billForm.billName.$dirty && billForm.billName.$invalid}\"><label>Full Name</label><input type=\"text\" class=\"form-control\" name=\"billName\" ng-model=\"vm.bill.name\" ng-required=\"true\" ng-pattern=\"/^[a-z A-Z]+$/\"><div ng-messages=\"billForm.billName.$dirty && billForm.billName.$error\"><div ng-messages-include=\"error-messages.html\"></div></div></div></div><div class=\"col-lg-6\"><div class=\"form-group\" ng-class=\"{'has-error':billForm.contactNo.$dirty && billForm.contactNo.$invalid}\"><label>Contact No.</label><input type=\"number\" class=\"form-control\" name=\"contactNo\" ng-maxlength=\"10\" ng-minlength=\"10\" ng-model=\"vm.bill.mobileNumber\"><div ng-messages=\"billForm.contactNo.$dirty && billForm.contactNo.$error\"><div ng-messages-include=\"error-messages.html\"></div></div></div></div></div><div class=\"row\"><div class=\"col-lg-6\"><div class=\"form-group\" ng-class=\"{'has-error':billForm.address.$dirty && billForm.address.$invalid}\"><label>Address</label><textarea rows=\"3\" class=\"form-control\" name=\"address\" ng-model=\"vm.bill.address\"></textarea><div ng-messages=\"billForm.address.$dirty && billForm.address.$error\"><div ng-messages-include=\"error-messages.html\"></div></div></div></div></div></div><div class=\"panel-footer\"><span class=\"\"><button type=\"submit\" class=\"btn btn-danger\">Update</button> <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancelUpdate();\">Cancel</button></span></div></div></form>"
+    "<form name=\"billForm\" role=\"form\" novalidate ng-submit=\"billForm.$valid && vm.updateBill()\"><div class=\"panel panel-red\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><i class=\"fa fa-pencil-square\"></i> Update Bill</h3></div><div class=\"panel-body\"><div uib-alert ng-repeat=\"alert in vm.alertService.alerts\" ng-class=\"'alert-' + (alert.type || 'warning')\" close=\"vm.alertService.closeAlert($index)\" dismiss-on-timeout=\"2000\">{{alert.msg}}</div><div class=\"row\"><div class=\"col-lg-6\"><div class=\"form-group\" ng-class=\"{'has-error':billForm.billName.$dirty && billForm.billName.$invalid}\"><label>Full Name</label><input type=\"text\" class=\"form-control\" name=\"billName\" ng-model=\"vm.bill.name\" ng-required=\"true\" ng-pattern=\"/^[a-z A-Z]+$/\"><div ng-messages=\"billForm.billName.$dirty && billForm.billName.$error\"><div ng-messages-include=\"error-messages.html\"></div></div></div></div><div class=\"col-lg-6\"><div class=\"form-group\" ng-class=\"{'has-error':billForm.contactNo.$dirty && billForm.contactNo.$invalid}\"><label>Contact No.</label><input type=\"number\" class=\"form-control\" name=\"contactNo\" ng-maxlength=\"10\" ng-minlength=\"10\" ng-model=\"vm.bill.mobileNumber\"><div ng-messages=\"billForm.contactNo.$dirty && billForm.contactNo.$error\"><div ng-messages-include=\"error-messages.html\"></div></div></div></div></div><div class=\"row\"><div class=\"col-lg-6\"><div class=\"form-group\" ng-class=\"{'has-error':billForm.address.$dirty && billForm.address.$invalid}\"><label>Address</label><textarea rows=\"3\" class=\"form-control\" name=\"address\" ng-model=\"vm.bill.address\"></textarea><div ng-messages=\"billForm.address.$dirty && billForm.address.$error\"><div ng-messages-include=\"error-messages.html\"></div></div></div></div></div></div><div class=\"panel-footer\"><span class=\"\"><button type=\"submit\" class=\"btn btn-danger\">Update</button> <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancelUpdate();\">Cancel</button></span></div></div></form>"
   );
 
 
   $templateCache.put('bills.list.html',
-    "<div class=\"panel panel-red\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><i class=\"fa fa-list fa-fw\"></i>&nbsp; Vendors</h3></div><div class=\"panel-body\"><div class=\"row\"><div class=\"col-lg-12\"><div class=\"table-responsive\"><table class=\"table table-bordered table-hover table-striped\"><thead><tr><th>Name</th><th>Mobile</th><th>Address</th><th></th></tr></thead><tbody><tr ng-repeat=\"bill in vm.bills track by bill._id\"><td ng-bind=\"bill.name\"></td><td ng-bind=\"bill.mobileNumber\"></td><td ng-bind=\"bill.address\"></td><td><button type=\"button\" class=\"btn btn-danger btn-circle\" ng-click=\"vm.editVendor(bill._id)\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button></td></tr></tbody></table></div></div></div></div></div>"
+    "<div class=\"panel panel-red\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><i class=\"fa fa-list\"></i>&nbsp; Vendors</h3></div><div class=\"panel-body\"><div class=\"row\"><div class=\"col-lg-12\"><div class=\"table-responsive\"><table class=\"table table-bordered table-hover table-striped\"><thead><tr><th>Name</th><th>Mobile</th><th>Address</th><th></th></tr></thead><tbody><tr ng-repeat=\"bill in vm.bills track by bill._id\"><td ng-bind=\"bill.name\"></td><td ng-bind=\"bill.mobileNumber\"></td><td ng-bind=\"bill.address\"></td><td><button type=\"button\" class=\"btn btn-danger btn-circle\" ng-click=\"vm.editVendor(bill._id)\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button></td></tr></tbody></table></div></div></div></div></div>"
   );
 
 
   $templateCache.put('bills.view.html',
-    "<div class=\"panel panel-yellow\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><i class=\"fa fa-list fa-fw\"></i>&nbsp; Bills</h3></div><div class=\"panel-body\"><div class=\"row\"><div class=\"col-lg-12\"><div class=\"table-responsive\"><table class=\"table table-bordered table-hover table-striped\"><thead><tr><th>Name</th><th>Mobile</th><th>Address</th><th></th></tr></thead><tbody><tr ng-repeat=\"bill in vm.bills track by bill._id\"><td ng-bind=\"bill.name\"></td><td ng-bind=\"bill.mobileNumber\"></td><td ng-bind=\"bill.address\"></td><td><button type=\"button\" class=\"btn btn-warning btn-circle\" ng-click=\"vm.editBill(bill._id)\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button></td></tr></tbody></table></div></div></div></div></div>"
+    "<div class=\"panel panel-yellow\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><i class=\"fa fa-list\"></i>&nbsp; Bills</h3></div><div class=\"panel-body\"><div class=\"row\"><div class=\"col-lg-12\"><div class=\"table-responsive\"><table class=\"table table-bordered table-hover table-striped\"><thead><tr><th>Name</th><th>Mobile</th><th>Address</th><th></th></tr></thead><tbody><tr ng-repeat=\"bill in vm.bills track by bill._id\"><td ng-bind=\"bill.name\"></td><td ng-bind=\"bill.mobileNumber\"></td><td ng-bind=\"bill.address\"></td><td><button type=\"button\" class=\"btn btn-warning btn-circle\" ng-click=\"vm.editBill(bill._id)\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button></td></tr></tbody></table></div></div></div></div></div>"
   );
 
 

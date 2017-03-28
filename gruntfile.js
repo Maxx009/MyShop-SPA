@@ -110,14 +110,14 @@ module.exports = function (grunt) {
                     'bower_Components/lib/angular-messages/angular-messages.min.js',
                     'bower_Components/lib/angular-ui-router/release/angular-ui-router.min.js',
                     'bower_Components/lib/oclazyload/dist/ocLazyLoad.min.js',
-                    'app/public/content/js/ui-bootstrap-tpls-2.5.0/ui-bootstrap-tpls-2.5.0.min.js'
+                    'app/content/js/ui-bootstrap-tpls-2.5.0/ui-bootstrap-tpls-2.5.0.min.js'
                 ],
                 dest: 'app/build/bundle/js/libraries.min.js'
             },
             // styles: {
             //     src: ['bower_Components/lib/bootstrap-css-only/css/bootstrap.min.css',
             //         'bower_Components/lib/font-awesome/css/font-awesome.min.css',
-            //         'app/public/content/styles/app.css'
+            //         'app/content/styles/app.css'
             //     ],
             //     dest: 'app/build/bundle/css/libraries.min.css'
             // }
@@ -132,7 +132,7 @@ module.exports = function (grunt) {
                     'app/build/bundle/css/libraries.min.css': [
                         'bower_Components/lib/bootstrap-css-only/css/bootstrap.min.css',
                         'bower_Components/lib/font-awesome/css/font-awesome.min.css',
-                        'app/public/content/styles/app.css'
+                        'app/content/styles/app.css'
                     ]
                 }
             }
@@ -191,6 +191,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     // grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['copy', 'ngtemplates', 'concat', 'uglify']);
+    grunt.registerTask('default', ['copy', 'ngtemplates', 'concat', 'cssmin','uglify']);
     // grunt.registerTask('prod', ['cssmin', 'uglify']);
 };

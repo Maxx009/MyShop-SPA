@@ -13,6 +13,7 @@
             this.units = 1;
             this.quantity = 1;
             this.rate = 0.0;
+            this.total = 0.0;
         }
 
         var vm = this;
@@ -73,13 +74,21 @@
         }
 
         function calculate() {
-            var grandTotal = 0;
+            vm.billDetails.grandTotal = 0.0;
             for (var index = 0; index < vm.billDetails.billItems.length; index++) {
                 var item = vm.billDetails.billItems[index];
-                item.total = (item.rate * item.quantity) * item.units;
-                grandTotal += item.total;
+                item.total = 0.0
+                if (!isNaN(item.rate) && !isNaN(item.quantity) && !isNaN(item.units)) {
+                    item.total = (item.rate * item.quantity) * item.units;
+                    vm.billDetails.grandTotal += item.total;
+                }
             }
-            vm.billDetails.grandTotal=grandTotal;
         }
+
+        function activate(params) {
+            calculate();
+        }
+        activate();
+        
     }
 }());

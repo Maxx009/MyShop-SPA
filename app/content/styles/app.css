@@ -1,6 +1,6 @@
 body {
     margin-top: 100px;
-    background-color: #222;
+    background-color: #fff;
 }
 
 @media(min-width:768px) {
@@ -237,7 +237,6 @@ ul.alert-dropdown {
     color: #b52b27 !important;
 }
 
-
 .yellow-color {
     color: #f0ad4e;
 }
@@ -251,7 +250,6 @@ ul.alert-dropdown {
 .yellow-color a:hover {
     color: #df8a13 !important;
 }
-
 
 .green-color {
     color: #5cb85c;
@@ -293,20 +291,19 @@ ul.alert-dropdown {
 
 .panel,
 .form-control,
-.btn,.breadcrumb,.dropdown-menu {
-    border-radius: 0!important;
+.btn,
+.breadcrumb,
+.dropdown-menu {
+    border-radius: 0 !important;
 }
-.breadcrumb{
+
+.breadcrumb {
     margin-bottom: 10px;
-} 
-.no-data-wrapper{
-text-align: center;
-
 }
-.no-data{
 
-}
+
 /*animation*/
+
 .ng-enter {
     transition: 0.5s;
     opacity: 0;
