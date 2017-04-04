@@ -2,9 +2,20 @@ var dataAccess = require('../services/data-access');
 const constants = require('../constants/sales.constant');
 var ObjectId = require('mongodb').ObjectId;
 
+function processBillObject(billObject) {
+    if (!billObject) {
+        return false;
+    }
+    billObject.billDate = new Date(billObject.billDate);
+    billObject.customer._id = ObjectId(billObject.customer._id);
+    for (var index = 0; index < billObject.billItems.length; index++) {
+        billObject.billItems[index].product._id = ObjectId(billObject.billItems[index].product._id);        
+    }
+    return billObject;
+}
 module.exports = function (app) {
     app.get('/api/get/list/bill', function (req, res, next) {
-        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {})
+        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {},{"customer.name": 1, "billDate": 1, "_id": 1, "grandTotal": 1},{"billDate": -1})
             .then(function (data) {
                 console.log(data);
                 data.toArray(function (error, docs) {
@@ -67,14 +78,13 @@ module.exports = function (app) {
     });
 
     app.post('/api/post/add/bill', function (req, res, next) {
-        var bill = req.body.payLoad;
+        var bill = processBillObject(req.body.payLoad);
         dataAccess.addDocumentToCollection(constants.COLLECTION_NAME, bill)
             .then(function (databaseResponse) {
                 return res.status(200).json({
                     message: "Inserted one item"
                 })
             }).catch(next);
-
     });
     
     app.use(function (err, req, res, next) {

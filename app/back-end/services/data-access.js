@@ -11,10 +11,10 @@ mongo.getCollection = function getCollection(collectionName) {
             return connection.collection(collectionName);
         });
 };
-mongo.getDataFromCollection = function getDataFromCollection(collectionName, jsonQuery,projection) {
+mongo.getDataFromCollection = function getDataFromCollection(collectionName, jsonQuery,projection,sort) {
     return mongo.getCollection(collectionName)
         .then(function getCollectionSuccess(collection) {
-            return collection.find(jsonQuery).project(projection);
+            return collection.find(jsonQuery).project(projection).sort(sort);
         });
 };
 mongo.getSingleDocument = function getSingleDocument(collectionName, jsonQuery) {

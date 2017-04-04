@@ -297,7 +297,8 @@ ul.alert-dropdown {
     border-radius: 0 !important;
 }
 
-.breadcrumb {
+.breadcrumb,
+.margin-bottom-10 {
     margin-bottom: 10px;
 }
 
