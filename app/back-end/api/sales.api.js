@@ -15,12 +15,7 @@ function processBillObject(billObject) {
 }
 module.exports = function (app) {
     app.get('/api/get/list/bill', function (req, res, next) {
-        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {}, {
-                "customer.name": 1,
-                "billDate": 1,
-                "_id": 1,
-                "grandTotal": 1
-            }, {
+        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {}, {}, {
                 "billDate": -1
             })
             .then(function (data) {
@@ -72,9 +67,12 @@ module.exports = function (app) {
                     "_id": ObjectId(bill._id)
                 },
                 update: {
-                    name: bill.name,
-                    mobileNumber: bill.mobileNumber,
-                    address: bill.address,
+                    billDate: bill.billDate,
+                    lavy: bill.lavy,
+                    labourCharge: bill.labourCharge,
+                    billItems: bill.billItems,
+                    grandTotal: bill.grandTotal,
+                    customer: bill.customer,
                     modifiedOn: new Date()
                 }
             })

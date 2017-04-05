@@ -13,10 +13,12 @@
 
         activate();
 
-        ////////////////
-
         function editBill(billId) {
-            $location.path('/main/bills/edit/' +billId);
+            $location.path('/main/sales/editbill/' + billId);
+        }
+
+        function viewBill(billId) {
+            $location.path('/main/sales/viewbill/' + billId);
         }
 
         function activate() {
