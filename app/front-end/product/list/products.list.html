@@ -13,6 +13,8 @@
                                 <th>Name</th>
                                 <th>Brand</th>
                                 <th>Vendor</th>
+                                <th>Created On</th>
+                                <th>Modified On</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -20,7 +22,9 @@
                             <tr ng-repeat="product in vm.products">
                                 <td ng-bind="product.name"></td>
                                 <td ng-bind="product.brand"></td>
-                                <td ng-bind="product.vendorName"></td>
+                                <td ng-bind="product.vendorName.name"></td>
+                                <td ng-bind="product.createdOn | date:'dd-MM-yyyy hh:mm a'"></td>
+                                <td ng-bind="product.modifiedOn | date:'dd-MM-yyyy hh:mm a'"></td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-circle" ng-click="vm.editProduct(product._id)"><i class="fa fa-pencil-square-o"aria-hidden="true"></i></button>
                                 </td>

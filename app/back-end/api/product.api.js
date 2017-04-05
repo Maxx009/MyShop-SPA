@@ -24,7 +24,7 @@ module.exports = function (app) {
     });
 
     app.get('/api/get/list/product', function (req, res, next) {
-        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {}).then(function (data) {
+        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {},{},{modifiedOn:-1}).then(function (data) {
             data.toArray(function (error, docs) {
                 if (error) {
                     return next(error);
@@ -34,7 +34,7 @@ module.exports = function (app) {
         }).catch(next);
     });
 
-app.get('/api/get/find/product/:name', function (req, res, next) {
+    app.get('/api/get/find/product/:name', function (req, res, next) {
         var searchToken = req.params.name;
         dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {
                 name: new RegExp(searchToken, 'i')
@@ -63,6 +63,7 @@ app.get('/api/get/find/product/:name', function (req, res, next) {
                     name: product.name,
                     brand: product.brand,
                     vendorName: product.vendorName,
+                    modifiedOn: new Date()
                 }
             })
             .then(function (databaseResponse) {
@@ -71,15 +72,17 @@ app.get('/api/get/find/product/:name', function (req, res, next) {
                 });
             }).catch(next);
     });
-    
+
     app.post('/api/post/add/product', function (req, res, next) {
         var product = req.body.payLoad;
+        product.createdOn = new Date();
+        product.modifiedOn = new Date();
         if (validateProduct(product)) {
             dataAccess.addDocumentToCollection(constants.COLLECTION_NAME, product)
                 .then(function (databaseResponse) {
                     res.status(200).json({
                         message: "Inserted one item"
-                    })
+                    });
                 })
                 .catch(next);
         } else {

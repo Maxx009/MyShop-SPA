@@ -31,7 +31,7 @@
             dataAccessService.feed("/api/post/add/product", vm.product)
                 .then(function (response) {
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
-                    $state.go("products.lists");
+                    resetProduct();
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED);
                 });

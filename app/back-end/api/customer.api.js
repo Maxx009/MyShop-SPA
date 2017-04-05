@@ -4,7 +4,7 @@ var ObjectId = require('mongodb').ObjectId;
 
 module.exports = function (app) {
     app.get('/api/get/list/customer', function (req, res, next) {
-        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {})
+        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {},{},{modifiedOn: -1})
             .then(function (data) {
                 console.log(data);
                 data.toArray(function (error, docs) {
@@ -34,8 +34,8 @@ module.exports = function (app) {
     app.get('/api/get/find/customer/:name', function (req, res, next) {
         var searchToken = req.params.name;
         dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {
-                        name: new RegExp(searchToken, 'i')
-                    }, {
+                name: new RegExp(searchToken, 'i')
+            }, {
                 _id: 1,
                 name: 1
             })
@@ -57,9 +57,9 @@ module.exports = function (app) {
                 },
                 update: {
                     name: customer.name,
-                    shopName: customer.shopName,
                     mobileNumber: customer.mobileNumber,
-                    address: customer.address
+                    address: customer.address,
+                    modifiedOn: new Date()
                 }
             })
             .then(function (databaseResponse) {
@@ -70,6 +70,8 @@ module.exports = function (app) {
     });
     app.post('/api/post/add/customer', function (req, res, next) {
         var customer = req.body.payLoad;
+        customer.createdOn = new Date();
+        customer.modifiedOn = new Date();
         dataAccess.addDocumentToCollection(constants.COLLECTION_NAME, customer)
             .then(function (databaseResponse) {
                 return res.status(200).json({

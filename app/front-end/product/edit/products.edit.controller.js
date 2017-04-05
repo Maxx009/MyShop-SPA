@@ -11,6 +11,7 @@
         var vm = this;
         vm.product = productItem;
         vm.updateProduct = updateProduct;
+        vm.getVendors = getVendors;
         vm.cancelUpdate = cancelUpdate;
         vm.alertService = alertMessage;
 
@@ -25,6 +26,13 @@
                     $state.go("main.products.list");
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_UPDATED);                    
+                });
+        }
+
+        function getVendors(val) {
+            return dataAccessService.fetch("/api/get/find/vendor/" + val)
+                .then(function (vendors) {
+                    return vendors;
                 });
         }
     }

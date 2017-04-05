@@ -4,7 +4,9 @@ var ObjectId = require('mongodb').ObjectId;
 
 module.exports = function (app) {
     app.get('/api/get/list/vendor', function (req, res, next) {
-        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {})
+        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {}, {}, {
+                modifiedOn: -1
+            })
             .then(function (data) {
                 console.log(data);
                 data.toArray(function (error, docs) {
@@ -32,7 +34,7 @@ module.exports = function (app) {
     app.get('/api/get/find/vendor/:name', function (req, res, next) {
         var searchToken = req.params.name;
         dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {
-                name: new RegExp(searchToken,'i')
+                name: new RegExp(searchToken, 'i')
             }, {
                 _id: 1,
                 name: 1
@@ -55,7 +57,8 @@ module.exports = function (app) {
                 update: {
                     name: vendor.name,
                     mobileNumber: vendor.mobileNumber,
-                    address: vendor.address
+                    address: vendor.address,
+                    modifiedOn: new Date()
                 }
             })
             .then(function (databaseResponse) {
@@ -66,6 +69,8 @@ module.exports = function (app) {
     });
     app.post('/api/post/add/vendor', function (req, res, next) {
         var vendor = req.body.payLoad;
+        vendor.createdOn = new Date();
+        vendor.modifiedOn = new Date();
         dataAccess.addDocumentToCollection(constants.COLLECTION_NAME, vendor)
             .then(function (databaseResponse) {
                 return res.status(200).json({

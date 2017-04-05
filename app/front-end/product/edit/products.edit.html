@@ -15,16 +15,25 @@
                             <div ng-messages-include="error-messages.html"></div>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-6">
                     <div class="form-group" ng-class="{'has-error':(productForm.productVendor.$dirty ||productForm.$submitted)&& productForm.productVendor.$invalid}">
                         <label>Vendor Name</label>
-                        <input type="text" name="productVendor" class="form-control" ng-model="vm.product.vendorName" />
+                        <input type="text" name="productVendor" ng-model="vm.product.vendorName" placeholder="Type vendor name" uib-typeahead="vendor as vendor.name for vendor in vm.getVendors($viewValue)"
+                            typeahead-loading="vm.loading" typeahead-no-results="vm.noResults" class="form-control">
+                        <i ng-show="vm.loading" class="fa fa-refresh"></i>
+                        <div ng-show="vm.noResults">
+                            <i class="fa fa-remove"></i> No Vendor Found
+                        </div>
                         <div ng-messages="(productForm.productVendor.$dirty ||productForm.$submitted)&& productForm.productVendor.$error">
                             <div ng-messages-include="error-messages.html"></div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-6">
-                    <div class="form-group" ng-class="{'has-error':(productForm.productBrand.$dirty ||productForm.$submitted))&& productForm.productBrand.$invalid}">
+                    <div class="form-group" ng-class="{'has-error':(productForm.productBrand.$dirty ||productForm.$submitted)&& productForm.productBrand.$invalid}">
                         <label>Brand</label>
                         <input type="text" name="productBrand" class="form-control" ng-model="vm.product.brand" />
                         <div ng-messages="(productForm.productBrand.$dirty ||productForm.$submitted)&& productForm.productBrand.$error">

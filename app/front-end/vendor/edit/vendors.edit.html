@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group" ng-class="{'has-error':vendorForm.vendorName.$dirty && vendorForm.vendorName.$invalid}">
-                        <label>Full Name</label>
+                        <label>Name</label>
                         <input type="text" class="form-control" name="vendorName" ng-model="vm.vendor.name" ng-required="true" ng-pattern="/^[a-z A-Z]+$/"
                         />
                         <div ng-messages="vendorForm.vendorName.$dirty && vendorForm.vendorName.$error">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="form-group" ng-class="{'has-error':vendorForm.address.$dirty && vendorForm.address.$invalid}">
                         <label>Address</label>
                         <textarea rows="3" class="form-control" name="address" ng-model="vm.vendor.address"></textarea>

@@ -7,7 +7,6 @@
             <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
                 dismiss-on-timeout="2000">{{alert.msg}}</div>
             <div class="row">
-                <!--<Pre>{{vm.product.vendorName | json}}</Pre>-->
                 <div class="col-lg-6">
                     <div class="form-group" ng-class="{'has-error':(productForm.productName.$dirty ||productForm.$submitted)&& productForm.productName.$invalid}">
                         <label>Product Name</label>
@@ -16,6 +15,8 @@
                             <div ng-messages-include="error-messages.html"></div>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-6">
                     <div class="form-group" ng-class="{'has-error':(productForm.productVendor.$dirty ||productForm.$submitted)&& productForm.productVendor.$invalid}">
                         <label>Vendor Name</label>
                         <input type="text" name="productVendor" ng-model="vm.product.vendorName" placeholder="Type vendor name" uib-typeahead="vendor as vendor.name for vendor in vm.getVendors($viewValue)"
@@ -29,6 +30,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group" ng-class="{'has-error':(productForm.productBrand.$dirty ||productForm.$submitted)&& productForm.productBrand.$invalid}">
                         <label>Brand</label><label class="text-danger">*</label>

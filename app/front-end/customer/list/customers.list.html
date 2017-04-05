@@ -11,18 +11,20 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Shop Name</th>
                                 <th>Mobile</th>
                                 <th>Address</th>
+                                <th>Created On</th>
+                                <th>Modified On</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="customer in vm.customers track by customer._id">
                                 <td ng-bind="customer.name"></td>
-                                <td ng-bind="customer.shopName"></td>
                                 <td ng-bind="customer.mobileNumber"></td>
                                 <td ng-bind="customer.address"></td>
+                                <td ng-bind="customer.createdOn | date:'dd-MM-yyyy hh:mm a'"></td>
+                                <td ng-bind="customer.modifiedOn | date:'dd-MM-yyyy hh:mm a'"></td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-circle" ng-click="vm.editCustomer(customer._id)"><i class="fa fa-pencil-square-o"aria-hidden="true"></i></button>
                                 </td>

@@ -28,6 +28,5 @@
         function cancelUpdate() {
             $state.go("main.customers.list");
         }
-        
     }
 }());
