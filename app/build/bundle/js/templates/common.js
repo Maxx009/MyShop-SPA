@@ -6,6 +6,11 @@ angular.module('myShopApp').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('loader.html',
+    "<div class=\"overlay\"><div class=\"loader\"></div></div>"
+  );
+
+
   $templateCache.put('picker.html',
     "<div><input type=\"text\" name=\"vm.elementName\" ng-model=\"vm.modelObject\" placeholder=\"vm.placeholder\" uib-typeahead=\"vm.typeAheadExpression\" typeahead-loading=\"vm.loading\" typeahead-no-results=\"vm.noResults\" class=\"form-control\"> <i ng-show=\"vm.loading\" class=\"fa fa-refresh\"></i><div ng-show=\"vm.noResults\"><i class=\"fa fa-remove\"></i> No data Found</div></div>"
   );

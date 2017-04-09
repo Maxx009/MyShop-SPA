@@ -19,22 +19,25 @@
         vm.saveCustomer = saveCustomer;
         vm.alertService = alertMessage;
 
-        function saveCustomer() {
+        function saveCustomer(form) {
             dataAccessService.feed("/api/post/add/customer", vm.customer)
                 .then(function (response) {
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
-                    resetCustomer();
+                    resetCustomer(form);
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED);
                 });
         }
 
-        function resetCustomer() {
+        function resetCustomer(form) {
             vm.customer = {
                 name: "",
                 mobileNumber: "",
                 address: ""
             };
+            form.$setValidity();
+            form.$setPristine();
+            form.$setUntouched();
         }
 
     }

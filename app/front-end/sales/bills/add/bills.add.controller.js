@@ -20,8 +20,8 @@
 
         vm.billDetails = {};
         vm.billDetails.billDate = new Date();
-        vm.billDetails.lavy = 0.0;
         vm.billDetails.labourCharge = 0.0;
+        vm.billDetails.lavy = 0.0;
         vm.billDetails.billItems = [
             new BillItem()
         ];
@@ -36,20 +36,23 @@
         vm.calculate = calculate;
         vm.calibrateWeights = calibrateWeights;
 
-        function saveBill() {
+        function saveBill(form) {
             dataAccessService.feed("/api/post/add/bill", vm.billDetails)
                 .then(function (response) {
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
-                    $state.go("main.sales.listBill");
+                   resetBill(form);
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED);
                 });
         }
 
-        function resetBill() {
+        function resetBill(form) {
             vm.billDetails.billItems = [
                 new BillItem()
             ];
+            form.$setValidity();
+            form.$setPristine();
+            form.$setUntouched();
         }
 
 

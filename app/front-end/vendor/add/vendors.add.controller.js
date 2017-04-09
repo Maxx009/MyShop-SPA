@@ -29,12 +29,15 @@
                 });
         }
 
-        function resetVendor() {
+        function resetVendor(form) {
             vm.vendor = {
                 name: "",
                 mobileNumber: "",
                 address: ""
             };
+            form.$setValidity();
+            form.$setPristine();
+            form.$setUntouched();
         }
 
     }
