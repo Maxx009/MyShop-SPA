@@ -11,6 +11,34 @@
         this.calculateBill = calculateBill;
         this.getCustomers = getCustomers;
         this.getProducts = getProducts;
+        this.calculateLavy = calculateLavy;
+        this.addNewWeightRow = addNewWeightRow;
+        this.removeWeightRow = removeWeightRow;
+
+        function calculateLavy(billDetails) {
+            var totalWeight = 0.0;
+            for (var index = 0; index < billDetails.weights.length; index++) {
+                totalWeight += billDetails.weights[index];
+            }
+            //Calculate from configured number
+            if (totalWeight < 25) {
+                billDetails.lavy = "";
+            } else if (condition) {
+
+            } else if (condition) {
+
+            } else if (condition) {
+
+            }
+        }
+
+        function addNewWeightRow(currentItem) {
+            currentItem.weights.push(0.0);
+        }
+
+        function removeWeightRow(currentItem, index) {
+            currentItem.weights.splice(index, 1);
+        }
 
         function calculateBill(billDetails) {
             billDetails.grandTotal = 0.0;

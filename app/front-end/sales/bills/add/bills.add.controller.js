@@ -30,11 +30,12 @@
         vm.resetBill = resetBill;
         vm.getCustomers = SalesService.getCustomers;
         vm.getProducts = SalesService.getProducts;
+        vm.addNewWeightRow = SalesService.addNewWeightRow;
+        vm.removeWeightRow = SalesService.removeWeightRow;
         vm.alertService = alertMessage;
         vm.addNewRow = addNewRow;
         vm.removeRow = removeRow;
         vm.calculate = calculate;
-        vm.calibrateWeights = calibrateWeights;
 
         function saveBill(form) {
             dataAccessService.feed("/api/post/add/bill", vm.billDetails)
@@ -53,8 +54,7 @@
             form.$setValidity();
             form.$setPristine();
             form.$setUntouched();
-        }
-
+        }        
 
         function addNewRow() {
             vm.billDetails.billItems.push(new BillItem());
@@ -66,14 +66,6 @@
 
         function calculate() {
             SalesService.calculateBill(vm.billDetails);
-        }
-
-        function calibrateWeights(currentItem) {
-            var array = new Array(Math.round(currentItem.units));
-            for (var index = 0; index < array.length; index++) {
-                array[index] = 0.0
-            }
-            currentItem.weights = array;
         }
 
         function activate(params) {
