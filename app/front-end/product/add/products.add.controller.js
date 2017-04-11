@@ -21,7 +21,6 @@
 
         function resetProduct(form) {
             vm.product = {
-                brand: "",
                 name: "",
                 vendorName: ""
             };

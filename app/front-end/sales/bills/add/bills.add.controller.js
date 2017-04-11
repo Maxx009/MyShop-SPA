@@ -5,15 +5,15 @@
         .module('myShopApp')
         .controller('AddBillController', AddBillController);
 
-    AddBillController.$inject = ["$state", "dataAccessService","SalesService", "constants", "alertMessage", "messages"];
+    AddBillController.$inject = ["$state", "dataAccessService", "SalesService", "constants", "alertMessage", "messages"];
 
-    function AddBillController($state, dataAccessService,SalesService, constants, alertMessage, messages) {
+    function AddBillController($state, dataAccessService, SalesService, constants, alertMessage, messages) {
         function BillItem() {
             this.product = "";
             this.units = 1;
             this.weights = [0.0];
             this.rate = 0.0;
-
+            this.brand = "";
         }
 
         var vm = this;
@@ -41,7 +41,7 @@
             dataAccessService.feed("/api/post/add/bill", vm.billDetails)
                 .then(function (response) {
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
-                   resetBill(form);
+                    resetBill(form);
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED);
                 });
@@ -54,7 +54,7 @@
             form.$setValidity();
             form.$setPristine();
             form.$setUntouched();
-        }        
+        }
 
         function addNewRow() {
             vm.billDetails.billItems.push(new BillItem());

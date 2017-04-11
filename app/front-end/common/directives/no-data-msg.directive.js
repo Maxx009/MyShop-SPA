@@ -3,10 +3,10 @@
 
     angular
         .module('myShopApp')
-        .directive('noData', NoDataDirective);
+        .directive('noData', noDataDirective);
 
-    NoDataDirective.inject = [];
-    function NoDataDirective() {
+    noDataDirective.inject = [];
+    function noDataDirective() {
         // Usage:
         //
         // Creates:<no-data></no-data>

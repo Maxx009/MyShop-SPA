@@ -3,10 +3,10 @@
 
     angular
         .module('myShopApp')
-        .directive('picker', Directive);
+        .directive('picker', pickerDirective);
 
-    Directive.inject = ['dependency1'];
-    function Directive(dependency1) {
+    pickerDirective.inject = ['dependency1'];
+    function pickerDirective(dependency1) {
         // Usage:
         //
         // Creates:

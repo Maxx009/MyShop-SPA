@@ -11,7 +11,6 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Brand</th>
                                 <th>Vendor</th>
                                 <th>Created On</th>
                                 <th>Modified On</th>
@@ -21,7 +20,6 @@
                         <tbody>
                             <tr ng-repeat="product in vm.products">
                                 <td ng-bind="product.name"></td>
-                                <td ng-bind="product.brand"></td>
                                 <td ng-bind="product.vendorName.name"></td>
                                 <td ng-bind="product.createdOn | date:'dd-MM-yyyy hh:mm a'"></td>
                                 <td ng-bind="product.modifiedOn | date:'dd-MM-yyyy hh:mm a'"></td>
