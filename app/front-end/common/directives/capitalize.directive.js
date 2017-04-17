@@ -20,7 +20,7 @@
         return directive;
 
         function link(scope, element, attrs, modelCtrl) {
-            var capitalize = function (inputValue) {
+            function capitalize(inputValue) {
                 if (inputValue === undefined) {
                     inputValue = '';
                 }

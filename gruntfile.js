@@ -2,22 +2,22 @@ module.exports = function (grunt) {
     function urlTrimmer(url) {
         url = url.split('/');
         return url[url.length - 1];
-    };
+    }
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        // jshint: {
-        //     // define the files to lint
-        //     files: ['gruntfile.js', '/app/build/bundle/js/*.js'],
-        //     // configure JSHint (documented at http://www.jshint.com/docs/)
-        //     options: {
-        //         // more options here if you want to override JSHint defaults
-        //         globals: {
-        //             angular: true,
-        //             console: true,
-        //             module: true
-        //         }
-        //     }
-        // },
+        jshint: {
+            // define the files to lint
+            files: ['gruntfile.js', 'app/front-end/*.js','app/front-end/**/*.js'],
+            // configure JSHint (documented at http://www.jshint.com/docs/)
+            options: {
+                // more options here if you want to override JSHint defaults
+                globals: {
+                    angular: true,
+                    console: true,
+                    module: true
+                }
+            }
+        },
         copy: {
             fonts: {
                 expand: true,
@@ -196,8 +196,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    // grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['copy', 'ngtemplates', 'replace', 'concat', 'cssmin', 'uglify']);
+    grunt.registerTask('default', ['jshint','copy', 'ngtemplates', 'replace', 'concat', 'cssmin', 'uglify']);
     // grunt.registerTask('prod', ['cssmin', 'uglify']);
 };

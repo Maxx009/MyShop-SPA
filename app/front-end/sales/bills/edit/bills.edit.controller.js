@@ -40,7 +40,7 @@
         }
 
         function cancelUpdate() {
-            $state.go("main.sales.listBill")
+            $state.go("main.sales.listBill");
         }
 
         function addNewRow() {

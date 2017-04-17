@@ -17,7 +17,7 @@
         function activate() {
             dataAccessService.fetch().then(function (count) {
                 vm.totalProducts = count;
-            })
+            });
         }
     }
 })();

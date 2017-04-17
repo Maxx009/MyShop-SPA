@@ -33,8 +33,9 @@
                 templateUrl: "login.html",
                 controller: "LoginController",
                 controllerAs: "vm"
-            })
+            });
         $urlRouterProvider.otherwise('/main/dashboard');
         $httpProvider.interceptors.push('APIInterceptorService');
+       
     }
 }());

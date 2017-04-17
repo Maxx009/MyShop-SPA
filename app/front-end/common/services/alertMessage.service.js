@@ -8,19 +8,23 @@
     AlertMessage.inject = [];
 
     function AlertMessage() {
-        this.alerts = [];
-        this.addAlert = addAlert;
-        this.closeAlert = closeAlert;
-
+        var service = {
+            alerts:[],
+            addAlert:addAlert,
+            closeAlert:closeAlert
+        };
+        
+        return service;
+        
         function addAlert(type, message) {
-            this.alerts.push({
+            service.alerts.push({
                 type: type,
                 msg: message
             });
         }
 
         function closeAlert(index) {
-            this.alerts.splice(index, 1);
+            service.alerts.splice(index, 1);
         }
     }
 })();

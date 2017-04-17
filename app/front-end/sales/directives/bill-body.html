@@ -1,18 +1,14 @@
 <div class="panel-body">
-    <!--<pre> {{vm.billDetails | json}}</pre>-->
+    <pre> {{vm.billDetails | json}}</pre>
     <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
         dismiss-on-timeout="2000">{{alert.msg}}</div>
     <div class="row">
         <div class="col-lg-8">
             <div class="form-group" ng-class="{'has-error':(billForm.customerName.$dirty || billForm.$submitted) && billForm.customerName.$invalid}">
                 <label>Customer Name</label>
-                <input type="text" name="customerName" ng-required="true" ng-model="vm.billDetails.customer" placeholder="Type Customer name"
+                <input type="text" name="customerName" typeahead-editable="false" typeahead-select-on-exact="true" ng-required="true" ng-model="vm.billDetails.customer" placeholder="Type Customer name"
                     uib-typeahead="customer as customer.name for customer in vm.getCustomers($viewValue)" typeahead-loading="vm.loading"
-                    typeahead-no-results="vm.noResults" class="form-control">
-                <i ng-show="vm.loading" class="fa fa-refresh"></i>
-                <div ng-show="vm.noResults">
-                    <i class="fa fa-remove"></i> No Customers Found
-                </div>
+                    typeahead-no-results="vm.noResults" class="form-control">                
                 <div ng-messages="(billForm.customerName.$dirty || billForm.$submitted)&& billForm.customerName.$error">
                     <div ng-messages-include="error-messages.html"></div>
                 </div>
@@ -54,7 +50,7 @@
                         <tr ng-repeat="item in vm.billDetails.billItems">
                             <td>
                                 <div ng-class="{'has-error':(billForm['product'+$index].$dirty || billForm.$submitted)&& billForm['product'+$index].$invalid}">
-                                    <input type="text" name="{{'product'+$index}}" ng-model="item.product" placeholder="Type product name" uib-typeahead="product as product.name for product in vm.getProducts($viewValue)"
+                                    <input type="text" name="{{'product'+$index}}" ng-model="item.product" placeholder="Type product name" typeahead-editable="false" typeahead-select-on-exact="true" uib-typeahead="product as product.name for product in vm.getProducts($viewValue)"
                                         class="form-control" ng-required="true">
                                 </div>
                                 <div ng-messages="(billForm['product'+$index].$dirty || billForm.$submitted)&& billForm['product'+$index].$error">

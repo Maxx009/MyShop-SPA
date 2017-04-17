@@ -14,7 +14,7 @@
         <div class="col-lg-6">
             <div class="form-group" ng-class="{'has-error':(productForm.productVendor.$dirty ||productForm.$submitted)&& productForm.productVendor.$invalid}">
                 <label>Vendor Name</label>
-                <input type="text" name="productVendor" ng-model="vm.product.vendorName" placeholder="Type vendor name" uib-typeahead="vendor as vendor.name for vendor in vm.getVendors($viewValue)"
+                <input type="text" name="productVendor" ng-model="vm.product.vendorName" placeholder="Type vendor name" typeahead-editable="false" typeahead-select-on-exact="true" uib-typeahead="vendor as vendor.name for vendor in vm.getVendors($viewValue)"
                     typeahead-loading="vm.loading" typeahead-no-results="vm.noResults" class="form-control">
                 <i ng-show="vm.loading" class="fa fa-refresh"></i>
                 <div ng-show="vm.noResults">
