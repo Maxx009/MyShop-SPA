@@ -28,8 +28,7 @@
             return response;
         }
 
-        function responseError(response) {
-            
+        function responseError(response) {           
             return response;
         }
     }

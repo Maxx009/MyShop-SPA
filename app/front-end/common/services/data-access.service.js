@@ -16,6 +16,10 @@
         var deferrer;
 
         function error(error) {
+            error.errorMessage = "";
+            if (error.code === 11000) {
+                error.errorMessage = error.errmsg.match(/{ :([^}]+)}/)[1] + " Already Exists.";
+            }
             deferrer.reject(error);
             console.error("In Data-Service Error-Callback :", error);
         }

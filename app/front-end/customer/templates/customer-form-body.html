@@ -1,6 +1,6 @@
 <div class="panel-body">
     <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
-        dismiss-on-timeout="2000">{{alert.msg}}</div>
+        >{{alert.msg}}</div>
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group" ng-class="{'has-error':(customerForm.customerName.$dirty ||customerForm.$submitted)&& customerForm.customerName.$invalid}">

@@ -25,7 +25,7 @@
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
                     resetCustomer(form);
                 }, function (error) {
-                    vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED);
+                    vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED +" Because "+ error.errorMessage);
                 });
         }
 

@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
             // define the files to lint
-            files: ['gruntfile.js', 'app/front-end/*.js','app/front-end/**/*.js'],
+            files: ['gruntfile.js', 'app/front-end/*.js', 'app/front-end/**/*.js'],
             // configure JSHint (documented at http://www.jshint.com/docs/)
             options: {
                 // more options here if you want to override JSHint defaults
@@ -198,6 +198,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['jshint','copy', 'ngtemplates', 'replace', 'concat', 'cssmin', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'copy', 'ngtemplates', 'replace', 'concat', 'cssmin', 'uglify']);
     // grunt.registerTask('prod', ['cssmin', 'uglify']);
 };
