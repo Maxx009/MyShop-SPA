@@ -1,5 +1,5 @@
 <div class="panel-body">
-    <pre> {{vm.billDetails | json}}</pre>
+    <!--<pre> {{vm.billDetails | json}}</pre>-->
     <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
         dismiss-on-timeout="2000">{{alert.msg}}</div>
     <div class="row">
@@ -129,7 +129,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td colspan="4" class="text-right"><label>Grant total</label></td>
+                            <td colspan="5" class="text-right"><label>Grant total</label></td>
                             <td><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.grandTotal"></label></td>
                             <td></td>
                         </tr>
