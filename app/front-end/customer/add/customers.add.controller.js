@@ -12,6 +12,10 @@
         vm.customer = {
             name: "",
             mobileNumber: "",
+            landLineNumber: {
+                stdCode:"",
+                number:""
+            },
             address: ""
         };
 
@@ -24,6 +28,7 @@
                 .then(function (response) {
                     vm.alertService.addAlert('success', messages.successMsgs.ITEM_ADDED);
                     resetCustomer(form);
+                    // data.customerCount = parseInt(data.customerCount,10)+1;
                 }, function (error) {
                     vm.alertService.addAlert('danger', messages.errorMsgs.ITEM_ADDED +" Because "+ error.errorMessage);
                 });

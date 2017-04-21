@@ -4,6 +4,14 @@
     </div>
     <div class="panel-body">
         <div class="row">
+            <div class="col-lg-5 pull-right">
+                <div class="form-group input-group">
+                    <input type="text" class="form-control" ng-model="vm.searchText">
+                    <span class="input-group-addon"><i class="fa fa-search"></i>  </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-12">
                 <!--<h2>Bordered with Striped Rows</h2>-->
                 <div class="table-responsive">
@@ -19,10 +27,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="customer in vm.customers track by customer._id">
+                            <tr ng-repeat="customer in vm.customers | filter : vm.searchText">
                                 <td ng-bind="customer.name"></td>
-                                <td ng-bind="customer.mobileNumber"></td>
-                                <td ng-bind="customer.address"></td>
+                                <td>
+                                    <div ng-if="customer.mobileNumber">
+                                        <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;
+                                        <span ng-bind="customer.mobileNumber"></span>
+                                    </div>
+                                    <div ng-if="customer.landLineNumber">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;
+                                        <span ng-bind="customer.landLineNumber.stdCode + '-' + customer.landLineNumber.number"></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p ng-bind="customer.address"></p>
+                                </td>
                                 <td ng-bind="customer.createdOn | date:'dd-MM-yyyy hh:mm a'"></td>
                                 <td ng-bind="customer.modifiedOn | date:'dd-MM-yyyy hh:mm a'"></td>
                                 <td>

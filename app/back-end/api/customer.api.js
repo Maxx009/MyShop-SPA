@@ -58,6 +58,7 @@ module.exports = function (app) {
                 update: {
                     name: customer.name,
                     mobileNumber: customer.mobileNumber,
+                    landLineNumber: customer.landLineNumber,
                     address: customer.address,
                     modifiedOn: new Date()
                 }

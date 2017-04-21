@@ -3,11 +3,13 @@
         <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-plus-square "></i> &nbsp; Add Customer</h3>
         </div>
+        <!--<pre>{{vm.customer | json}}</pre>-->
+        <!--<pre>{{customerForm | json}}</pre>-->
         <ng-include src="'customer-form-body.html'"></ng-include>
         <div class="panel-footer">
             <span class="">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i>&nbsp; Save</button>
-                <button type="button" class="btn btn-default" ng-click="vm.resetCustomer();"><i class="fa fa-refresh"></i>&nbsp; Reset</button>
+                <button type="button" class="btn btn-default" ng-click="vm.resetCustomer(customerForm);"><i class="fa fa-refresh"></i>&nbsp; Reset</button>
             </span>
         </div>
     </div>

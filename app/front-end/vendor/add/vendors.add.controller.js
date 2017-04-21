@@ -12,7 +12,11 @@
         vm.vendor = {
             name: "",
             mobileNumber: "",
-            address: ""
+            address: "",
+            landLineNumber: {
+                stdCode:"",
+                number:""
+            }
         };
 
         vm.resetVendor = resetVendor;
