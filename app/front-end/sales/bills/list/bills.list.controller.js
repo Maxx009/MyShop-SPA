@@ -10,6 +10,7 @@
     function ListBillController(bills, $location) {
         var vm = this;
         vm.editBill = editBill;
+        vm.viewBill = viewBill;
 
         activate();
 

@@ -1,8 +1,10 @@
 <form name="customerForm" role="form" novalidate ng-submit="customerForm.$valid && vm.updateCustomer()">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-pencil-square "></i>  Update Customer</h3>
+            <h3 class="panel-title"><i class="fa fa-pencil-square "></i> Update Customer</h3>
         </div>
+        <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
+            dismiss-on-timeout="3000">{{alert.msg}}</div>
         <ng-include src="'customer-form-body.html'"></ng-include>
         <div class="panel-footer">
             <span class="">

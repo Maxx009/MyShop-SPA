@@ -40,8 +40,7 @@ module.exports = function (app) {
                 name: new RegExp(searchToken, 'i')
             }, {
                 _id: 1,
-                name: 1,
-                brand: 1
+                name: 1
             })
             .then(function (data) {
                 data.toArray(function (error, docs) {
@@ -61,7 +60,6 @@ module.exports = function (app) {
                 },
                 update: {
                     name: product.name,
-                    brand: product.brand,
                     vendorName: product.vendorName,
                     modifiedOn: new Date()
                 }

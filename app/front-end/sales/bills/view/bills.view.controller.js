@@ -5,22 +5,25 @@
         .module('myShopApp')
         .controller('ViewBillController', ViewBillController);
 
-    ViewBillController.$inject = ["bills", "$location"];
+    ViewBillController.$inject = ["billItem", "$location","SalesService"];
 
-    function ViewBillController(bills, $location) {
+    function ViewBillController(billItem, $location,SalesService) {
         var vm = this;
-        vm.editBill = editBill;
+        vm.printBill = printBill;
+        vm.cancelView = cancelView;
 
         activate();
 
-        ////////////////
-
-        function editBill(billId) {
-            $location.path('/main/bills/edit/' +billId);
+        function printBill(billId) {
+            
+        }
+        function cancelView() {
+            $location.path("/main/sales/listBill");
         }
 
         function activate() {
-            vm.bills = bills;
+            vm.billDetails = billItem;
+            SalesService.calculateBill(vm.billDetails);
         }
     }
 }());

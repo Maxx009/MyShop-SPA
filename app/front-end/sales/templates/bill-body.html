@@ -6,9 +6,9 @@
         <div class="col-lg-8">
             <div class="form-group" ng-class="{'has-error':(billForm.customerName.$dirty || billForm.$submitted) && billForm.customerName.$invalid}">
                 <label>Customer Name</label>
-                <input type="text" name="customerName" typeahead-editable="false" typeahead-select-on-exact="true" ng-required="true" ng-model="vm.billDetails.customer" placeholder="Type Customer name"
-                    uib-typeahead="customer as customer.name for customer in vm.getCustomers($viewValue)" typeahead-loading="vm.loading"
-                    typeahead-no-results="vm.noResults" class="form-control">                
+                <input type="text" name="customerName" typeahead-editable="false" typeahead-select-on-exact="true" ng-required="true" ng-model="vm.billDetails.customer"
+                    placeholder="Type Customer name" uib-typeahead="customer as customer.name for customer in vm.getCustomers($viewValue)"
+                    typeahead-loading="vm.loading" typeahead-no-results="vm.noResults" class="form-control">
                 <div ng-messages="(billForm.customerName.$dirty || billForm.$submitted)&& billForm.customerName.$error">
                     <div ng-messages-include="error-messages.html"></div>
                 </div>
@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-                <table class="table table-hover table-striped">
+                <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Product</th>
@@ -50,7 +50,8 @@
                         <tr ng-repeat="item in vm.billDetails.billItems">
                             <td>
                                 <div ng-class="{'has-error':(billForm['product'+$index].$dirty || billForm.$submitted)&& billForm['product'+$index].$invalid}">
-                                    <input type="text" name="{{'product'+$index}}" ng-model="item.product" placeholder="Type product name" typeahead-editable="false" typeahead-select-on-exact="true" uib-typeahead="product as product.name for product in vm.getProducts($viewValue)"
+                                    <input type="text" name="{{'product'+$index}}" ng-model="item.product" placeholder="Type product name" typeahead-editable="false"
+                                        typeahead-select-on-exact="true" uib-typeahead="product as product.name for product in vm.getProducts($viewValue)"
                                         class="form-control" ng-required="true">
                                 </div>
                                 <div ng-messages="(billForm['product'+$index].$dirty || billForm.$submitted)&& billForm['product'+$index].$error">
@@ -67,7 +68,7 @@
                             </td>
                             <td>
                                 <div ng-class="{'has-error':(billForm['unit'+$index].$dirty || billForm.$submitted)&& billForm['unit'+$index].$invalid}">
-                                    <input type="number" class="form-control" name="{{'unit'+$index}}" ng-model="item.units" ng-change="item.units !== undefined && vm.calculate();"
+                                    <input type="number" class="form-control" name="{{'unit'+$index}}" ng-model="item.units" ng-change="item.units !== undefined && vm.calculate(vm.billDetails);"
                                         ng-required="true" min="1" max="10" />
                                 </div>
                                 <div ng-messages="(billForm['unit'+$index].$dirty || billForm.$submitted)&& billForm['unit'+$index].$error">
@@ -76,7 +77,7 @@
                             </td>
                             <td>
                                 <div ng-class="{'has-error':(billForm['rate'+$index].$dirty || billForm.$submitted)&& billForm['rate'+$index].$invalid}">
-                                    <input type="number" class="form-control" name="{{'rate'+$index}}" ng-model="item.rate" ng-change="vm.calculate();" ng-required="true"
+                                    <input type="number" class="form-control" name="{{'rate'+$index}}" ng-model="item.rate" ng-change="vm.calculate(vm.billDetails);" ng-required="true"
                                         min="1" max="999999" />
                                 </div>
                                 <div ng-messages="(billForm['rate'+$index].$dirty || billForm.$submitted)&& billForm['rate'+$index].$error">
@@ -87,14 +88,14 @@
                                 <div ng-repeat="weight in item.weights track by $index" class="margin-bottom-10">
                                     <div ng-class="{'has-error':(billForm['weights'+$parent.$index+''+$index].$dirty || billForm.$submitted)&& billForm['weights'+$parent.$index+''+$index].$invalid}">
                                         <p class="input-group">
-                                            <input type="number" name="{{'weights'+$parent.$index+''+$index}}" class="form-control" ng-model="item.weights[$index]" ng-change="vm.calculate();"
+                                            <input type="number" name="{{'weights'+$parent.$index+''+$index}}" class="form-control" ng-model="item.weights[$index]" ng-change="vm.calculate(vm.billDetails);"
                                                 ng-required="true" min="1" max="1000" />
                                             <span class="input-group-btn" ng-if="item.units && item.units > 1">
                                                 <button type="button" class="btn btn-danger" tooltip-placement="right" uib-tooltip="Add another weight" ng-click="vm.addNewWeightRow(item);"
                                                     ng-if="item.units > item.weights.length && $last">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                 </button>
-                                                <button type="button" class="btn  btn-danger" tooltip-placement="right" uib-tooltip="Remove weight" ng-click="vm.removeWeightRow(item,$index);vm.calculate();"
+                                                <button type="button" class="btn  btn-danger" tooltip-placement="right" uib-tooltip="Remove weight" ng-click="vm.removeWeightRow(item,$index);vm.calculate(vm.billDetails);"
                                                     ng-if="!$last">
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                 </button>
@@ -112,26 +113,37 @@
                                 <label ng-bind="item.total"></label>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" uib-tooltip="Add Row" ng-click="vm.addNewRow();" ng-if="$last">
+                                <button type="button" class="btn btn-danger" uib-tooltip="Add Row" ng-click="vm.addNewRow(vm.billDetails);" ng-if="$last">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
-                                <button type="button" class="btn btn-danger" uib-tooltip="Remove Row" ng-click="vm.removeRow($index);vm.calculate();" ng-if="vm.billDetails.billItems.length >1">
+                                <button type="button" class="btn btn-danger" uib-tooltip="Remove Row" ng-click="vm.removeRow($index,vm.billDetails);vm.calculate(vm.billDetails);" ng-if="vm.billDetails.billItems.length >1">
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                         </button>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="text-right"><label>Labour Charge</label></td>
-                            <td><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.labourCharge"></label></td>
-                            <td class="text-right"><label>Lavy</label></td>
-                            <td><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.lavy"></label></td>
-                            <td></td>
-                            <td></td>
+                        <tr class="success">
+                            <td colspan="5" class="text-right"><label>Sub Total</label></td>
+                            <td colspan="2"><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.subTotal"></label></td>
+                       </tr>
+                        <tr class="warning">
+                            <td colspan="5" class="text-right"><label>Labour Charge</label></td>
+                            <td colspan="2"><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.labourCharge"></label></td>
                         </tr>
-                        <tr>
-                            <td colspan="5" class="text-right"><label>Grant total</label></td>
-                            <td><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.grandTotal"></label></td>
-                            <td></td>
+                        <tr class="warning">
+                            <td colspan="5" class="text-right"><label>Lavy</label></td>
+                            <td colspan="2"><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.lavy"></label></td>
+                         </tr>
+                        <tr class="warning">
+                            <td colspan="5" class="text-right"><label>Transport Charge</label></td>
+                            <td colspan="2"><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.transportCharge"></label></td>
+                         </tr>
+                        <tr class="warning">
+                            <td colspan="5" class="text-right"><label>VAT/CST</label></td>
+                            <td colspan="2"><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.tax"></label></td>
+                        </tr>
+                        <tr class="success">
+                            <td colspan="5" class="text-right"><h4><label>Grant total</label></h4></td>
+                            <td colspan="2"><h4><i class="fa fa-inr"></i>&nbsp;<label ng-bind="vm.billDetails.grandTotal"></label></h4></td>
                         </tr>
                     </tbody>
                 </table>

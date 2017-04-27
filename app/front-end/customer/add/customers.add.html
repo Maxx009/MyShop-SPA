@@ -5,6 +5,8 @@
         </div>
         <!--<pre>{{vm.customer | json}}</pre>-->
         <!--<pre>{{customerForm | json}}</pre>-->
+        <div uib-alert ng-repeat="alert in vm.alertService.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.alertService.closeAlert($index)"
+            dismiss-on-timeout="3000">{{alert.msg}}</div>
         <ng-include src="'customer-form-body.html'"></ng-include>
         <div class="panel-footer">
             <span class="">

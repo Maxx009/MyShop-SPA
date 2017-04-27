@@ -35,9 +35,6 @@ module.exports = function (app) {
         var searchToken = req.params.name;
         dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {
                 name: new RegExp(searchToken, 'i')
-            }, {
-                _id: 1,
-                name: 1
             })
             .then(function (data) {
                 data.toArray(function (error, docs) {

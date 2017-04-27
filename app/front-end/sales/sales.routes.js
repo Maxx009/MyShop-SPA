@@ -68,8 +68,8 @@
                 }
             })
             .state('main.sales.viewBill', {
-                url: "/ViewBill",
-                templateUrl: "bills.viewss.html",
+                url: "/ViewBill/:billId",
+                templateUrl: "bills.view.html",
                 controller: "ViewBillController",
                 controllerAs: "vm",
                 resolve: {

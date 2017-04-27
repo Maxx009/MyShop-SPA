@@ -8,12 +8,41 @@
     SalesService.inject = ["dataAccessService", "constants"];
 
     function SalesService(dataAccessService, constants) {
+        function BillItem() {
+            this.product = "";
+            this.units = 1;
+            this.weights = [0.0];
+            this.rate = 0.0;
+            this.brand = "";
+        }
+
+        this.billDetails = {
+            billDate: new Date(),
+            labourCharge: 0.0,
+            transportCharge: 0.0,
+            tax: 0.0,
+            lavy: 0.0,
+            subTotal: 0.0,
+            billItems: [
+                new BillItem()
+            ],
+        };
         this.calculateBill = calculateBill;
         this.getCustomers = getCustomers;
         this.getProducts = getProducts;
         this.calculateLavy = calculateLavy;
-        this.addNewWeightRow = addNewWeightRow;
         this.removeWeightRow = removeWeightRow;
+        this.addNewWeightRow = addNewWeightRow;
+        this.addNewRow = addNewRow;
+        this.removeRow = removeRow;
+
+        function addNewRow(billDetails) {
+            billDetails.billItems.push(new BillItem());
+        }
+
+        function removeRow(index,billDetails) {
+            billDetails.billItems.splice(index, 1);
+        }
 
         function calculateLavy(billDetails) {
             var totalWeight = 0.0;
@@ -42,6 +71,7 @@
 
         function calculateBill(billDetails) {
             billDetails.grandTotal = 0.0;
+            billDetails.subTotal = 0.0;
             for (var index = 0; index < billDetails.billItems.length; index++) {
                 var item = billDetails.billItems[index];
                 item.total = 0.0;
@@ -51,13 +81,13 @@
                             item.total += Math.round((item.rate * item.weights[weightIndex]) * 100) / 100;
                         }
                     }
-                    billDetails.grandTotal += item.total;
+                    billDetails.subTotal += item.total;
                 }
             }
-            if (billDetails.grandTotal) {
+            if (billDetails.subTotal) {
                 billDetails.lavy = constants.LAVY;
-                billDetails.labourCharge = Math.round(((constants.LABOUR_CHARGE_PERCENTAGE / 100) * billDetails.grandTotal) * 100) / 100;
-                billDetails.grandTotal += billDetails.lavy + billDetails.labourCharge;
+                billDetails.labourCharge = Math.round(((constants.LABOUR_CHARGE_PERCENTAGE / 100) * billDetails.subTotal) * 100) / 100;
+                billDetails.grandTotal += Math.round((billDetails.lavy + billDetails.labourCharge + billDetails.subTotal) * 100) / 100;
             }
         }
 

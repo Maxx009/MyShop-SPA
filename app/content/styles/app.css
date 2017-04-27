@@ -43,7 +43,6 @@ body {
 
 .top-nav>li {
     display: inline-block;
-    float: left;
 }
 
 .top-nav>li>a {
@@ -349,6 +348,39 @@ ul.alert-dropdown {
     }
 }
 
+.padding-top-25 {
+    padding-top:25px;
+}
+.padding-bottom-25 {
+    padding-bottom:25px;
+}
+/* View Bill Style*/
+.contact-info span {
+    font-size:14px;
+    padding:0px 50px 0px 50px;      
+    line-height:30px;
+}
+
+.contact-info hr {
+    margin-top: 0px;
+margin-bottom: 0px;
+}
+
+.client-info {
+    font-size:15px;
+}
+
+.ttl-amts {
+    text-align:right;
+    padding-right:50px;
+}
+
+.padding-0{
+    padding: 0 !important;
+}
+.weight::after{
+    content: ", ";
+}
 
 /*animation*/
 
