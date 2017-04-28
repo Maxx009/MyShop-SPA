@@ -1,28 +1,29 @@
 var dataAccess = require('../services/data-access');
-const constants = require('../constants/customer.constant');
+const constants = require('../constants/vendor.constant');
 var ObjectId = require('mongodb').ObjectId;
 
 module.exports = function (app) {
-    app.get('/api/get/list/customer', function (req, res, next) {
-        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {},{},{modifiedOn: -1})
+    app.get('/api/get/list/vendor', function (req, res, next) {
+        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {}, {}, {
+                modifiedOn: -1
+            })
             .then(function (data) {
                 console.log(data);
                 data.toArray(function (error, docs) {
                     if (error) {
-                        res.status(500).json(error);
-                        return;
+                        next(error);
                     }
                     res.status(200).json(docs);
                 });
             }).catch(next);
     });
-    app.get('/api/get/count/customer', function (req, res, next) {
+    app.get('/api/get/count/vendor', function (req, res, next) {
         dataAccess.getDocumentCount(constants.COLLECTION_NAME, {})
             .then(function (count) {
                 res.status(200).send(count.toString());
             }).catch(next);
     });
-    app.get('/api/get/single/customer/:id', function (req, res, next) {
+    app.get('/api/get/single/vendor/:id', function (req, res, next) {
         dataAccess.getSingleDocument(constants.COLLECTION_NAME, {
                 "_id": ObjectId(req.params.id)
             })
@@ -30,16 +31,13 @@ module.exports = function (app) {
                 res.status(200).json(doc);
             }).catch(next);
     });
-
-    app.get('/api/get/find/customer/:name', function (req, res, next) {
+    app.get('/api/get/find/vendor/:name', function (req, res, next) {
         var searchToken = req.params.name;
         dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {
                 name: new RegExp(searchToken, 'i')
-            },{
-                name:1,
-                address:1,
-                mobileNumber:1,
-                landLineNumber:1
+            }, {
+                _id: 1,
+                name: 1
             })
             .then(function (data) {
                 data.toArray(function (error, docs) {
@@ -50,18 +48,16 @@ module.exports = function (app) {
                 });
             }).catch(next);
     });
-
-    app.put('/api/put/update/customer', function (req, res, next) {
-        var customer = req.body.payLoad;
+    app.put('/api/put/update/vendor', function (req, res, next) {
+        var vendor = req.body.payLoad;
         dataAccess.updateDocument(constants.COLLECTION_NAME, {
                 query: {
-                    "_id": ObjectId(customer._id)
+                    "_id": ObjectId(vendor._id)
                 },
                 update: {
-                    name: customer.name,
-                    mobileNumber: customer.mobileNumber,
-                    landLineNumber: customer.landLineNumber,
-                    address: customer.address,
+                    name: vendor.name,
+                    mobileNumber: vendor.mobileNumber,
+                    address: vendor.address,
                     modifiedOn: new Date()
                 }
             })
@@ -71,11 +67,11 @@ module.exports = function (app) {
                 });
             }).catch(next);
     });
-    app.post('/api/post/add/customer', function (req, res, next) {
-        var customer = req.body.payLoad;
-        customer.createdOn = new Date();
-        customer.modifiedOn = new Date();
-        dataAccess.addDocumentToCollection(constants.COLLECTION_NAME, customer)
+    app.post('/api/post/add/vendor', function (req, res, next) {
+        var vendor = req.body.payLoad;
+        vendor.createdOn = new Date();
+        vendor.modifiedOn = new Date();
+        dataAccess.addDocumentToCollection(constants.COLLECTION_NAME, vendor)
             .then(function (databaseResponse) {
                 return res.status(200).json({
                     message: "Inserted one item"

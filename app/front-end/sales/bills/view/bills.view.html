@@ -20,12 +20,11 @@
                 <strong ng-bind="vm.billDetails.customer.name"></strong>
                 <div ng-if="vm.billDetails.customer.address"><b>Address :</b> <span ng-bind="vm.billDetails.customer.address"></span></div>
                 <div ng-if="vm.billDetails.customer.mobileNumber || vm.billDetails.customer.landLineNumber">
-                    <i class="fa fa-mobile" aria-hidden="true"></i> : <strong ng-bind="vm.billDetails.customer.mobileNumber |'-'"></strong>
-                    <i class="fa fa-phone" aria-hidden="true"></i> : <strong ng-bind="vm.billDetails.customer.landLineNumber.stdCode +' - '+vm.billDetails.customer.landLineNumber.number"></strong>
+                    <i class="fa fa-mobile" aria-hidden="true"></i> : <strong ng-bind="vm.billDetails.customer.mobileNumber ||'-'"></strong>
+                    <br /><i class="fa fa-phone" aria-hidden="true"></i> : <strong ng-bind="vm.billDetails.customer.landLineNumber.stdCode +' - '+vm.billDetails.customer.landLineNumber.number"></strong>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
-
                 <h4> <strong>Payment Details </strong></h4>
                 <b>Bill Amount :  <i class="fa fa-inr"></i>&nbsp;{{vm.billDetails.grandTotal}} </b>
                 <br /> Bill Date : {{vm.billDetails.billDate | date:'dd-MMMM-yyyy'}}
@@ -93,8 +92,8 @@
     </div>
     <div class="panel-footer red">
         <span class="">
-            <button type="button" class="btn btn-danger" ng-click="vm.printBill();"><i class="fa fa-floppy-o"></i>&nbsp; Print</button>
-            <button type="button" class="btn btn-default" ng-click="vm.cancelView();"><i class="fa fa-refresh"></i>&nbsp; Back</button>
+            <button type="button" class="btn btn-danger" ng-click="vm.printBill();"><i class="fa fa-print"></i>&nbsp; Print</button>
+            <button type="button" class="btn btn-default" ng-click="vm.cancelView();"><i class="fa fa-reply"></i>&nbsp; Back</button>
         </span>
     </div>
 </div>

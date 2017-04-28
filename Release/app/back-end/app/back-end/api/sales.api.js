@@ -1,28 +1,42 @@
 var dataAccess = require('../services/data-access');
-const constants = require('../constants/customer.constant');
+const constants = require('../constants/sales.constant');
 var ObjectId = require('mongodb').ObjectId;
 
+function processBillObject(billObject) {
+    if (!billObject) {
+        return false;
+    }
+    billObject.billDate = new Date(billObject.billDate);
+    billObject.customer._id = ObjectId(billObject.customer._id);
+    for (var index = 0; index < billObject.billItems.length; index++) {
+        billObject.billItems[index].product._id = ObjectId(billObject.billItems[index].product._id);
+    }
+    return billObject;
+}
 module.exports = function (app) {
-    app.get('/api/get/list/customer', function (req, res, next) {
-        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {},{},{modifiedOn: -1})
+    app.get('/api/get/list/bill', function (req, res, next) {
+        dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {}, {}, {
+                "billDate": -1
+            })
             .then(function (data) {
                 console.log(data);
                 data.toArray(function (error, docs) {
                     if (error) {
-                        res.status(500).json(error);
-                        return;
+                        next(error);
                     }
                     res.status(200).json(docs);
                 });
             }).catch(next);
     });
-    app.get('/api/get/count/customer', function (req, res, next) {
+
+    app.get('/api/get/count/bill', function (req, res, next) {
         dataAccess.getDocumentCount(constants.COLLECTION_NAME, {})
             .then(function (count) {
                 res.status(200).send(count.toString());
             }).catch(next);
     });
-    app.get('/api/get/single/customer/:id', function (req, res, next) {
+
+    app.get('/api/get/single/bill/:id', function (req, res, next) {
         dataAccess.getSingleDocument(constants.COLLECTION_NAME, {
                 "_id": ObjectId(req.params.id)
             })
@@ -31,15 +45,10 @@ module.exports = function (app) {
             }).catch(next);
     });
 
-    app.get('/api/get/find/customer/:name', function (req, res, next) {
+    app.get('/api/get/find/bill/:name', function (req, res, next) {
         var searchToken = req.params.name;
         dataAccess.getDataFromCollection(constants.COLLECTION_NAME, {
                 name: new RegExp(searchToken, 'i')
-            },{
-                name:1,
-                address:1,
-                mobileNumber:1,
-                landLineNumber:1
             })
             .then(function (data) {
                 data.toArray(function (error, docs) {
@@ -51,17 +60,19 @@ module.exports = function (app) {
             }).catch(next);
     });
 
-    app.put('/api/put/update/customer', function (req, res, next) {
-        var customer = req.body.payLoad;
+    app.put('/api/put/update/bill', function (req, res, next) {
+        var bill = req.body.payLoad;
         dataAccess.updateDocument(constants.COLLECTION_NAME, {
                 query: {
-                    "_id": ObjectId(customer._id)
+                    "_id": ObjectId(bill._id)
                 },
                 update: {
-                    name: customer.name,
-                    mobileNumber: customer.mobileNumber,
-                    landLineNumber: customer.landLineNumber,
-                    address: customer.address,
+                    billDate: bill.billDate,
+                    lavy: bill.lavy,
+                    labourCharge: bill.labourCharge,
+                    billItems: bill.billItems,
+                    grandTotal: bill.grandTotal,
+                    customer: bill.customer,
                     modifiedOn: new Date()
                 }
             })
@@ -71,18 +82,19 @@ module.exports = function (app) {
                 });
             }).catch(next);
     });
-    app.post('/api/post/add/customer', function (req, res, next) {
-        var customer = req.body.payLoad;
-        customer.createdOn = new Date();
-        customer.modifiedOn = new Date();
-        dataAccess.addDocumentToCollection(constants.COLLECTION_NAME, customer)
+
+    app.post('/api/post/add/bill', function (req, res, next) {
+        var bill = processBillObject(req.body.payLoad);
+        bill.createdOn = new Date();
+        bill.modifiedOn = new Date();
+        dataAccess.addDocumentToCollection(constants.COLLECTION_NAME, bill)
             .then(function (databaseResponse) {
                 return res.status(200).json({
                     message: "Inserted one item"
-                })
+                });
             }).catch(next);
-
     });
+
     app.use(function (err, req, res, next) {
         console.error(err.stack);
         res.status(400).send(err);

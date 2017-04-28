@@ -18,14 +18,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-        copy: {
-            fonts: {
-                expand: true,
-                flatten: true,
-                src: 'bower_Components/font-awesome/fonts/*',
-                dest: 'app/build/bundle/fonts/',
-            },
-        },
         ngtemplates: {
             product: {
                 src: 'app/front-end/product/**/*.html',
@@ -189,6 +181,32 @@ module.exports = function (grunt) {
                 }
             }
         },
+        copy: {
+            fonts: {
+                expand: true,
+                flatten: true,
+                src: 'bower_Components/font-awesome/fonts/*',
+                dest: 'app/build/bundle/fonts/',
+            },
+            release_app: {
+                expand: true,
+                flatten: false,
+                src: ['app/*.js'],
+                dest: 'Release/',
+            },
+            release_app_back_end: {
+                expand: true,
+                flatten: false,
+                src: ['app/back-end/**'],
+                dest: 'Release/app/back-end/',
+            },
+            release_Build: {
+                expand: true,
+                flatten: false,
+                src: ['app/build/**'],
+                dest: 'Release/app/build/',
+            }
+        },
     });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-angular-templates');
@@ -198,6 +216,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['jshint', 'copy', 'ngtemplates', 'replace', 'concat', 'cssmin', 'uglify']);
-    // grunt.registerTask('prod', ['cssmin', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'ngtemplates', 'replace', 'concat', 'cssmin', 'uglify','copy']);
 };
