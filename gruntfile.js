@@ -198,13 +198,13 @@ module.exports = function (grunt) {
                 expand: true,
                 flatten: false,
                 src: ['app/back-end/**'],
-                dest: 'Release/app/back-end/',
+                dest: 'Release/',
             },
             release_Build: {
                 expand: true,
                 flatten: false,
                 src: ['app/build/**'],
-                dest: 'Release/app/build/',
+                dest: 'Release/',
             }
         },
     });
