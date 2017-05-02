@@ -112,6 +112,7 @@ module.exports = function (grunt) {
             libraries: {
                 src: ['bower_Components/angular/angular.min.js',
                     'bower_Components/angular-animate/angular-animate.min.js',
+                    'bower_Components/angularPrint/angularPrint.js',
                     'bower_Components/angular-messages/angular-messages.min.js',
                     'bower_Components/angular-ui-router/release/angular-ui-router.min.js',
                     'bower_Components/oclazyload/dist/ocLazyLoad.min.js',
@@ -130,6 +131,7 @@ module.exports = function (grunt) {
                     'app/build/bundle/css/libraries.min.css': [
                         'bower_Components/bootstrap-css-only/css/bootstrap.min.css',
                         'bower_Components/font-awesome/css/font-awesome.min.css',
+                        'bower_Components/AngularPrint/angularPrint.css',
                         'app/content/styles/app.css'
                     ]
                 }
@@ -137,7 +139,7 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
-                beautify: true,
+                beautify: false ,
                 mangle: false
             },
             allJS: {

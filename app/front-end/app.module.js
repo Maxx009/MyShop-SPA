@@ -1,4 +1,4 @@
 (function () {
     'use strict';
-    angular.module('myShopApp', ["ui.router", "ngAnimate", "ngMessages","oc.lazyLoad","ui.bootstrap"]);
+    angular.module('myShopApp', ["ui.router", "ngAnimate", "ngMessages","oc.lazyLoad","ui.bootstrap","AngularPrint"]);
 }());
