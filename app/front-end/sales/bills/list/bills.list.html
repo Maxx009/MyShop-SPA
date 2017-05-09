@@ -4,6 +4,14 @@
     </div>
     <div class="panel-body">
         <div class="row">
+            <div class="col-lg-5 pull-right">
+                <div class="form-group input-group">
+                    <input type="text" class="form-control" ng-model="vm.searchText">
+                    <span class="input-group-addon"><i class="fa fa-search"></i>  </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
@@ -18,7 +26,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="bill in vm.bills track by bill._id">
+                            <tr>
+                                <td colspan="4" class="text-center" ng-if="filteredBill.length === 0"><span class="text-danger">No Customer Found</span></td>
+                            </tr>
+                            <tr ng-repeat="bill in filteredBill = (vm.bills | filter : vm.searchText) | limitTo:5:5*(vm.page-1)">
                                 <td ng-bind="bill.customer.name"></td>
                                 <td ng-bind="bill.grandTotal"></td>
                                 <td ng-bind="bill.billDate | date:'dd-MM-yyyy hh:mm a'"></td>
@@ -31,6 +42,8 @@
                             </tr>
                         </tbody>
                     </table>
+                    <ul uib-pagination class="pull-right red-pagination pagination-sm pagination" total-items="filteredBill.length" ng-model="vm.page"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page="5"></ul>
                 </div>
             </div>
         </div>

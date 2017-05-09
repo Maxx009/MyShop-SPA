@@ -11,7 +11,6 @@
         var vm = this;
         vm.editBill = editBill;
         vm.viewBill = viewBill;
-
         activate();
 
         function editBill(billId) {
@@ -23,6 +22,7 @@
         }
 
         function activate() {
+            vm.page=1;
             vm.bills = bills;
         }
     }

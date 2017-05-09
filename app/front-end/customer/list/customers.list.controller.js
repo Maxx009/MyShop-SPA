@@ -14,10 +14,11 @@
         activate();
 
         function editCustomer(customerId) {
-            $location.path('/main/customers/edit/' +customerId);
+            $location.path('/main/customers/edit/' + customerId);
         }
 
         function activate() {
+            vm.page = 1;
             vm.customers = customers;
         }
     }

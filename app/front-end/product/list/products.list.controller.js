@@ -7,7 +7,7 @@
 
     ProductListController.$inject = ["$location", "products"];
 
-    function ProductListController($location,products) {
+    function ProductListController($location, products) {
         var vm = this;
         activate();
 
@@ -19,6 +19,7 @@
         }
 
         function activate() {
+            vm.page = 1;
             vm.products = products;
         }
     }

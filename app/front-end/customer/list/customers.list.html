@@ -21,41 +21,42 @@
                                 <th>Name</th>
                                 <th>Contact No.</th>
                                 <th>Address</th>
-                                <th>Created On</th>
-                                <th>Modified On</th>
+                                <!--<th>Created On</th>
+                                <th>Modified On</th>-->
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="6" class="text-center" ng-if="fileteredCustomers.length === 0"><span class="text-danger">No Customer Found</span></td>
+                                <td colspan="4" class="text-center" ng-if="filteredCustomers.length === 0"><span class="text-danger">No Customer Found</span></td>
                             </tr>
-                            <tr ng-repeat="customer in fileteredCustomers = (vm.customers | filter : vm.searchText)">
+                            <tr ng-repeat="customer in filteredCustomers = (vm.customers | filter : vm.searchText) | limitTo:5:5*(vm.page-1)">
                                 <td ng-bind="customer.name"></td>
                                 <td>
-                                    <div ng-if="customer.mobileNumber">
+                                    <div>
                                         <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;
-                                        <span ng-bind="customer.mobileNumber"></span>
+                                        <span ng-bind="customer.mobileNumber || '-'"></span>
                                     </div>
-                                    <div ng-if="customer.landLineNumber">
+                                    <div>
                                         <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;
                                         <span ng-bind="customer.landLineNumber.stdCode + '-' + customer.landLineNumber.number"></span>
                                     </div>
                                 </td>
                                 <td>
-                                    <p ng-bind="customer.address"></p>
+                                    <p ng-bind="customer.address || '-'"></p>
                                 </td>
-                                <td ng-bind="customer.createdOn | date:'dd-MM-yyyy hh:mm a'"></td>
-                                <td ng-bind="customer.modifiedOn | date:'dd-MM-yyyy hh:mm a'"></td>
+                                <!--<td ng-bind="customer.createdOn | date:'dd-MMM-yyyy hh:mm a'"></td>-->
+                                <!--<td ng-bind="customer.modifiedOn | date:'dd-MMM-yyyy hh:mm a'"></td>-->
                                 <td>
                                     <button type="button" class="btn btn-primary btn-circle" ng-click="vm.editCustomer(customer._id)"><i class="fa fa-pencil-square-o"aria-hidden="true"></i></button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                <!--<ul uib-pager total-items="vm.customers.length" ng-model="vm.currentPage" items-per-page="5"></ul>                    -->
+                    <ul uib-pagination class="pull-right pagination-sm pagination" total-items="filteredCustomers.length" ng-model="vm.page"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page="5"></ul>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </div>

@@ -18,7 +18,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="product in vm.products">
+                             <tr>
+                                <td colspan="5" class="text-center" ng-if="vm.products.length === 0"><span class="text-danger">No Products Found</span></td>
+                            </tr>
+                            <tr ng-repeat="product in vm.products track by product._id">                                
                                 <td ng-bind="product.name"></td>
                                 <td ng-bind="product.vendorName.name"></td>
                                 <td ng-bind="product.createdOn | date:'dd-MM-yyyy hh:mm a'"></td>
@@ -29,6 +32,8 @@
                             </tr>                             
                         </tbody>
                     </table>
+                    <ul uib-pagination class="pull-right red-pagination pagination-sm pagination" total-items="vm.products.length" ng-model="vm.page"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page="5"></ul>                
                 </div>
             </div>
 

@@ -10,7 +10,6 @@
     function AddProductController($state, dataAccessService, alertMessage, messages) {
         var vm = this;
         vm.product = {
-            brand: "",
             name: "",
             vendorName: ""
         };

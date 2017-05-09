@@ -1,4 +1,6 @@
 <div class="panel-body">
+    <pre>{{vm.customer | json}}</pre>
+    <!--<pre>{{customerForm | json}}</pre>-->
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group" ng-class="{'has-error':(customerForm.customerName.$dirty ||customerForm.$submitted)&& customerForm.customerName.$invalid}">
