@@ -10,6 +10,7 @@
             "args": [],
             "isBuildCommand": true,
             "isBackground": false,
+            "showOutput": "always",
             "problemMatcher": [
                 "$lessCompile",
                 "$tsc",

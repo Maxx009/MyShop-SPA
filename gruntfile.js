@@ -3,11 +3,15 @@ module.exports = function (grunt) {
         url = url.split('/');
         return url[url.length - 1];
     }
+    var htmlMin = {
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true
+    };
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
             // define the files to lint
-            files: ['gruntfile.js', 'app/front-end/*.js', 'app/front-end/**/*.js'],
+            files: ['gruntfile.js', 'app/src/front-end/*.js', 'app/src/front-end/**/*.js'],
             // configure JSHint (documented at http://www.jshint.com/docs/)
             options: {
                 // more options here if you want to override JSHint defaults
@@ -20,80 +24,62 @@ module.exports = function (grunt) {
         },
         ngtemplates: {
             product: {
-                src: 'app/front-end/product/**/*.html',
+                src: 'app/src/front-end/product/**/*.html',
                 dest: 'app/build/bundle/js/templates/product.js',
                 options: {
                     module: 'myShopApp',
                     url: urlTrimmer,
-                    htmlmin: {
-                        collapseWhitespace: true,
-                        collapseBooleanAttributes: true
-                    }
+                    htmlmin: htmlMin
                 }
             },
             customer: {
-                src: 'app/front-end/customer/**/*.html',
+                src: 'app/src/front-end/customer/**/*.html',
                 dest: 'app/build/bundle/js/templates/customer.js',
                 options: {
                     module: 'myShopApp',
                     url: urlTrimmer,
-                    htmlmin: {
-                        collapseWhitespace: true,
-                        collapseBooleanAttributes: true
-                    }
+                    htmlmin: htmlMin
                 }
             },
             vendor: {
-                src: 'app/front-end/vendor/**/*.html',
+                src: 'app/src/front-end/vendor/**/*.html',
                 dest: 'app/build/bundle/js/templates/vendor.js',
                 options: {
                     module: 'myShopApp',
                     url: urlTrimmer,
-                    htmlmin: {
-                        collapseWhitespace: true,
-                        collapseBooleanAttributes: true
-                    }
+                    htmlmin: htmlMin
                 }
             },
             sales: {
-                src: ['app/front-end/sales/**/**/*.html', 'app/front-end/sales/**/*.html'],
+                src: ['app/src/front-end/sales/**/**/*.html', 'app/src/front-end/sales/**/*.html'],
                 dest: 'app/build/bundle/js/templates/sales.js',
                 options: {
                     module: 'myShopApp',
                     url: urlTrimmer,
-                    htmlmin: {
-                        collapseWhitespace: true,
-                        collapseBooleanAttributes: true
-                    }
+                    htmlmin: htmlMin
                 }
             },
             main: {
-                src: ['app/front-end/main/*.html'],
+                src: ['app/src/front-end/main/*.html'],
                 dest: 'app/build/bundle/js/templates/main.js',
                 options: {
                     url: urlTrimmer,
                     module: 'myShopApp',
-                    htmlmin: {
-                        collapseWhitespace: true,
-                        collapseBooleanAttributes: true
-                    }
+                    htmlmin: htmlMin
                 }
             },
             common: {
-                src: ['app/front-end/common/templates/*.html', 'app/front-end/login/*.html'],
+                src: ['app/src/front-end/common/templates/*.html', 'app/src/front-end/login/*.html'],
                 dest: 'app/build/bundle/js/templates/common.js',
                 options: {
                     url: urlTrimmer,
                     module: 'myShopApp',
-                    htmlmin: {
-                        collapseWhitespace: true,
-                        collapseBooleanAttributes: true
-                    }
+                    htmlmin: htmlMin
                 }
             }
         },
         replace: {
-            another_example: {
+            bootstrap: {
                 src: [
                     'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                     'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
@@ -132,7 +118,7 @@ module.exports = function (grunt) {
                         'bower_Components/bootstrap-css-only/css/bootstrap.min.css',
                         'bower_Components/font-awesome/css/font-awesome.min.css',
                         'bower_Components/AngularPrint/angularPrint.css',
-                        'app/content/styles/app.css'
+                        'app/src/content/styles/app.css'
                     ]
                 }
             }
@@ -145,16 +131,16 @@ module.exports = function (grunt) {
             allJS: {
                 files: {
                     'app/build/bundle/js/app.min.js': [
-                        'app/front-end/app.module.js',
-                        'app/front-end/app.routes.js',
-                        'app/front-end/login/*.js',
-                        'app/front-end/product/products.routes.js',
-                        'app/front-end/customer/customers.routes.js',
-                        'app/front-end/vendor/vendors.routes.js',
-                        'app/front-end/sales/sales.routes.js',
+                        'app/src/front-end/app.module.js',
+                        'app/src/front-end/app.routes.js',
+                        'app/src/front-end/login/*.js',
+                        'app/src/front-end/product/products.routes.js',
+                        'app/src/front-end/customer/customers.routes.js',
+                        'app/src/front-end/vendor/vendors.routes.js',
+                        'app/src/front-end/sales/sales.routes.js',
 
-                        'app/front-end/common/**/*.js',
-                        'app/front-end/main/*.js',
+                        'app/src/front-end/common/**/*.js',
+                        'app/src/front-end/main/*.js',
 
                         'app/build/bundle/js/templates/main.js',
                         'app/build/bundle/js/templates/common.js',
@@ -164,21 +150,21 @@ module.exports = function (grunt) {
                         'app/build/bundle/js/templates/customer.js'
                     ],
                     'app/build/bundle/js/products.min.js': [
-                        'app/front-end/product/**/*.js',
-                        '!app/front-end/product/*.js'
+                        'app/src/front-end/product/**/*.js',
+                        '!app/src/front-end/product/*.js'
                     ],
                     'app/build/bundle/js/customer.min.js': [
-                        'app/front-end/customer/**/*.js',
-                        '!app/front-end/customer/*.js'
+                        'app/src/front-end/customer/**/*.js',
+                        '!app/src/front-end/customer/*.js'
                     ],
                     'app/build/bundle/js/vendor.min.js': [
-                        'app/front-end/vendor/**/*.js',
-                        '!app/front-end/vendor/*.js'
+                        'app/src/front-end/vendor/**/*.js',
+                        '!app/src/front-end/vendor/*.js'
                     ],
                     'app/build/bundle/js/sales.min.js': [
-                        'app/front-end/sales/**/**/*.js',
-                        'app/front-end/sales/**/*.js',
-                        '!app/front-end/sales/*.js'
+                        'app/src/front-end/sales/**/**/*.js',
+                        'app/src/front-end/sales/**/*.js',
+                        '!app/src/front-end/sales/*.js'
                     ]
                 }
             }
@@ -192,22 +178,23 @@ module.exports = function (grunt) {
             },
             release_app: {
                 expand: true,
-                flatten: false,
-                src: ['app/*.js'],
-                dest: 'Release/',
-            },
-            release_app_back_end: {
-                expand: true,
-                flatten: false,
-                src: ['app/back-end/**'],
-                dest: 'Release/',
+                cwd:"app/src",                
+                src: ['*.js'],
+                dest: 'Release/app',
+                filter: 'isFile'
             },
             release_Build: {
                 expand: true,
                 flatten: false,
                 src: ['app/build/**'],
                 dest: 'Release/',
-            }
+            },            
+            release_app_back_end: {
+                expand: true,
+                cwd:"app/src",
+                src: ['back-end/**'],
+                dest: 'Release/app',
+            },
         },
     });
     grunt.loadNpmTasks('grunt-contrib-copy');
